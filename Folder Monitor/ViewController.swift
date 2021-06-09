@@ -11,15 +11,34 @@ import PDFKit
 import FileWatcher
 
 class ViewController: NSViewController {
+    
+    @IBOutlet weak var btnMonitor: NSButton!
+    
     lazy var filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        extractTextFromPDF()
-        testMonitor()
+//        startMonitor()
     }
     
-    func testMonitor() {
+    
+    @IBAction func monitorProcess(_ sender: Any) {
+        if btnMonitor.title == "Start" {
+            startMonitor()
+            btnMonitor.title = "Stop"
+            btnMonitor.layer?.backgroundColor = NSColor.red.cgColor
+        }
+        else if btnMonitor.title == "Stop" {
+            stopMonitor()
+            btnMonitor.title = "Start"
+            btnMonitor.layer?.backgroundColor = NSColor.white.cgColor
+
+        }
+    }
+    
+    
+    func startMonitor() {
 //        let filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
@@ -28,8 +47,9 @@ class ViewController: NSViewController {
 
         filewatcher.start() // start monitoring
     }
+    
     func stopMonitor() {
-        
+        filewatcher.stop()
     }
     
     // for test
