@@ -710,8 +710,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
+                                <rect key="frame" x="204" y="119" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system" size="14"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="monitorProcess:" target="XfG-lQ-9wD" id="CgI-oO-AQo"/>
+                                </connections>
+                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ztd-a7-Xbe">
-                                <rect key="frame" x="197" y="126" width="76" height="36"/>
+                                <rect key="frame" x="200" y="149" width="76" height="36"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Hello world!" id="WQ2-BE-yAI">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -721,6 +732,9 @@
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
