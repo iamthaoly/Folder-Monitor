@@ -42,7 +42,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if answer == 2 {
                 UserDefaults.standard.set(true, forKey: "dontShowQuitAlert")
             }
-            isQuit = answer != 1
+            isQuit = (answer == 0 || answer == 2)
         })
         if isQuit {
             NSApplication.shared.terminate(self)
