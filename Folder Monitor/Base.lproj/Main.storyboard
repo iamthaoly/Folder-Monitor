@@ -713,9 +713,9 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
                                 <rect key="frame" x="204" y="119" width="72" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
+                                <buttonCell key="cell" type="bevel" title="Start" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="14"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="monitorProcess:" target="XfG-lQ-9wD" id="CgI-oO-AQo"/>

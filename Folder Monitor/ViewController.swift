@@ -10,7 +10,7 @@ import Cocoa
 import PDFKit
 import FileWatcher
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSWindowDelegate {
     
     @IBOutlet weak var btnMonitor: NSButton!
     
@@ -22,6 +22,24 @@ class ViewController: NSViewController {
 //        startMonitor()
     }
     
+    override func viewDidAppear() {
+        self.view.window?.delegate = self
+    }
+    
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        var isQuit = false
+        showCloseAlert(completion: {answer in
+            isQuit = answer
+//            if answer {
+//                NSApplication.shared.terminate(self)
+//            }
+        })
+        if isQuit {
+            NSApplication.shared.terminate(self)
+            return true
+        }
+        return false
+    }
     
     @IBAction func monitorProcess(_ sender: Any) {
         if btnMonitor.title == "Start" {
@@ -43,12 +61,16 @@ class ViewController: NSViewController {
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
             debugPrint("Something happened here: " + event.path)
+            if !FileManager().fileExists(atPath: event.path) { print("was deleted")
+            }
+            print("event.flags:  \(event.flags)")
         }
 
         filewatcher.start() // start monitoring
     }
     
     func stopMonitor() {
+        print("Monitor stopped")
         filewatcher.stop()
     }
     
@@ -91,4 +113,17 @@ class ViewController: NSViewController {
 
 
 }
-
+extension ViewController {
+    func showCloseAlert(completion: (Bool) -> Void) {
+        let alert = NSAlert()
+        alert.messageText = "Do you want to quit? The folder would be stopped monitoring."
+        alert.informativeText = "Informative text?"
+        alert.alertStyle = NSAlert.Style.warning
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        alert.addButton(withTitle: "Quit and don't show again")
+        let isQuit = alert.runModal() != NSApplication.ModalResponse.alertSecondButtonReturn
+        completion(isQuit)
+        
+    }
+}
