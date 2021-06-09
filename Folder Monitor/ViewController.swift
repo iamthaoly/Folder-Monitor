@@ -22,17 +22,27 @@ class ViewController: NSViewController, NSWindowDelegate {
 //        startMonitor()
     }
     
+    func setUserDefault() {
+        let defaults = UserDefaults.standard
+
+    }
+    
     override func viewDidAppear() {
         self.view.window?.delegate = self
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         var isQuit = false
+        let dontShowQuitAlert = UserDefaults.standard.bool(forKey: "dontShowQuitAlert")
+        if dontShowQuitAlert {
+            NSApplication.shared.terminate(self)
+            return true
+        }
         showCloseAlert(completion: {answer in
-            isQuit = answer
-//            if answer {
-//                NSApplication.shared.terminate(self)
-//            }
+            if answer == 2 {
+                UserDefaults.standard.set(true, forKey: "dontShowQuitAlert")
+            }
+            isQuit = answer != 1
         })
         if isQuit {
             NSApplication.shared.terminate(self)
@@ -114,16 +124,25 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 }
 extension ViewController {
-    func showCloseAlert(completion: (Bool) -> Void) {
+    func showCloseAlert(completion: (Int) -> Void) {
         let alert = NSAlert()
-        alert.messageText = "Do you want to quit? The folder would be stopped monitoring."
-        alert.informativeText = "Informative text?"
+        alert.messageText = "Do you want to quit? "
+        alert.informativeText = "The folder would be stopped monitoring."
         alert.alertStyle = NSAlert.Style.warning
         alert.addButton(withTitle: "Yes")
         alert.addButton(withTitle: "No")
         alert.addButton(withTitle: "Quit and don't show again")
-        let isQuit = alert.runModal() != NSApplication.ModalResponse.alertSecondButtonReturn
-        completion(isQuit)
+        let buttonChosen = alert.runModal()
+        switch buttonChosen {
+        case .alertFirstButtonReturn:
+            completion(0) // Yes
+        case .alertSecondButtonReturn:
+            completion(1) // No
+        case .alertThirdButtonReturn:
+            completion(2) // Quit and don't show again
+        default:
+            completion(0)
+        }
         
     }
 }
