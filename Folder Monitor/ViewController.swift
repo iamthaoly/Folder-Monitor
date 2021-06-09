@@ -8,12 +8,28 @@
 
 import Cocoa
 import PDFKit
-class ViewController: NSViewController {
+import FileWatcher
 
+class ViewController: NSViewController {
+    lazy var filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        extractTextFromPDF()
-        // Do any additional setup after loading the view.
+//        extractTextFromPDF()
+        testMonitor()
+    }
+    
+    func testMonitor() {
+//        let filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
+        filewatcher.queue = DispatchQueue.global()
+        filewatcher.callback = { event in
+            debugPrint("Something happened here: " + event.path)
+        }
+
+        filewatcher.start() // start monitoring
+    }
+    func stopMonitor() {
+        
     }
     
     // for test
@@ -29,8 +45,8 @@ class ViewController: NSViewController {
                 let pageCount = pdf.pageCount
                 print("PDF Number of page: \(pageCount)")
                 let content = pdf.string
-                print("PDF content: ")
-                debugPrint(content)
+//                print("PDF content: ")
+//                debugPrint(content)
                 if let range = content?.range(of: "GERMANY") {
                     let index = content?.distance(from: content!.startIndex, to: range.lowerBound)
                     debugPrint(index)

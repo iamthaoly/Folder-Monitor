@@ -1,0 +1,6 @@
+framework module Pods_Folder_MonitorTests {
+  umbrella header "Pods-Folder MonitorTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
