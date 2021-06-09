@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418E22670457A00E8ABB8 /* AppDelegate.swift */; };
+		081418E52670457A00E8ABB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418E42670457A00E8ABB8 /* ViewController.swift */; };
+		081418E72670457F00E8ABB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081418E62670457F00E8ABB8 /* Assets.xcassets */; };
+		081418EA2670457F00E8ABB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081418E82670457F00E8ABB8 /* Main.storyboard */; };
+		081418F62670458000E8ABB8 /* Folder_MonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418F52670458000E8ABB8 /* Folder_MonitorTests.swift */; };
+		081419012670458000E8ABB8 /* Folder_MonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081419002670458000E8ABB8 /* Folder_MonitorUITests.swift */; };
+		0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0814190E26704D1200E8ABB8 /* testfile.pdf */; };
+		081419122670511F00E8ABB8 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		081418F22670458000E8ABB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 081418D72670457A00E8ABB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 081418DE2670457A00E8ABB8;
+			remoteInfo = "Folder Monitor";
+		};
+		081418FD2670458000E8ABB8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 081418D72670457A00E8ABB8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 081418DE2670457A00E8ABB8;
+			remoteInfo = "Folder Monitor";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		081418DF2670457A00E8ABB8 /* Folder Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Folder Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		081418E22670457A00E8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		081418E42670457A00E8ABB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		081418E62670457F00E8ABB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		081418E92670457F00E8ABB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		081418EB2670457F00E8ABB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		081418EC2670457F00E8ABB8 /* Folder_Monitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Folder_Monitor.entitlements; sourceTree = "<group>"; };
+		081418F12670458000E8ABB8 /* Folder MonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Folder MonitorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		081418F52670458000E8ABB8 /* Folder_MonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder_MonitorTests.swift; sourceTree = "<group>"; };
+		081418F72670458000E8ABB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		081418FC2670458000E8ABB8 /* Folder MonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Folder MonitorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		081419002670458000E8ABB8 /* Folder_MonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder_MonitorUITests.swift; sourceTree = "<group>"; };
+		081419022670458000E8ABB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0814190E26704D1200E8ABB8 /* testfile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testfile.pdf; sourceTree = "<group>"; };
+		081419112670511E00E8ABB8 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		081418DC2670457A00E8ABB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				081419122670511F00E8ABB8 /* PDFKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418EE2670458000E8ABB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418F92670458000E8ABB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		081418D62670457A00E8ABB8 = {
+			isa = PBXGroup;
+			children = (
+				081418E12670457A00E8ABB8 /* Folder Monitor */,
+				081418F42670458000E8ABB8 /* Folder MonitorTests */,
+				081418FF2670458000E8ABB8 /* Folder MonitorUITests */,
+				081418E02670457A00E8ABB8 /* Products */,
+				081419102670511E00E8ABB8 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		081418E02670457A00E8ABB8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				081418DF2670457A00E8ABB8 /* Folder Monitor.app */,
+				081418F12670458000E8ABB8 /* Folder MonitorTests.xctest */,
+				081418FC2670458000E8ABB8 /* Folder MonitorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		081418E12670457A00E8ABB8 /* Folder Monitor */ = {
+			isa = PBXGroup;
+			children = (
+				081418E22670457A00E8ABB8 /* AppDelegate.swift */,
+				081418E42670457A00E8ABB8 /* ViewController.swift */,
+				081418E62670457F00E8ABB8 /* Assets.xcassets */,
+				0814190E26704D1200E8ABB8 /* testfile.pdf */,
+				081418E82670457F00E8ABB8 /* Main.storyboard */,
+				081418EB2670457F00E8ABB8 /* Info.plist */,
+				081418EC2670457F00E8ABB8 /* Folder_Monitor.entitlements */,
+			);
+			path = "Folder Monitor";
+			sourceTree = "<group>";
+		};
+		081418F42670458000E8ABB8 /* Folder MonitorTests */ = {
+			isa = PBXGroup;
+			children = (
+				081418F52670458000E8ABB8 /* Folder_MonitorTests.swift */,
+				081418F72670458000E8ABB8 /* Info.plist */,
+			);
+			path = "Folder MonitorTests";
+			sourceTree = "<group>";
+		};
+		081418FF2670458000E8ABB8 /* Folder MonitorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				081419002670458000E8ABB8 /* Folder_MonitorUITests.swift */,
+				081419022670458000E8ABB8 /* Info.plist */,
+			);
+			path = "Folder MonitorUITests";
+			sourceTree = "<group>";
+		};
+		081419102670511E00E8ABB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				081419112670511E00E8ABB8 /* PDFKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		081418DE2670457A00E8ABB8 /* Folder Monitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 081419052670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder Monitor" */;
+			buildPhases = (
+				081418DB2670457A00E8ABB8 /* Sources */,
+				081418DC2670457A00E8ABB8 /* Frameworks */,
+				081418DD2670457A00E8ABB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Folder Monitor";
+			productName = "Folder Monitor";
+			productReference = 081418DF2670457A00E8ABB8 /* Folder Monitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		081418F02670458000E8ABB8 /* Folder MonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 081419082670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder MonitorTests" */;
+			buildPhases = (
+				081418ED2670458000E8ABB8 /* Sources */,
+				081418EE2670458000E8ABB8 /* Frameworks */,
+				081418EF2670458000E8ABB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				081418F32670458000E8ABB8 /* PBXTargetDependency */,
+			);
+			name = "Folder MonitorTests";
+			productName = "Folder MonitorTests";
+			productReference = 081418F12670458000E8ABB8 /* Folder MonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		081418FB2670458000E8ABB8 /* Folder MonitorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0814190B2670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder MonitorUITests" */;
+			buildPhases = (
+				081418F82670458000E8ABB8 /* Sources */,
+				081418F92670458000E8ABB8 /* Frameworks */,
+				081418FA2670458000E8ABB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				081418FE2670458000E8ABB8 /* PBXTargetDependency */,
+			);
+			name = "Folder MonitorUITests";
+			productName = "Folder MonitorUITests";
+			productReference = 081418FC2670458000E8ABB8 /* Folder MonitorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		081418D72670457A00E8ABB8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				KnownAssetTags = (
+					New,
+				);
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = lytran;
+				TargetAttributes = {
+					081418DE2670457A00E8ABB8 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					081418F02670458000E8ABB8 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 081418DE2670457A00E8ABB8;
+					};
+					081418FB2670458000E8ABB8 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 081418DE2670457A00E8ABB8;
+					};
+				};
+			};
+			buildConfigurationList = 081418DA2670457A00E8ABB8 /* Build configuration list for PBXProject "Folder Monitor" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 081418D62670457A00E8ABB8;
+			productRefGroup = 081418E02670457A00E8ABB8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				081418DE2670457A00E8ABB8 /* Folder Monitor */,
+				081418F02670458000E8ABB8 /* Folder MonitorTests */,
+				081418FB2670458000E8ABB8 /* Folder MonitorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		081418DD2670457A00E8ABB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				081418E72670457F00E8ABB8 /* Assets.xcassets in Resources */,
+				0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */,
+				081418EA2670457F00E8ABB8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418EF2670458000E8ABB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418FA2670458000E8ABB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		081418DB2670457A00E8ABB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				081418E52670457A00E8ABB8 /* ViewController.swift in Sources */,
+				081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418ED2670458000E8ABB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				081418F62670458000E8ABB8 /* Folder_MonitorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081418F82670458000E8ABB8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				081419012670458000E8ABB8 /* Folder_MonitorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		081418F32670458000E8ABB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 081418DE2670457A00E8ABB8 /* Folder Monitor */;
+			targetProxy = 081418F22670458000E8ABB8 /* PBXContainerItemProxy */;
+		};
+		081418FE2670458000E8ABB8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 081418DE2670457A00E8ABB8 /* Folder Monitor */;
+			targetProxy = 081418FD2670458000E8ABB8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		081418E82670457F00E8ABB8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				081418E92670457F00E8ABB8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		081419032670458000E8ABB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		081419042670458000E8ABB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		081419062670458000E8ABB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder_Monitor.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder Monitor/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-Monitor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		081419072670458000E8ABB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder_Monitor.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder Monitor/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-Monitor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		081419092670458000E8ABB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder MonitorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-MonitorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Folder Monitor.app/Contents/MacOS/Folder Monitor";
+			};
+			name = Debug;
+		};
+		0814190A2670458000E8ABB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder MonitorTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-MonitorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Folder Monitor.app/Contents/MacOS/Folder Monitor";
+			};
+			name = Release;
+		};
+		0814190C2670458000E8ABB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder MonitorUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-MonitorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Folder Monitor";
+			};
+			name = Debug;
+		};
+		0814190D2670458000E8ABB8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Folder MonitorUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-MonitorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "Folder Monitor";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		081418DA2670457A00E8ABB8 /* Build configuration list for PBXProject "Folder Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081419032670458000E8ABB8 /* Debug */,
+				081419042670458000E8ABB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		081419052670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder Monitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081419062670458000E8ABB8 /* Debug */,
+				081419072670458000E8ABB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		081419082670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder MonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081419092670458000E8ABB8 /* Debug */,
+				0814190A2670458000E8ABB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0814190B2670458000E8ABB8 /* Build configuration list for PBXNativeTarget "Folder MonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0814190C2670458000E8ABB8 /* Debug */,
+				0814190D2670458000E8ABB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 081418D72670457A00E8ABB8 /* Project object */;
+}
