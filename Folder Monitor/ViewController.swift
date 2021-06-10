@@ -11,6 +11,7 @@ import PDFKit
 import FileWatcher
 
 class ViewController: NSViewController, NSWindowDelegate {
+    @IBOutlet weak var txtFolderPath: NSTextField!
     
     @IBOutlet weak var btnMonitor: NSButton!
     
@@ -20,6 +21,13 @@ class ViewController: NSViewController, NSWindowDelegate {
         super.viewDidLoad()
 //        extractTextFromPDF()
 //        startMonitor()
+        setupUI()
+    }
+    
+    func setupUI() {
+        if let path = UserDefaults.standard.string(forKey: "previous Folder") {
+            txtFolderPath.stringValue = path
+        }
     }
     
     func setUserDefault() {
@@ -49,6 +57,30 @@ class ViewController: NSViewController, NSWindowDelegate {
             return true
         }
         return false
+    }
+    
+    @IBAction func browserFolder(_ sender: Any) {
+        let dialog = NSOpenPanel();
+        dialog.title = "Choose a folder"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.canChooseFiles = false
+        dialog.allowsMultipleSelection = false
+
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url // Pathname of the file
+            if (result != nil) {
+                let path = result!.path
+                txtFolderPath.stringValue = path
+                UserDefaults.standard.set(path, forKey: "previous Folder")
+
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
     }
     
     @IBAction func monitorProcess(_ sender: Any) {

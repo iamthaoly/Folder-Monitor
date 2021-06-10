@@ -721,21 +721,15 @@
                                     <action selector="monitorProcess:" target="XfG-lQ-9wD" id="CgI-oO-AQo"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
-                                <rect key="frame" x="78" y="224" width="267" height="21"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
-                                    <font key="font" metaFont="systemMedium" size="11"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bms-Hj-uoq">
-                                <rect key="frame" x="330" y="214" width="126" height="32"/>
-                                <buttonCell key="cell" type="push" title="Choose folder" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nLy-1X-hgG">
+                                <rect key="frame" x="320" y="214" width="136" height="32"/>
+                                <buttonCell key="cell" type="push" title="Choose folder..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nLy-1X-hgG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="browserFolder:" target="XfG-lQ-9wD" id="JOf-IR-zc8"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFb-Jj-L6W">
                                 <rect key="frame" x="28" y="226" width="44" height="16"/>
@@ -746,14 +740,14 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YMB-qL-TOZ">
-                                <rect key="frame" x="30" y="196" width="268" height="16"/>
+                                <rect key="frame" x="30" y="196" width="272" height="16"/>
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kM-6n-2BJ">
-                                        <rect key="frame" x="0.0" y="4" width="12" height="12"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSMenuOnStateTemplate" id="vWz-zh-PSW"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Warning" id="vWz-zh-PSW"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-Hr-AaH">
-                                        <rect key="frame" x="18" y="0.0" width="252" height="16"/>
+                                        <rect key="frame" x="22" y="0.0" width="252" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="You haven't choose any folder to monitor" id="KWz-Gh-gFu">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -770,6 +764,15 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
+                                <rect key="frame" x="68" y="221" width="267" height="21"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="bms-Hj-uoq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="30" id="aHe-j6-s2L"/>
@@ -780,6 +783,7 @@
                     </view>
                     <connections>
                         <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                        <outlet property="txtFolderPath" destination="LG0-av-GAj" id="ycj-u1-bHT"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -788,6 +792,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSMenuOnStateTemplate" width="12" height="12"/>
+        <image name="Warning" width="16" height="16"/>
     </resources>
 </document>
