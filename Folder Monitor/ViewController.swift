@@ -123,22 +123,31 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // for test
     func extractTextFromPDF() {
-//        let home = FileManager.default.homeDirectoryForCurrentUser
-//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        debugPrint(path)
-//        let pdfPath = home.appendingPathComponent("Documents/testfile.pdf")
-//        print(pdfPath)
+        let url = URL(fileURLWithPath: "/Users/ly/Documents/App/testfile.pdf")
+        print(url)
+        print(url)
         if let pdfFileUrl = Bundle.main.url(forResource: "testfile", withExtension: "pdf") {
             debugPrint("PDF file: \(pdfFileUrl)")
             if let pdf = PDFDocument(url: pdfFileUrl) {
-                let pageCount = pdf.pageCount
-                print("PDF Number of page: \(pageCount)")
                 let content = pdf.string!
 //                print("PDF content: ")
-                debugPrint(content)
+//                debugPrint(content)
                 // Find substring
-                extractNumberFromText(content: content)
-                
+                if let refNumber = extractNumberFromText(content: content) {
+                    if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
+                        let newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
+                        let fileManager = FileManager.default
+                        do {
+                            try fileManager.moveItem(at: pdfFileUrl, to: newUrl)
+                        }
+                        catch let error as NSError{
+                            debugPrint("Rename file error \(error)")
+                        }
+                    }
+                }
+                else {
+                    // number not found
+                }
             }
             else {
                 debugPrint("Cannot read pdf!")
@@ -150,6 +159,15 @@ class ViewController: NSViewController, NSWindowDelegate {
         
     }
     
+    func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
+        let fileName = filePath.deletingPathExtension().lastPathComponent
+        if fileName == refNumber {
+            print("Correct format. Do nothing")
+            return true
+        }
+        print("Wrong format")
+        return false
+    }
     func extractNumberFromText(content: String) -> String? {
         let word = "Referenznr"
         if let range = content.range(of: word) {
@@ -158,13 +176,13 @@ class ViewController: NSViewController, NSWindowDelegate {
             
             r1 = content.index(after: range.upperBound)
             var char = content[r1]
-            print("content: \(char)")
+//            print("content: \(char)")
             while(r1 < content.endIndex && !(char.isASCII && char.isNumber)) {
                 print("content: \(char)")
                 r1 = content.index(r1, offsetBy: 1)
                 char = content[r1]
             }
-            print("r1: \(r1)")
+//            print("r1: \(r1)")
             r2 = r1
             char = content[r2]
             while(r2 < content.endIndex && (char.isNumber || char == "-")) {
