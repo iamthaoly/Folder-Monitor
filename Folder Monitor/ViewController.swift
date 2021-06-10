@@ -25,7 +25,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     func setupUI() {
-        if let path = UserDefaults.standard.string(forKey: "previous Folder") {
+        if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             txtFolderPath.stringValue = path
         }
     }
@@ -74,7 +74,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if (result != nil) {
                 let path = result!.path
                 txtFolderPath.stringValue = path
-                UserDefaults.standard.set(path, forKey: "previous Folder")
+                UserDefaults.standard.set(path, forKey: "previousFolder")
 
             }
         } else {
