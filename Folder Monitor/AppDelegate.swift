@@ -11,10 +11,17 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        if let bookmarkData = UserDefaults.standard.object(forKey: "bookmark") as? Data {
+            do {
+                var bookmarkIsStale = false
+                let url = try URL.init(resolvingBookmarkData: bookmarkData as Data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bookmarkIsStale)
+                url.startAccessingSecurityScopedResource()
+            } catch let error as NSError {
+                print("Bookmark Access Fails: \(error.description)")
+            }
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

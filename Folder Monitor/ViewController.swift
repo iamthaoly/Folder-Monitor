@@ -17,12 +17,22 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var btnMonitor: NSButton!
     @IBOutlet var txtLogs: NSTextView!
     
-    
+    var folderPath: URL? {
+        didSet {
+            do {
+                let bookmark = try folderPath?.bookmarkData(options: .securityScopeAllowOnlyReadAccess, includingResourceValuesForKeys: nil, relativeTo: nil)
+                UserDefaults.standard.set(bookmark, forKey: "bookmark")
+            } catch let error as NSError {
+                print("Set Bookmark Fails: \(error.description)")
+            }
+            txtFolderPath.stringValue = folderPath?.absoluteString ?? ""
+        }
+    }
     lazy var filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        extractTextFromPDF()
+//        extractTextFromPDF()
 //        startMonitor()
         setupUI()
     }
@@ -76,7 +86,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             let result = dialog.url // Pathname of the file
             if (result != nil) {
                 let path = result!.path
-                txtFolderPath.stringValue = path
+                folderPath = URL(string: path)
                 UserDefaults.standard.set(path, forKey: "previousFolder")
 
             }
@@ -114,6 +124,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
 
         filewatcher.start() // start monitoring
+        extractTextFromPDF()
     }
     
     func stopMonitor() {
@@ -123,9 +134,23 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // for test
     func extractTextFromPDF() {
-        let url = URL(fileURLWithPath: "/Users/ly/Documents/App/testfile.pdf")
+        let path = "/Users/ly/Downloads/App/testfile.pdf"
+        let url = URL(fileURLWithPath: "/Users/ly/Downloads/App/testfile.pdf")
+        let newURL = URL(fileURLWithPath: "/Users/ly/Downloads/App/123.pdf")
         print(url)
-        print(url)
+        if FileManager.default.fileExists(atPath: path) {
+            print("PDF Exists!")
+            do {
+                try FileManager.default.moveItem(at: url, to: newURL)
+            }
+            catch let error as NSError{
+                debugPrint("Rename file error \(error)")
+            }
+        }
+        else {
+            print("PDF Not Exists...")
+        }
+        return
         if let pdfFileUrl = Bundle.main.url(forResource: "testfile", withExtension: "pdf") {
             debugPrint("PDF file: \(pdfFileUrl)")
             if let pdf = PDFDocument(url: pdfFileUrl) {
@@ -168,6 +193,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         print("Wrong format")
         return false
     }
+    
     func extractNumberFromText(content: String) -> String? {
         let word = "Referenznr"
         if let range = content.range(of: word) {
@@ -228,5 +254,16 @@ extension ViewController {
             completion(0)
         }
         
+    }
+    private func saveBookmarkData(for workDir: URL) {
+        do {
+            let bookmarkData = try workDir.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
+
+            // save in UserDefaults
+            
+//            Preferences.workingDirectoryBookmark = bookmarkData
+        } catch {
+            print("Failed to save bookmark data for \(workDir)", error)
+        }
     }
 }
