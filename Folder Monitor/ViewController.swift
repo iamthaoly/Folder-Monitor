@@ -13,13 +13,16 @@ import FileWatcher
 class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var txtFolderPath: NSTextField!
     
+    @IBOutlet weak var btnBrowserFolder: NSButton!
     @IBOutlet weak var btnMonitor: NSButton!
+    @IBOutlet var txtLogs: NSTextView!
+    
     
     lazy var filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        extractTextFromPDF()
+        extractTextFromPDF()
 //        startMonitor()
         setupUI()
     }
@@ -87,12 +90,14 @@ class ViewController: NSViewController, NSWindowDelegate {
         if btnMonitor.title == "Start" {
             startMonitor()
             btnMonitor.title = "Stop"
-            btnMonitor.layer?.backgroundColor = NSColor.red.cgColor
+            btnMonitor.contentTintColor = NSColor.red
+//            btnMonitor.layer?.backgroundColor = NSColor.red.cgColor
         }
         else if btnMonitor.title == "Stop" {
             stopMonitor()
             btnMonitor.title = "Start"
-            btnMonitor.layer?.backgroundColor = NSColor.white.cgColor
+            btnMonitor.contentTintColor = NSColor.black
+//            btnMonitor.layer?.backgroundColor = NSColor.white.cgColor
 
         }
     }
@@ -128,13 +133,11 @@ class ViewController: NSViewController, NSWindowDelegate {
             if let pdf = PDFDocument(url: pdfFileUrl) {
                 let pageCount = pdf.pageCount
                 print("PDF Number of page: \(pageCount)")
-                let content = pdf.string
+                let content = pdf.string!
 //                print("PDF content: ")
-//                debugPrint(content)
-                if let range = content?.range(of: "GERMANY") {
-                    let index = content?.distance(from: content!.startIndex, to: range.lowerBound)
-                    debugPrint(index)
-                }
+                debugPrint(content)
+                // Find substring
+                extractNumberFromText(content: content)
                 
             }
             else {
@@ -145,6 +148,37 @@ class ViewController: NSViewController, NSWindowDelegate {
             debugPrint("PDF not found!")
         }
         
+    }
+    
+    func extractNumberFromText(content: String) -> String? {
+        let word = "Referenznr"
+        if let range = content.range(of: word) {
+            var r1: String.Index = content.index(after: range.lowerBound)
+            var r2: String.Index = content.index(range.upperBound, offsetBy: 10)
+            
+            r1 = content.index(after: range.upperBound)
+            var char = content[r1]
+            print("content: \(char)")
+            while(r1 < content.endIndex && !(char.isASCII && char.isNumber)) {
+                print("content: \(char)")
+                r1 = content.index(r1, offsetBy: 1)
+                char = content[r1]
+            }
+            print("r1: \(r1)")
+            r2 = r1
+            char = content[r2]
+            while(r2 < content.endIndex && (char.isNumber || char == "-")) {
+                r2 = content.index(r2, offsetBy: 1)
+                char = content[r2]
+            }
+            print("Referenznr-->")
+            print(content[r1..<r2])
+            return String(content[r1..<r2])
+        }
+        else {
+            // word not found
+        }
+        return nil
     }
 
     override var representedObject: Any? {
