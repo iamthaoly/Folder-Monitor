@@ -18,6 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 var bookmarkIsStale = false
                 let url = try URL.init(resolvingBookmarkData: bookmarkData as Data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bookmarkIsStale)
                 url.startAccessingSecurityScopedResource()
+                print("AppDelegate: \(UserDefaults.standard.object(forKey: "bookmark"))")
             } catch let error as NSError {
                 print("Bookmark Access Fails: \(error.description)")
             }

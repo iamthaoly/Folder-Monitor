@@ -19,16 +19,20 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     var folderPath: URL? {
         didSet {
+            // Save folder access permission to bookmark
             do {
                 let bookmark = try folderPath?.bookmarkData(options: .securityScopeAllowOnlyReadAccess, includingResourceValuesForKeys: nil, relativeTo: nil)
                 UserDefaults.standard.set(bookmark, forKey: "bookmark")
             } catch let error as NSError {
                 print("Set Bookmark Fails: \(error.description)")
             }
-            txtFolderPath.stringValue = folderPath?.absoluteString ?? ""
+            let strPath = folderPath?.absoluteString ?? ""
+            txtFolderPath.stringValue = strPath
+            filewatcher = FileWatcher([NSString(string: strPath).expandingTildeInPath])
         }
     }
-    lazy var filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
+    lazy var filewatcher = FileWatcher([NSString(string: folderPath!.absoluteString).expandingTildeInPath])
+//    lazy var filewatcher: FileWatcher? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +43,11 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     func setupUI() {
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
-            txtFolderPath.stringValue = path
+            if FileManager.default.fileExists(atPath: path) {
+                txtFolderPath.stringValue = path
+                folderPath = URL(string: path)
+            }
         }
-    }
-    
-    func setUserDefault() {
-        let defaults = UserDefaults.standard
-
     }
     
     override func viewDidAppear() {
@@ -115,25 +117,40 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     func startMonitor() {
 //        let filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
+        if folderPath == nil {
+            print("folderPath nill")
+            return
+        }
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
-            debugPrint("Something happened here: " + event.path)
-            if !FileManager().fileExists(atPath: event.path) { print("was deleted")
+            var log: String = ""
+            log.append(contentsOf: "---")
+            // [1] delete event
+            var fileName = ((URL(string: event.path))?.lastPathComponent)
+            if !FileManager().fileExists(atPath: event.path) {
+                log.append(contentsOf: "\(String(describing: fileName)) was deleted.")
             }
-            print("event.flags:  \(event.flags)")
+//            print("event.flags:  \(event.flags)")
+            // [2] create event
+            if event.fileCreated {
+                log.append(contentsOf: "\(String(describing: fileName)) was added.")
+                self.extractTextFromPDF(filePath: event.path)
+            }
+            log.append(contentsOf: "---")
+            self.txtLogs.string.append(contentsOf: log)
         }
 
         filewatcher.start() // start monitoring
-        extractTextFromPDF()
+
     }
     
     func stopMonitor() {
-        print("Monitor stopped")
+        txtLogs.string.append(contentsOf: "Monitor stopped")
         filewatcher.stop()
     }
     
     // for test
-    func extractTextFromPDF() {
+    func extractTextFromPDF(filePath: String) {
         let path = "/Users/ly/Downloads/App/testfile.pdf"
         let url = URL(fileURLWithPath: "/Users/ly/Downloads/App/testfile.pdf")
         let newURL = URL(fileURLWithPath: "/Users/ly/Downloads/App/123.pdf")
@@ -150,47 +167,46 @@ class ViewController: NSViewController, NSWindowDelegate {
         else {
             print("PDF Not Exists...")
         }
-        return
-        if let pdfFileUrl = Bundle.main.url(forResource: "testfile", withExtension: "pdf") {
-            debugPrint("PDF file: \(pdfFileUrl)")
-            if let pdf = PDFDocument(url: pdfFileUrl) {
-                let content = pdf.string!
+        
+        guard let pdfFileUrl: URL = URL(string: filePath) else {return}
+        debugPrint("PDF file: \(pdfFileUrl)")
+        if let pdf = PDFDocument(url: pdfFileUrl) {
+            let content = pdf.string!
 //                print("PDF content: ")
 //                debugPrint(content)
-                // Find substring
-                if let refNumber = extractNumberFromText(content: content) {
-                    if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
-                        let newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
-                        let fileManager = FileManager.default
-                        do {
-                            try fileManager.moveItem(at: pdfFileUrl, to: newUrl)
-                        }
-                        catch let error as NSError{
-                            debugPrint("Rename file error \(error)")
-                        }
+            // Find substring
+            if let refNumber = extractNumberFromText(content: content) {
+                if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
+                    let newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
+                    let fileManager = FileManager.default
+                    do {
+                        try fileManager.moveItem(at: pdfFileUrl, to: newUrl)
                     }
-                }
-                else {
-                    // number not found
+                    catch let error as NSError{
+                        txtLogs.string.append("Rename file error \(error)")
+                    }
                 }
             }
             else {
-                debugPrint("Cannot read pdf!")
+                // number not found
             }
         }
         else {
-            debugPrint("PDF not found!")
+            txtLogs.string.append("Cannot read pdf!")
         }
+//        else {
+//            debugPrint("PDF not found!")
+//        }
         
     }
     
     func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
         let fileName = filePath.deletingPathExtension().lastPathComponent
         if fileName == refNumber {
-            print("Correct format. Do nothing")
+            txtLogs.string.append("Correct format. Do nothing")
             return true
         }
-        print("Wrong format")
+        txtLogs.string.append("Wrong format")
         return false
     }
     
@@ -255,15 +271,5 @@ extension ViewController {
         }
         
     }
-    private func saveBookmarkData(for workDir: URL) {
-        do {
-            let bookmarkData = try workDir.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
 
-            // save in UserDefaults
-            
-//            Preferences.workingDirectoryBookmark = bookmarkData
-        } catch {
-            print("Failed to save bookmark data for \(workDir)", error)
-        }
-    }
 }
