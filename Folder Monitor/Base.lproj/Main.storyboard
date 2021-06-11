@@ -843,6 +843,7 @@
                     <connections>
                         <outlet property="btnBrowserFolder" destination="bms-Hj-uoq" id="wPv-Ph-AMN"/>
                         <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                        <outlet property="scrollView" destination="8IV-NM-HJG" id="tUQ-ea-IQB"/>
                         <outlet property="txtFolderPath" destination="LG0-av-GAj" id="ycj-u1-bHT"/>
                         <outlet property="txtLogs" destination="W5m-u9-pLe" id="q3a-7u-S38"/>
                     </connections>

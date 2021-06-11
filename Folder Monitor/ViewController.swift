@@ -16,6 +16,12 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var btnBrowserFolder: NSButton!
     @IBOutlet weak var btnMonitor: NSButton!
     @IBOutlet var txtLogs: NSTextView!
+        {
+        didSet {
+            scrollView.documentView?.scroll(.zero)
+        }
+    }
+    @IBOutlet weak var scrollView: NSScrollView!
     
     var folderPath: URL? {
         didSet {
@@ -44,6 +50,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     func setupUI() {
+        
         txtLogs.string.append(contentsOf: "\n")
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
@@ -131,6 +138,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 //        }
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
+            event.printEventType()
             if event.fileCreated || event.fileRemoved || event.fileRenamed{
                 var log: String = ""
                 log.append(contentsOf: "---\n")
@@ -149,10 +157,12 @@ class ViewController: NSViewController, NSWindowDelegate {
                         log.append(contentsOf: " - Not PDF - Ignored.\n")
                     }
                     else {
-                        self.extractTextFromPDF(filePath: event.path)
+                        let tempLog = self.extractTextFromPDF(filePath: event.path)
+                        log.append(tempLog)
                     }
                 }
-                log.append(contentsOf: "---\n")
+
+                log.append(contentsOf: "\n")
                 DispatchQueue.main.async {
                     self.txtLogs.string.append(contentsOf: log)
                 }
@@ -172,6 +182,8 @@ class ViewController: NSViewController, NSWindowDelegate {
         return false
     }
     
+    
+    
     func stopMonitor() {
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
@@ -179,63 +191,78 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     // for test
-    func extractTextFromPDF(filePath: String) {
-        let path = "/Users/ly/Downloads/App/testfile.pdf"
-        let url = URL(fileURLWithPath: "/Users/ly/Downloads/App/testfile.pdf")
-        let newURL = URL(fileURLWithPath: "/Users/ly/Downloads/App/123.pdf")
-        print(url)
-        if FileManager.default.fileExists(atPath: path) {
-            print("PDF Exists!")
-            do {
-                try FileManager.default.moveItem(at: url, to: newURL)
-            }
-            catch let error as NSError{
-                debugPrint("Rename file error \(error)")
-            }
-        }
-        else {
-            print("PDF Not Exists...")
+    func extractTextFromPDF(filePath: String) -> String{
+//        let path = "/Users/ly/Downloads/App/testfile.pdf"
+//        let url = URL(fileURLWithPath: "/Users/ly/Downloads/App/testfile.pdf")
+//        let newURL = URL(fileURLWithPath: "/Users/ly/Downloads/App/123.pdf")
+//        print(url)
+//        if FileManager.default.fileExists(atPath: path) {
+//            print("PDF Exists!")
+//            do {
+//                try FileManager.default.moveItem(at: url, to: newURL)
+//            }
+//            catch let error as NSError{
+//                debugPrint("Rename file error \(error)")
+//            }
+//        }
+//        else {
+//            print("PDF Not Exists...")
+//        }
+        var log = ""
+        guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else {return log}
+        debugPrint("PDF file: \(pdfFileUrl)")
+        do {
+            let data = try Data(contentsOf: pdfFileUrl)
+            print(data)
+        } catch {
+            print("Error: \(error)")
         }
         
-        guard let pdfFileUrl: URL = URL(string: filePath) else {return}
-        debugPrint("PDF file: \(pdfFileUrl)")
         if let pdf = PDFDocument(url: pdfFileUrl) {
             let content = pdf.string!
 //                print("PDF content: ")
 //                debugPrint(content)
             // Find substring
             if let refNumber = extractNumberFromText(content: content) {
+                log.append(" - Referenznr number found: \(refNumber) ")
                 if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
                     let newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
+                    let oldFileName = pdfFileUrl.lastPathComponent
+                    let newFileName = newUrl.lastPathComponent
                     let fileManager = FileManager.default
                     do {
                         try fileManager.moveItem(at: pdfFileUrl, to: newUrl)
+                        log.append("-> Rename \(oldFileName) to \(newFileName)")
                     }
                     catch let error as NSError{
-                        txtLogs.string.append("Rename file error \(error)")
+                        log.append(" - Rename file error - ")
                     }
+                }
+                else {
+                    log.append(" - Correct format. ")
                 }
             }
             else {
                 // number not found
+                log.append(" - Referenznr number not found in PDF - Ignored.")
             }
         }
         else {
-            txtLogs.string.append("Cannot read pdf!")
+            log.append(" - Cannot read PDF - Ignored.")
         }
-//        else {
-//            debugPrint("PDF not found!")
-//        }
+        // Update to text view
+        return log
+        
         
     }
     
     func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
         let fileName = filePath.deletingPathExtension().lastPathComponent
         if fileName == refNumber {
-            txtLogs.string.append("Correct format. Do nothing")
+//            txtLogs.string.append("Correct format. Do nothing.")
             return true
         }
-        txtLogs.string.append("Wrong format")
+//        txtLogs.string.append("Wrong format")
         return false
     }
     
@@ -304,4 +331,21 @@ extension ViewController {
         
     }
 
+}
+
+extension FileWatcherEvent {
+    func printEventType() {
+        if self.fileCreated {
+            print("Event: Created")
+        }
+        else if self.fileRenamed {
+            print("Event: Renamed")
+        }
+        else if self.fileModified {
+            print("Event: Modified")
+        }
+        else if self.fileRemoved {
+            print("Event: Removed")
+        }
+    }
 }
