@@ -10,23 +10,23 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		lQN8ElOpdDhpoVJq367pivhdDnM=
+		NlF3GhqvgSdfHOTPLWudiFMZjVk=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		B7AgOu+dCZnav5lXexnSByYISao=
+		Xw2D0B1GyQBZr+tqWjcF8oNGjr0=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		UcaXjHQb8I4xodDKy30JQTblsVE=
+		5PTYSR2k95CNr7H2ZB5+LEtJnyc=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<data>
-		Qo09cyeoh7kqOfzAME+/Yz17hes=
+		o9W1rbtNYlqsYJ1IUuAinz9K09c=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<data>
-		1+J9N3hCNScESYDsGMPVbgyjj+M=
+		zoPgEvePhh3MAZYYGsckZGifqXg=
 		</data>
 		<key>Resources/testfile.pdf</key>
 		<data>
@@ -39,10 +39,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			0oERd5YtIv185Z0y1JvwT0TZTLo=
+			Wsw22VdQINf5GI6rGpCI0mEsthI=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"d2811177962d22fd7ce59d32d49bf04f44d94cba"</string>
+			<string>cdhash H"5acc36d9575020d7f9188eab1a9088d2612cb612"</string>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<dict>
@@ -127,35 +127,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			El/mea+39TPSK/Il9CIgD2GZfsopfCbuxRTr/vlumUo=
+			/udnhW+solXmwtcjlb5QNRUkESsy3fKL65S/s3ZvNpY=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HabsSi8s+emb2uigp+bqm9/dgNfEWYLKA7UFBejH0Ng=
+			1N8ky5o+aLwSVnrURs03wA0tpVUYZX9tafaFUGkLlKo=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			oEffK1TXi7Rgg4qCP/3THye+7pYj8YVENYWmmzFhJQY=
+			4DZWRgzslPo7gkc3w+3OAO6qKpBy5k3Og0LKaGL9vCo=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			U/iQOXOF+9fqyIAlFTyznAmzY76ShjC0OJROYVU6W24=
+			uG5hgPRolgL5E3j0pgsXFKZkRYK7H6oF+R6FlUQEoNM=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WieaKkDBC4baL84Ty8UAfrcnhlUdU9CtXlIHXmJXN1w=
+			zJcid6+v+LQooQXGzwAKO5jNuVx34CJ9DZVgHyj/p1A=
 			</data>
 		</dict>
 		<key>Resources/testfile.pdf</key>
