@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,8 @@
 		081418F62670458000E8ABB8 /* Folder_MonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418F52670458000E8ABB8 /* Folder_MonitorTests.swift */; };
 		081419012670458000E8ABB8 /* Folder_MonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081419002670458000E8ABB8 /* Folder_MonitorUITests.swift */; };
 		0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0814190E26704D1200E8ABB8 /* testfile.pdf */; };
-		081419122670511F00E8ABB8 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		086C0B1326739B0A0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
+		086C0B1426739B0A0009A3E7 /* PDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		08994BA92672F65D0062C561 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08994BA82672F65D0062C561 /* Date.swift */; };
 		08DAA2773D5BD46C5930035E /* libPods-Folder Monitor-Folder MonitorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE83C3AECB014BE39DD4D81 /* libPods-Folder Monitor-Folder MonitorUITests.a */; };
 		D463249150ECEDE8A7EF959C /* libPods-Folder Monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB17998C09A5FC036BFDBFA /* libPods-Folder Monitor.a */; };
@@ -37,6 +38,20 @@
 			remoteInfo = "Folder Monitor";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		086C0B1526739B0A0009A3E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				086C0B1426739B0A0009A3E7 /* PDFKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		081418DF2670457A00E8ABB8 /* Folder Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Folder Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				081419122670511F00E8ABB8 /* PDFKit.framework in Frameworks */,
+				086C0B1326739B0A0009A3E7 /* PDFKit.framework in Frameworks */,
 				D463249150ECEDE8A7EF959C /* libPods-Folder Monitor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +200,7 @@
 				081418DB2670457A00E8ABB8 /* Sources */,
 				081418DC2670457A00E8ABB8 /* Frameworks */,
 				081418DD2670457A00E8ABB8 /* Resources */,
+				086C0B1526739B0A0009A3E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -549,8 +565,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder_Monitor.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Folder Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -559,6 +576,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-Monitor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -570,8 +588,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder_Monitor.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Folder Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -580,6 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lytran.Folder-Monitor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
