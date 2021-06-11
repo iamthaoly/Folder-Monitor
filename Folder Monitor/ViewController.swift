@@ -37,9 +37,6 @@ class ViewController: NSViewController, NSWindowDelegate {
             }
             if let strPath = folderPath?.absoluteString {
                 txtFolderPath.stringValue = strPath
-                
-                process(start: false)
-                
             }
             
         }
@@ -65,6 +62,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if FileManager.default.fileExists(atPath: path) {
                 txtFolderPath.stringValue = path
                 folderPath = URL(string: path)
+                btnMonitor.isEnabled = true
             }
         }
     }
@@ -75,10 +73,10 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     
     @IBAction func monitorProcess(_ sender: Any) {
-        if btnMonitor.title == "Start" {
+        if btnMonitor.title == "START" {
             process(start: true)
         }
-        else if btnMonitor.title == "Stop" {
+        else if btnMonitor.title == "STOP" {
             process(start: false)
         }
     }
@@ -86,30 +84,30 @@ class ViewController: NSViewController, NSWindowDelegate {
     func process(start: Bool) {
         if start {
             startMonitor()
-            btnMonitor.title = "Stop"
-            btnMonitor.contentTintColor = NSColor.red
+            btnMonitor.title = "STOP"
+            btnMonitor.titleTextColor = NSColor.red
         }
         else {
             stopMonitor()
-            btnMonitor.title = "Start"
-            btnMonitor.contentTintColor = NSColor.black
+            btnMonitor.title = "START"
+            btnMonitor.titleTextColor = NSColor.black
 
         }
     }
     
     func startMonitor() {
-//        let filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
         if folderPath == nil {
             print("folderPath nill")
             return
         }
+        changeStatus(status: .ok, text: "Your folder are being monitor")
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
-//        for i in 0...20 {
-//            txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
-//        }
+
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
+            let eventURL = URL(string: event.path)
+            if eventURL!.pathExtension != "pdf" { return }
             event.printEventType()
             if event.fileCreated || event.fileRemoved || event.fileRenamed{
                 var log: String = ""
@@ -151,6 +149,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
         filewatcher.stop()
+        changeStatus(status: .error, text: "Your folder are not being monitor")
     }
     
     func extractTextFromPDF(filePath: String) -> String{
@@ -357,4 +356,23 @@ extension FileWatcherEvent {
             print("Event: Removed")
         }
     }
+}
+
+extension NSButton {
+ 
+    var titleTextColor : NSColor {
+        get {
+            let attrTitle = self.attributedTitle
+            return attrTitle.attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil) as! NSColor
+        }
+        
+        set(newColor) {
+            let attrTitle = NSMutableAttributedString(attributedString: self.attributedTitle)
+            let titleRange = NSMakeRange(0, self.title.count)
+ 
+            attrTitle.addAttributes([NSAttributedString.Key.foregroundColor: newColor], range: titleRange)
+            self.attributedTitle = attrTitle
+        }
+    }
+    
 }

@@ -716,7 +716,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="idA-DD-uSc"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
+                                <buttonCell key="cell" type="push" title="START" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -797,7 +797,7 @@
                                             <size key="minSize" width="451" height="136"/>
                                             <size key="maxSize" width="557" height="10000000"/>
                                             <attributedString key="textStorage">
-                                                <fragment content="Whenever you add or remove files, it will be logged here.">
+                                                <fragment content="Whenever you add or remove PDFs, it will be logged here.">
                                                     <attributes>
                                                         <color key="NSColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                         <font key="NSFont" metaFont="smallSystem"/>
