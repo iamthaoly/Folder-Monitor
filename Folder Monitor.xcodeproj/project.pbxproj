@@ -14,8 +14,7 @@
 		081418F62670458000E8ABB8 /* Folder_MonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418F52670458000E8ABB8 /* Folder_MonitorTests.swift */; };
 		081419012670458000E8ABB8 /* Folder_MonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081419002670458000E8ABB8 /* Folder_MonitorUITests.swift */; };
 		0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0814190E26704D1200E8ABB8 /* testfile.pdf */; };
-		086C0B1326739B0A0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
-		086C0B1426739B0A0009A3E7 /* PDFKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
 		08994BA92672F65D0062C561 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08994BA82672F65D0062C561 /* Date.swift */; };
 		08DAA2773D5BD46C5930035E /* libPods-Folder Monitor-Folder MonitorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE83C3AECB014BE39DD4D81 /* libPods-Folder Monitor-Folder MonitorUITests.a */; };
 		D463249150ECEDE8A7EF959C /* libPods-Folder Monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB17998C09A5FC036BFDBFA /* libPods-Folder Monitor.a */; };
@@ -39,20 +38,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		086C0B1526739B0A0009A3E7 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				086C0B1426739B0A0009A3E7 /* PDFKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		081418DF2670457A00E8ABB8 /* Folder Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Folder Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		081418E22670457A00E8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +54,7 @@
 		081419022670458000E8ABB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0814190E26704D1200E8ABB8 /* testfile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testfile.pdf; sourceTree = "<group>"; };
 		081419112670511E00E8ABB8 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
+		086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Folder MonitorRelease.entitlements"; sourceTree = "<group>"; };
 		08994BA82672F65D0062C561 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		1DB17998C09A5FC036BFDBFA /* libPods-Folder Monitor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder Monitor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DE83C3AECB014BE39DD4D81 /* libPods-Folder Monitor-Folder MonitorUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder Monitor-Folder MonitorUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				086C0B1326739B0A0009A3E7 /* PDFKit.framework in Frameworks */,
+				086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */,
 				D463249150ECEDE8A7EF959C /* libPods-Folder Monitor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +121,7 @@
 		081418E12670457A00E8ABB8 /* Folder Monitor */ = {
 			isa = PBXGroup;
 			children = (
+				086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */,
 				08994BA82672F65D0062C561 /* Date.swift */,
 				081418E22670457A00E8ABB8 /* AppDelegate.swift */,
 				081418E42670457A00E8ABB8 /* ViewController.swift */,
@@ -200,7 +187,6 @@
 				081418DB2670457A00E8ABB8 /* Sources */,
 				081418DC2670457A00E8ABB8 /* Frameworks */,
 				081418DD2670457A00E8ABB8 /* Resources */,
-				086C0B1526739B0A0009A3E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -586,9 +572,9 @@
 			baseConfigurationReference = B3C1A76764EC2BD9067B6ED4 /* Pods-Folder Monitor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder_Monitor.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Folder Monitor/Folder MonitorRelease.entitlements";
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
