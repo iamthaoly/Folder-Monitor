@@ -28,6 +28,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             }
             let strPath = folderPath?.absoluteString ?? ""
             txtFolderPath.stringValue = strPath
+            filewatcher.stop()
             filewatcher = FileWatcher([NSString(string: strPath).expandingTildeInPath])
         }
     }
@@ -39,9 +40,11 @@ class ViewController: NSViewController, NSWindowDelegate {
 //        extractTextFromPDF()
 //        startMonitor()
         setupUI()
+
     }
     
     func setupUI() {
+        txtLogs.string.append(contentsOf: "\n")
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
                 txtFolderPath.stringValue = path
@@ -121,31 +124,57 @@ class ViewController: NSViewController, NSWindowDelegate {
             print("folderPath nill")
             return
         }
+        let time = getTime()
+        txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
+//        for i in 0...20 {
+//            txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
+//        }
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
-            var log: String = ""
-            log.append(contentsOf: "---")
-            // [1] delete event
-            var fileName = ((URL(string: event.path))?.lastPathComponent)
-            if !FileManager().fileExists(atPath: event.path) {
-                log.append(contentsOf: "\(String(describing: fileName)) was deleted.")
+            if event.fileCreated || event.fileRemoved || event.fileRenamed{
+                var log: String = ""
+                log.append(contentsOf: "---\n")
+                log.append(self.getTime() + "\n")
+                let fileName = ((URL(string: event.path))?.lastPathComponent) ?? "filename"
+                // [1] delete event
+                if event.fileRemoved {
+                    log.append(contentsOf: "\(String(describing: fileName)) was deleted.\n")
+
+                }
+    //            print("event.flags:  \(event.flags)")
+                // [2] create event
+                if event.fileCreated || event.fileRenamed{
+                    log.append(contentsOf: "\(String(describing: fileName)) was added.")
+                    if !self.isPDF(path: event.path) {
+                        log.append(contentsOf: " - Not PDF - Ignored.\n")
+                    }
+                    else {
+                        self.extractTextFromPDF(filePath: event.path)
+                    }
+                }
+                log.append(contentsOf: "---\n")
+                DispatchQueue.main.async {
+                    self.txtLogs.string.append(contentsOf: log)
+                }
             }
-//            print("event.flags:  \(event.flags)")
-            // [2] create event
-            if event.fileCreated {
-                log.append(contentsOf: "\(String(describing: fileName)) was added.")
-                self.extractTextFromPDF(filePath: event.path)
-            }
-            log.append(contentsOf: "---")
-            self.txtLogs.string.append(contentsOf: log)
+
         }
 
         filewatcher.start() // start monitoring
 
     }
     
+    func isPDF(path: String) -> Bool {
+        guard let url = URL(string: path) else {return false}
+        if url.pathExtension == "pdf" {
+            return true
+        }
+        return false
+    }
+    
     func stopMonitor() {
-        txtLogs.string.append(contentsOf: "Monitor stopped")
+        let time = getTime()
+        txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
         filewatcher.stop()
     }
     
@@ -250,6 +279,9 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 }
 extension ViewController {
+    func getTime() -> String {
+        return Date.currentDateTime()
+    }
     func showCloseAlert(completion: (Int) -> Void) {
         let alert = NSAlert()
         alert.messageText = "Do you want to quit? "

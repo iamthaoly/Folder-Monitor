@@ -690,6 +690,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="618" y="384" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="480" height="270"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -707,11 +708,14 @@
             <objects>
                 <viewController title="Main" id="XfG-lQ-9wD" customClass="ViewController" customModule="Folder_Monitor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="617" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="528" height="260"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
-                                <rect key="frame" x="323" y="185" width="270" height="32"/>
+                                <rect key="frame" x="383" y="185" width="121" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="idA-DD-uSc"/>
+                                </constraints>
                                 <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -721,7 +725,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bms-Hj-uoq">
-                                <rect key="frame" x="457" y="215" width="136" height="32"/>
+                                <rect key="frame" x="368" y="215" width="136" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose folder..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nLy-1X-hgG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -764,7 +768,7 @@
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
-                                <rect key="frame" x="75" y="222" width="372" height="21"/>
+                                <rect key="frame" x="75" y="222" width="283" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -780,18 +784,18 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IV-NM-HJG">
-                                <rect key="frame" x="30" y="20" width="557" height="138"/>
+                                <rect key="frame" x="30" y="20" width="468" height="138"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="meg-T3-nhf">
-                                    <rect key="frame" x="1" y="1" width="540" height="136"/>
+                                    <rect key="frame" x="1" y="1" width="451" height="136"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="W5m-u9-pLe">
-                                            <rect key="frame" x="0.0" y="0.0" width="540" height="136"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="451" height="136"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="540" height="136"/>
-                                            <size key="maxSize" width="540" height="10000000"/>
+                                            <size key="minSize" width="451" height="136"/>
+                                            <size key="maxSize" width="557" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="Events happen here">
                                                     <attributes>
@@ -810,7 +814,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="zLN-rE-dZp">
-                                    <rect key="frame" x="541" y="1" width="15" height="136"/>
+                                    <rect key="frame" x="452" y="1" width="15" height="136"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -821,7 +825,7 @@
                             <constraint firstItem="OdP-IC-WqB" firstAttribute="centerY" secondItem="YMB-qL-TOZ" secondAttribute="centerY" id="7Xg-xw-5op"/>
                             <constraint firstItem="YMB-qL-TOZ" firstAttribute="top" secondItem="fFb-Jj-L6W" secondAttribute="top" constant="30" id="As5-BO-6on"/>
                             <constraint firstItem="bms-Hj-uoq" firstAttribute="leading" secondItem="LG0-av-GAj" secondAttribute="trailing" constant="16" id="Brs-ho-Elo"/>
-                            <constraint firstItem="OdP-IC-WqB" firstAttribute="leading" secondItem="YMB-qL-TOZ" secondAttribute="trailing" constant="30" id="CNn-TZ-uEb"/>
+                            <constraint firstItem="OdP-IC-WqB" firstAttribute="leading" secondItem="YMB-qL-TOZ" secondAttribute="trailing" constant="90" id="CNn-TZ-uEb"/>
                             <constraint firstItem="LG0-av-GAj" firstAttribute="centerY" secondItem="fFb-Jj-L6W" secondAttribute="centerY" id="EZw-Wg-uli"/>
                             <constraint firstItem="OdP-IC-WqB" firstAttribute="trailing" secondItem="bms-Hj-uoq" secondAttribute="trailing" id="EoS-ul-Pgz"/>
                             <constraint firstItem="8IV-NM-HJG" firstAttribute="trailing" secondItem="OdP-IC-WqB" secondAttribute="trailing" id="L5x-MG-aHh"/>
@@ -845,7 +849,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="656"/>
+            <point key="canvasLocation" x="30" y="656"/>
         </scene>
     </scenes>
     <resources>
