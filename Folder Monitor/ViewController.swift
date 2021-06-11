@@ -41,13 +41,12 @@ class ViewController: NSViewController, NSWindowDelegate {
             
         }
     }
-    lazy var filewatcher = FileWatcher([NSString(string: folderPath!.absoluteString).expandingTildeInPath])
+    lazy var filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
 //    lazy var filewatcher: FileWatcher? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        extractTextFromPDF()
-//        startMonitor()
+
         setupUI()
 
     }
@@ -86,6 +85,10 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     func process(start: Bool) {
         if start {
+            if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "temp"){
+                changeStatus(status: .warning, text: "Current folder's not exist. Please choose another.")
+                return
+            }
             startMonitor()
             btnMonitor.title = "STOP"
             btnMonitor.titleTextColor = NSColor.red
@@ -99,10 +102,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     func startMonitor() {
-        if folderPath == nil {
-            print("folderPath nill")
-            return
-        }
+        filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
         changeStatus(status: .ok, text: "Your folder are being monitor.")
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
@@ -258,8 +258,6 @@ extension ViewController {
     }
     
     func isPDF(path: String) -> Bool {
-//        guard let url = URL.init(string: path) else {return false}
-//        guard let url = URL(fileURLWithPath: path) else {return false}
         let url = URL(fileURLWithPath: path)
         if url.pathExtension == "pdf" {
             return true
