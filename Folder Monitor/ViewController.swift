@@ -37,7 +37,9 @@ class ViewController: NSViewController, NSWindowDelegate {
             }
             if let strPath = folderPath?.absoluteString {
                 txtFolderPath.stringValue = strPath
+                
                 process(start: false)
+                
             }
             
         }
@@ -53,8 +55,11 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     }
     
+    override func viewDidAppear() {
+        self.view.window?.delegate = self
+    }
+    
     func setupUI() {
-        
         txtLogs.string.append(contentsOf: "\n")
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
@@ -63,68 +68,11 @@ class ViewController: NSViewController, NSWindowDelegate {
             }
         }
     }
-    
-    override func viewDidAppear() {
-        self.view.window?.delegate = self
-    }
-    
-    func changeStatus(status: Status, text: String) {
-        switch status {
-        case .warning:
-            imvStatus.image = NSImage(named: "Warning")
-        case .ok:
-            imvStatus.image = NSImage(named: "Check")
-        case .error:
-            imvStatus.image = NSImage(named: "Close")
-        default:
-            imvStatus.image = NSImage(named: "Warning")
-        }
-        lblStatus.stringValue = text
-        
-    }
-    func windowShouldClose(_ sender: NSWindow) -> Bool {
-        var isQuit = false
-        let dontShowQuitAlert = UserDefaults.standard.bool(forKey: "dontShowQuitAlert")
-        if dontShowQuitAlert {
-            NSApplication.shared.terminate(self)
-            return true
-        }
-        showCloseAlert(completion: {answer in
-            if answer == 2 {
-                UserDefaults.standard.set(true, forKey: "dontShowQuitAlert")
-            }
-            isQuit = (answer == 0 || answer == 2)
-        })
-        if isQuit {
-            NSApplication.shared.terminate(self)
-            return true
-        }
-        return false
-    }
-    
-    @IBAction func browserFolder(_ sender: Any) {
-        let dialog = NSOpenPanel();
-        dialog.title = "Choose a folder"
-        dialog.showsResizeIndicator = true
-        dialog.showsHiddenFiles = false
-        dialog.canChooseDirectories = true
-        dialog.canCreateDirectories = true
-        dialog.canChooseFiles = false
-        dialog.allowsMultipleSelection = false
 
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            let result = dialog.url // Pathname of the file
-            if (result != nil) {
-                let path = result!.path
-                folderPath = URL(string: path)
-                UserDefaults.standard.set(path, forKey: "previousFolder")
-
-            }
-        } else {
-            // User clicked on "Cancel"
-            return
-        }
+    func scrollToBottom() {
+        txtLogs.scrollToEndOfDocument(self)
     }
+    
     
     @IBAction func monitorProcess(_ sender: Any) {
         if btnMonitor.title == "Start" {
@@ -148,7 +96,6 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         }
     }
-    
     
     func startMonitor() {
 //        let filewatcher = FileWatcher([NSString(string: "~/Desktop").expandingTildeInPath])
@@ -200,43 +147,13 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     }
     
-    func isPDF(path: String) -> Bool {
-        guard let url = URL(string: path) else {return false}
-        if url.pathExtension == "pdf" {
-            return true
-        }
-        return false
-    }
-    
-    func scrollToBottom() {
-        txtLogs.scrollToEndOfDocument(self)
-    }
-    
-    
     func stopMonitor() {
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
         filewatcher.stop()
     }
     
-    // for test
     func extractTextFromPDF(filePath: String) -> String{
-//        let path = "/Users/ly/Downloads/App/testfile.pdf"
-//        let url = URL(fileURLWithPath: "/Users/ly/Downloads/App/testfile.pdf")
-//        let newURL = URL(fileURLWithPath: "/Users/ly/Downloads/App/123.pdf")
-//        print(url)
-//        if FileManager.default.fileExists(atPath: path) {
-//            print("PDF Exists!")
-//            do {
-//                try FileManager.default.moveItem(at: url, to: newURL)
-//            }
-//            catch let error as NSError{
-//                debugPrint("Rename file error \(error)")
-//            }
-//        }
-//        else {
-//            print("PDF Not Exists...")
-//        }
         var log = ""
         guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else {return log}
         debugPrint("PDF file: \(pdfFileUrl)")
@@ -285,16 +202,6 @@ class ViewController: NSViewController, NSWindowDelegate {
         
     }
     
-    func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
-        let fileName = filePath.deletingPathExtension().lastPathComponent
-        if fileName == refNumber {
-//            txtLogs.string.append("Correct format. Do nothing.")
-            return true
-        }
-//        txtLogs.string.append("Wrong format")
-        return false
-    }
-    
     func extractNumberFromText(content: String) -> String? {
         let word = "Referenznr"
         if let range = content.range(of: word) {
@@ -335,6 +242,79 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 }
 extension ViewController {
+    func changeStatus(status: Status, text: String) {
+        switch status {
+        case .warning:
+            imvStatus.image = NSImage(named: "Warning")
+        case .ok:
+            imvStatus.image = NSImage(named: "Check")
+        case .error:
+            imvStatus.image = NSImage(named: "Close")
+        default:
+            imvStatus.image = NSImage(named: "Warning")
+        }
+        lblStatus.stringValue = text
+        
+    }
+    
+    func isPDF(path: String) -> Bool {
+        guard let url = URL(string: path) else {return false}
+        if url.pathExtension == "pdf" {
+            return true
+        }
+        return false
+    }
+    
+    func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
+        let fileName = filePath.deletingPathExtension().lastPathComponent
+        if fileName == refNumber {
+            return true
+        }
+        return false
+    }
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        var isQuit = false
+        let dontShowQuitAlert = UserDefaults.standard.bool(forKey: "dontShowQuitAlert")
+        if dontShowQuitAlert {
+            NSApplication.shared.terminate(self)
+            return true
+        }
+        showCloseAlert(completion: {answer in
+            if answer == 2 {
+                UserDefaults.standard.set(true, forKey: "dontShowQuitAlert")
+            }
+            isQuit = (answer == 0 || answer == 2)
+        })
+        if isQuit {
+            NSApplication.shared.terminate(self)
+            return true
+        }
+        return false
+    }
+    
+    @IBAction func browserFolder(_ sender: Any) {
+        let dialog = NSOpenPanel();
+        dialog.title = "Choose a folder"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.canChooseFiles = false
+        dialog.allowsMultipleSelection = false
+
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            let result = dialog.url // Pathname of the file
+            if (result != nil) {
+                let path = result!.path
+                folderPath = URL(string: path)
+                UserDefaults.standard.set(path, forKey: "previousFolder")
+
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+    }
     func getTime() -> String {
         return Date.currentDateTime()
     }
