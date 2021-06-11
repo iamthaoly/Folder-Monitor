@@ -10,17 +10,20 @@ import Cocoa
 import PDFKit
 import FileWatcher
 
+enum Status {
+    case warning
+    case ok
+    case error
+}
 class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var txtFolderPath: NSTextField!
     
+    @IBOutlet weak var lblStatus: NSTextField!
+    @IBOutlet weak var imvStatus: NSImageView!
     @IBOutlet weak var btnBrowserFolder: NSButton!
     @IBOutlet weak var btnMonitor: NSButton!
     @IBOutlet var txtLogs: NSTextView!
-        {
-        didSet {
-            scrollView.documentView?.scroll(.zero)
-        }
-    }
+    
     @IBOutlet weak var scrollView: NSScrollView!
     
     var folderPath: URL? {
@@ -32,10 +35,11 @@ class ViewController: NSViewController, NSWindowDelegate {
             } catch let error as NSError {
                 print("Set Bookmark Fails: \(error.description)")
             }
-            let strPath = folderPath?.absoluteString ?? ""
-            txtFolderPath.stringValue = strPath
-            filewatcher.stop()
-            filewatcher = FileWatcher([NSString(string: strPath).expandingTildeInPath])
+            if let strPath = folderPath?.absoluteString {
+                txtFolderPath.stringValue = strPath
+                process(start: false)
+            }
+            
         }
     }
     lazy var filewatcher = FileWatcher([NSString(string: folderPath!.absoluteString).expandingTildeInPath])
@@ -64,6 +68,20 @@ class ViewController: NSViewController, NSWindowDelegate {
         self.view.window?.delegate = self
     }
     
+    func changeStatus(status: Status, text: String) {
+        switch status {
+        case .warning:
+            imvStatus.image = NSImage(named: "Warning")
+        case .ok:
+            imvStatus.image = NSImage(named: "Check")
+        case .error:
+            imvStatus.image = NSImage(named: "Close")
+        default:
+            imvStatus.image = NSImage(named: "Warning")
+        }
+        lblStatus.stringValue = text
+        
+    }
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         var isQuit = false
         let dontShowQuitAlert = UserDefaults.standard.bool(forKey: "dontShowQuitAlert")
@@ -110,16 +128,23 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     @IBAction func monitorProcess(_ sender: Any) {
         if btnMonitor.title == "Start" {
+            process(start: true)
+        }
+        else if btnMonitor.title == "Stop" {
+            process(start: false)
+        }
+    }
+    
+    func process(start: Bool) {
+        if start {
             startMonitor()
             btnMonitor.title = "Stop"
             btnMonitor.contentTintColor = NSColor.red
-//            btnMonitor.layer?.backgroundColor = NSColor.red.cgColor
         }
-        else if btnMonitor.title == "Stop" {
+        else {
             stopMonitor()
             btnMonitor.title = "Start"
             btnMonitor.contentTintColor = NSColor.black
-//            btnMonitor.layer?.backgroundColor = NSColor.white.cgColor
 
         }
     }
@@ -165,6 +190,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                 log.append(contentsOf: "\n")
                 DispatchQueue.main.async {
                     self.txtLogs.string.append(contentsOf: log)
+                    self.scrollToBottom()
                 }
             }
 
@@ -182,6 +208,9 @@ class ViewController: NSViewController, NSWindowDelegate {
         return false
     }
     
+    func scrollToBottom() {
+        txtLogs.scrollToEndOfDocument(self)
+    }
     
     
     func stopMonitor() {

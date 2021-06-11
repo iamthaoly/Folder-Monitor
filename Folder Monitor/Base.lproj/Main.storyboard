@@ -747,7 +747,7 @@
                                 <subviews>
                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kM-6n-2BJ">
                                         <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Check" id="vWz-zh-PSW"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Warning" id="vWz-zh-PSW"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-Hr-AaH">
                                         <rect key="frame" x="19" y="0.0" width="252" height="16"/>
@@ -797,7 +797,7 @@
                                             <size key="minSize" width="451" height="136"/>
                                             <size key="maxSize" width="557" height="10000000"/>
                                             <attributedString key="textStorage">
-                                                <fragment content="Events happen here">
+                                                <fragment content="Whenever you add or remove files, it will be logged here.">
                                                     <attributes>
                                                         <color key="NSColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                         <font key="NSFont" metaFont="smallSystem"/>
@@ -843,6 +843,8 @@
                     <connections>
                         <outlet property="btnBrowserFolder" destination="bms-Hj-uoq" id="wPv-Ph-AMN"/>
                         <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                        <outlet property="imvStatus" destination="7kM-6n-2BJ" id="PGO-pt-vwe"/>
+                        <outlet property="lblStatus" destination="2Mi-Hr-AaH" id="7d8-tb-bQG"/>
                         <outlet property="scrollView" destination="8IV-NM-HJG" id="tUQ-ea-IQB"/>
                         <outlet property="txtFolderPath" destination="LG0-av-GAj" id="ycj-u1-bHT"/>
                         <outlet property="txtLogs" destination="W5m-u9-pLe" id="q3a-7u-S38"/>
@@ -854,6 +856,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Check" width="16" height="16"/>
+        <image name="Warning" width="16" height="16"/>
     </resources>
 </document>
