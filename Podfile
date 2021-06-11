@@ -3,8 +3,8 @@
 
 target 'Folder Monitor' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
+#  use_frameworks!
+  use_modular_headers!
   # Pods for Folder Monitor
   pod "FileWatcher"
   target 'Folder MonitorTests' do

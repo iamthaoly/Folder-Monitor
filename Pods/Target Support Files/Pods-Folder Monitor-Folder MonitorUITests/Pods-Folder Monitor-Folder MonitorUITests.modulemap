@@ -1,4 +1,4 @@
-framework module Pods_Folder_Monitor_Folder_MonitorUITests {
+module Pods_Folder_Monitor_Folder_MonitorUITests {
   umbrella header "Pods-Folder Monitor-Folder MonitorUITests-umbrella.h"
 
   export *

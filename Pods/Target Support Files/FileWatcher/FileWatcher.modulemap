@@ -1,4 +1,4 @@
-framework module FileWatcher {
+module FileWatcher {
   umbrella header "FileWatcher-umbrella.h"
 
   export *
