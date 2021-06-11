@@ -41,7 +41,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             
         }
     }
-    lazy var filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
+    lazy var filewatcher = FileWatcher([NSString(string: folderPath?.path ?? "temp").expandingTildeInPath])
 //    lazy var filewatcher: FileWatcher? = nil
     
     override func viewDidLoad() {
