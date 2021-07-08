@@ -6,7 +6,9 @@ target 'Folder Monitor' do
 #  use_frameworks!
   use_modular_headers!
   # Pods for Folder Monitor
-  pod "FileWatcher"
+  pod 'FileWatcher'
+  pod 'SwiftLint'
+  
   target 'Folder MonitorTests' do
     inherit! :search_paths
     # Pods for testing

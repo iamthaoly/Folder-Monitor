@@ -1,16 +1,20 @@
 PODS:
   - FileWatcher (0.2.1)
+  - SwiftLint (0.43.1)
 
 DEPENDENCIES:
   - FileWatcher
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - FileWatcher
+    - SwiftLint
 
 SPEC CHECKSUMS:
   FileWatcher: c7d30f1dc6e3c12025d940d90804ecc997960f81
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 6938ae9e4086f3f4edbe7b1e15f6de58d8c59d9f
+PODFILE CHECKSUM: add9f4e791650adff33adc9738503e99d0061222
 
 COCOAPODS: 1.10.1

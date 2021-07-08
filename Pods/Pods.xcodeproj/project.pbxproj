@@ -3,40 +3,66 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = SwiftLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		2EA632947CC39646D41EE1EA60C2AB49 /* FileWatcher_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 4859D740A4D3F12D5C8F5CF10FE49B7B /* FileWatcher_macOS.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		33FE6EC9948794DAE9071CCA4A48641A /* FileWatcher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 736B0A1E59BC39FB5226EC3EF7E7AA02 /* FileWatcher-dummy.m */; };
-		462F67B288751573CDBA0D90CAE3B3DE /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739664841B21ABF89B7F75CAE15798 /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m */; };
-		512EEEA6E886CA2DB1CCAC3F671C7669 /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5206A8075736E280B989F024B41A5F /* FileWatcher.swift */; };
-		5A017F180C3DA409610627BF08FB3FAA /* FileWatcher+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DD031ECB58E016359B5A91CC500CF4 /* FileWatcher+Type.swift */; };
-		8064CF0354AF5E7215382DBEAF081B65 /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 33C9E7A9DBF5D27375EBC6F825C11158 /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9E947C03CD61DDB36D22772921A9F8AF /* Pods-Folder Monitor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B104710A87B2496FF61B3E4D8809DD4F /* Pods-Folder Monitor-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C051C883DEF21CFE971AD5894A7F6754 /* FileWatcherEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED733CD015F0993E22981639C24BAD9 /* FileWatcherEvent.swift */; };
-		C2561AF5F149378006CECAFA534D67ED /* Pods-Folder Monitor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF76798F945C3D7B25C2AAEA051ABD9 /* Pods-Folder Monitor-dummy.m */; };
-		C28024D63426B76B5FBD83A8320085EF /* FileWatcher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AD49EF2FEA2B96F56460E1AD04ECFAC /* FileWatcher-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DA9ADE2517ABB9C2233C1AAA363DFFAF /* FileWatcher+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D28FC07E5F15F4EF04B58EDFC6C6E3E /* FileWatcher+Action.swift */; };
+		2EA632947CC39646D41EE1EA60C2AB49 /* FileWatcher_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 342A9509A59B509A7C7CD50CCD7B62C8 /* FileWatcher_macOS.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		33FE6EC9948794DAE9071CCA4A48641A /* FileWatcher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F91A7F30063FCEBF2A1E04B08F5ABE /* FileWatcher-dummy.m */; };
+		3FFF9C110A07FFC2505661A45F2790D7 /* Pods-Folder Monitor-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF76798F945C3D7B25C2AAEA051ABD9 /* Pods-Folder Monitor-dummy.m */; };
+		512EEEA6E886CA2DB1CCAC3F671C7669 /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D5300C01C21CE5A3423A1E781998AC /* FileWatcher.swift */; };
+		59213B763C35BA0FDC7CB901442907FB /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 12739664841B21ABF89B7F75CAE15798 /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m */; };
+		5A017F180C3DA409610627BF08FB3FAA /* FileWatcher+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EFFBB835D2AEFB4CA9B4CFE9355907 /* FileWatcher+Type.swift */; };
+		B1D799F819AA14D5B6AC801C615F14F4 /* Pods-Folder Monitor-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B104710A87B2496FF61B3E4D8809DD4F /* Pods-Folder Monitor-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C051C883DEF21CFE971AD5894A7F6754 /* FileWatcherEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34EDF4D09609DEC01E4186330124CF5 /* FileWatcherEvent.swift */; };
+		C28024D63426B76B5FBD83A8320085EF /* FileWatcher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C6EA70DE69BD25DCC4434905ECAB644B /* FileWatcher-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DA9ADE2517ABB9C2233C1AAA363DFFAF /* FileWatcher+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E77271DA93564222EA8C793E68AA09E /* FileWatcher+Action.swift */; };
+		EDCC99B75C7E141BF890341B55AE8D0B /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 33C9E7A9DBF5D27375EBC6F825C11158 /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FF18067C0B31D63F0EF282AF055F1418 /* Pods-Folder MonitorTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA11301D92F2186BD0876073A5013B4 /* Pods-Folder MonitorTests-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		119EF21157928C29EA47C5716A5273ED /* PBXContainerItemProxy */ = {
+		01137CADD8AB31E686CBC785534EC344 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
+		03C77BF53670F45FC2187336811D1EEE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2C6DCF49E9E3138CD06BB33023EAB2A8;
 			remoteInfo = FileWatcher;
 		};
-		42AE86537BF58C1FD1545DD0093B7856 /* PBXContainerItemProxy */ = {
+		485B9FA46992D0A7B1116614CCE2F0B8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 95D07EE3F1F30417E5034A8B032C3FE7;
 			remoteInfo = "Pods-Folder Monitor";
 		};
-		F21A9F3E9056018078B68253031AF972 /* PBXContainerItemProxy */ = {
+		64BF21A6FACD477CCB2F8EB17280B4DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52B60EC2A583F24ACBB69C113F5488B9;
+			remoteInfo = SwiftLint;
+		};
+		AA9DD31D151CFEC242996268A27DBB57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -46,40 +72,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0947F9B94A377A14E3B9445A4C14BB31 /* FileWatcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileWatcher.release.xcconfig; sourceTree = "<group>"; };
+		0152AD79B64ED0E906A6157EBEAECAC4 /* FileWatcher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-prefix.pch"; sourceTree = "<group>"; };
 		0D7422470A43E629F396C1741E2071A8 /* Pods-Folder Monitor-Folder MonitorUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Folder Monitor-Folder MonitorUITests.modulemap"; sourceTree = "<group>"; };
 		10FCCEDBF38C818F0A6F30EF0C630114 /* libFileWatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFileWatcher.a; path = libFileWatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		12739664841B21ABF89B7F75CAE15798 /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder Monitor-Folder MonitorUITests-dummy.m"; sourceTree = "<group>"; };
-		1D28FC07E5F15F4EF04B58EDFC6C6E3E /* FileWatcher+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Action.swift"; sourceTree = "<group>"; };
+		1AE185CB868613A032D5DC7B61A7AA68 /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
 		1EF99A4AC2E5926C60FC6000F1A58758 /* libPods-Folder Monitor-Folder MonitorUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder Monitor-Folder MonitorUITests.a"; path = "libPods-Folder Monitor-Folder MonitorUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F830C9C9A69214D78814DB36C925F8D /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
 		2AA11301D92F2186BD0876073A5013B4 /* Pods-Folder MonitorTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder MonitorTests-dummy.m"; sourceTree = "<group>"; };
 		2E0736CBE46331CB83276B91DF8B495D /* Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2F804393319831158E656583529E54C2 /* Pods-Folder MonitorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder MonitorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		33C9E7A9DBF5D27375EBC6F825C11158 /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Folder Monitor-Folder MonitorUITests-umbrella.h"; sourceTree = "<group>"; };
-		3C5206A8075736E280B989F024B41A5F /* FileWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
-		3ED733CD015F0993E22981639C24BAD9 /* FileWatcherEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcherEvent.swift; sourceTree = "<group>"; };
-		4859D740A4D3F12D5C8F5CF10FE49B7B /* FileWatcher_macOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FileWatcher_macOS.h; path = FileWatcher_macOS/FileWatcher_macOS.h; sourceTree = "<group>"; };
+		342A9509A59B509A7C7CD50CCD7B62C8 /* FileWatcher_macOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FileWatcher_macOS.h; path = FileWatcher_macOS/FileWatcher_macOS.h; sourceTree = "<group>"; };
+		43F91A7F30063FCEBF2A1E04B08F5ABE /* FileWatcher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FileWatcher-dummy.m"; sourceTree = "<group>"; };
 		59214EBD0C238B915B33A1B958F0E938 /* Pods-Folder Monitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder Monitor.debug.xcconfig"; sourceTree = "<group>"; };
-		6595137BF6CF81783A3BD2173D451CB6 /* FileWatcher.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileWatcher.modulemap; sourceTree = "<group>"; };
 		6C17B3A13ACA65D42B9596981F201500 /* Pods-Folder Monitor-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Folder Monitor-acknowledgements.plist"; sourceTree = "<group>"; };
-		736B0A1E59BC39FB5226EC3EF7E7AA02 /* FileWatcher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FileWatcher-dummy.m"; sourceTree = "<group>"; };
 		785BBBDC1C22CB51C598AD996A9BA73B /* Pods-Folder MonitorTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Folder MonitorTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		7AB1C13D717EEC92BEEEC89F5DDD9BBD /* Pods-Folder Monitor-Folder MonitorUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder Monitor-Folder MonitorUITests.release.xcconfig"; sourceTree = "<group>"; };
+		85ADAE89114EABC0663B3DF2F0F17B97 /* FileWatcher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileWatcher.release.xcconfig; sourceTree = "<group>"; };
 		8849432E21E10088BA038DD2A966525D /* Pods-Folder Monitor-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Folder Monitor-acknowledgements.markdown"; sourceTree = "<group>"; };
-		8AD49EF2FEA2B96F56460E1AD04ECFAC /* FileWatcher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-umbrella.h"; sourceTree = "<group>"; };
 		8CF76798F945C3D7B25C2AAEA051ABD9 /* Pods-Folder Monitor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder Monitor-dummy.m"; sourceTree = "<group>"; };
+		8E77271DA93564222EA8C793E68AA09E /* FileWatcher+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Action.swift"; sourceTree = "<group>"; };
 		919E69B4C31C5AD1EE19E7359576A509 /* Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A223D4AFC706CFF1FC1D59FA0B570727 /* FileWatcher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-prefix.pch"; sourceTree = "<group>"; };
+		B0D5300C01C21CE5A3423A1E781998AC /* FileWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
 		B0DC036C72593B28A855AE2CF472619C /* Pods-Folder MonitorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder MonitorTests.release.xcconfig"; sourceTree = "<group>"; };
 		B104710A87B2496FF61B3E4D8809DD4F /* Pods-Folder Monitor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Folder Monitor-umbrella.h"; sourceTree = "<group>"; };
 		B4D278250924DC079D896D95C93102F3 /* libPods-Folder Monitor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder Monitor.a"; path = "libPods-Folder Monitor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6EFC89E82AFC437DA79317C0BFD1268 /* FileWatcher.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileWatcher.modulemap; sourceTree = "<group>"; };
+		BE1627AA07A2640A74C47DF9B22AC1F3 /* FileWatcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileWatcher.debug.xcconfig; sourceTree = "<group>"; };
+		C6EA70DE69BD25DCC4434905ECAB644B /* FileWatcher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-umbrella.h"; sourceTree = "<group>"; };
 		C8DFA58CA23F696D9D08EF575C11A854 /* Pods-Folder MonitorTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Folder MonitorTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		C93B2EBB68F671632622D45D8F74997F /* libPods-Folder MonitorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder MonitorTests.a"; path = "libPods-Folder MonitorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF85738DEB375534742D5EF364F8D4BE /* Pods-Folder Monitor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Folder Monitor.modulemap"; sourceTree = "<group>"; };
-		DB55BA53EE0F1A3CE36F618EFEF003B8 /* FileWatcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileWatcher.debug.xcconfig; sourceTree = "<group>"; };
+		D34EDF4D09609DEC01E4186330124CF5 /* FileWatcherEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcherEvent.swift; sourceTree = "<group>"; };
+		D6EFFBB835D2AEFB4CA9B4CFE9355907 /* FileWatcher+Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Type.swift"; sourceTree = "<group>"; };
 		ECBD458EF74EF484DEBE4F496AB8ADB2 /* Pods-Folder Monitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder Monitor.release.xcconfig"; sourceTree = "<group>"; };
-		F0DD031ECB58E016359B5A91CC500CF4 /* FileWatcher+Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Type.swift"; sourceTree = "<group>"; };
 		F37FE2E01BEBB1DD0C1EA3EE3114EBBE /* Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,14 +119,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1DEF33365E1D7175461ADCD4A8A01797 /* Frameworks */ = {
+		247F7EC4146C62AB20CB94603280868A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35CE46E0DFF321D20CC634C3061757F8 /* Frameworks */ = {
+		8031576EC39005C1E28342F8ED65EC7C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,6 +171,15 @@
 			path = "Target Support Files/Pods-Folder Monitor";
 			sourceTree = "<group>";
 		};
+		60C539D6077412A948301E063233AD64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				96262504D3D56EBD760AFDAC34BC5022 /* FileWatcher */,
+				C9D9C42173A52BF2D8B6A465D00A6FAB /* SwiftLint */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7F708B6F8F29A972503ED1103968F712 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,12 +190,18 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		9D10FFDC5EC7FD6E035A2BEDE6992C0D /* Pods */ = {
+		96262504D3D56EBD760AFDAC34BC5022 /* FileWatcher */ = {
 			isa = PBXGroup;
 			children = (
-				CF6D310BDC14E3F44526BAF10FC97CDE /* FileWatcher */,
+				B0D5300C01C21CE5A3423A1E781998AC /* FileWatcher.swift */,
+				8E77271DA93564222EA8C793E68AA09E /* FileWatcher+Action.swift */,
+				D6EFFBB835D2AEFB4CA9B4CFE9355907 /* FileWatcher+Type.swift */,
+				342A9509A59B509A7C7CD50CCD7B62C8 /* FileWatcher_macOS.h */,
+				D34EDF4D09609DEC01E4186330124CF5 /* FileWatcherEvent.swift */,
+				F94B04A06FA113E98BCDB7EE110D1528 /* Support Files */,
 			);
-			name = Pods;
+			name = FileWatcher;
+			path = FileWatcher;
 			sourceTree = "<group>";
 		};
 		9D250D9CFC14E9955082B4586CA316F3 /* Products */ = {
@@ -187,29 +230,24 @@
 			path = "Target Support Files/Pods-Folder Monitor-Folder MonitorUITests";
 			sourceTree = "<group>";
 		};
+		C9D9C42173A52BF2D8B6A465D00A6FAB /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+				F199AAE221D2C97B37B58F27E086982C /* Support Files */,
+			);
+			name = SwiftLint;
+			path = SwiftLint;
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				9D10FFDC5EC7FD6E035A2BEDE6992C0D /* Pods */,
+				60C539D6077412A948301E063233AD64 /* Pods */,
 				9D250D9CFC14E9955082B4586CA316F3 /* Products */,
 				7F708B6F8F29A972503ED1103968F712 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		CF6D310BDC14E3F44526BAF10FC97CDE /* FileWatcher */ = {
-			isa = PBXGroup;
-			children = (
-				3C5206A8075736E280B989F024B41A5F /* FileWatcher.swift */,
-				1D28FC07E5F15F4EF04B58EDFC6C6E3E /* FileWatcher+Action.swift */,
-				F0DD031ECB58E016359B5A91CC500CF4 /* FileWatcher+Type.swift */,
-				4859D740A4D3F12D5C8F5CF10FE49B7B /* FileWatcher_macOS.h */,
-				3ED733CD015F0993E22981639C24BAD9 /* FileWatcherEvent.swift */,
-				EA2411D84D9F8F53C149F93B871FE677 /* Support Files */,
-			);
-			name = FileWatcher;
-			path = FileWatcher;
 			sourceTree = "<group>";
 		};
 		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
@@ -219,15 +257,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA2411D84D9F8F53C149F93B871FE677 /* Support Files */ = {
+		F199AAE221D2C97B37B58F27E086982C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6595137BF6CF81783A3BD2173D451CB6 /* FileWatcher.modulemap */,
-				736B0A1E59BC39FB5226EC3EF7E7AA02 /* FileWatcher-dummy.m */,
-				A223D4AFC706CFF1FC1D59FA0B570727 /* FileWatcher-prefix.pch */,
-				8AD49EF2FEA2B96F56460E1AD04ECFAC /* FileWatcher-umbrella.h */,
-				DB55BA53EE0F1A3CE36F618EFEF003B8 /* FileWatcher.debug.xcconfig */,
-				0947F9B94A377A14E3B9445A4C14BB31 /* FileWatcher.release.xcconfig */,
+				1F830C9C9A69214D78814DB36C925F8D /* SwiftLint.debug.xcconfig */,
+				1AE185CB868613A032D5DC7B61A7AA68 /* SwiftLint.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftLint";
+			sourceTree = "<group>";
+		};
+		F94B04A06FA113E98BCDB7EE110D1528 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B6EFC89E82AFC437DA79317C0BFD1268 /* FileWatcher.modulemap */,
+				43F91A7F30063FCEBF2A1E04B08F5ABE /* FileWatcher-dummy.m */,
+				0152AD79B64ED0E906A6157EBEAECAC4 /* FileWatcher-prefix.pch */,
+				C6EA70DE69BD25DCC4434905ECAB644B /* FileWatcher-umbrella.h */,
+				BE1627AA07A2640A74C47DF9B22AC1F3 /* FileWatcher.debug.xcconfig */,
+				85ADAE89114EABC0663B3DF2F0F17B97 /* FileWatcher.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/FileWatcher";
@@ -243,11 +291,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C5FABD6D77F6FB515969D98B4E013A2E /* Headers */ = {
+		87005352B44157B4A0E3FE1AD8AC45CA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8064CF0354AF5E7215382DBEAF081B65 /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h in Headers */,
+				B1D799F819AA14D5B6AC801C615F14F4 /* Pods-Folder Monitor-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C346B3B0DD0F18450C13F42B06E3C9BC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EDCC99B75C7E141BF890341B55AE8D0B /* Pods-Folder Monitor-Folder MonitorUITests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,29 +316,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E0F246DFB1E0D7BC056E40EB5CBE511D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9E947C03CD61DDB36D22772921A9F8AF /* Pods-Folder Monitor-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		27CD3D4761C203870AC241827FFAFB17 /* Pods-Folder Monitor-Folder MonitorUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4DAB168D321800D97FCEA359CE59AD48 /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor-Folder MonitorUITests" */;
+			buildConfigurationList = E379F12046FBE76903865E7808DB204B /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor-Folder MonitorUITests" */;
 			buildPhases = (
-				C5FABD6D77F6FB515969D98B4E013A2E /* Headers */,
-				FC33158FD8AE0868CCB47E13A22E8F5B /* Sources */,
-				1DEF33365E1D7175461ADCD4A8A01797 /* Frameworks */,
+				C346B3B0DD0F18450C13F42B06E3C9BC /* Headers */,
+				D89ED1B2B0F4560CD0E151D9CC7BADCB /* Sources */,
+				8031576EC39005C1E28342F8ED65EC7C /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4ABF5F5BD99C628FC9F9102E29049C6A /* PBXTargetDependency */,
+				7340068B1CA5EA85150FF0FB01E0ED87 /* PBXTargetDependency */,
+				5C0A0A2903EE015E383E29BB815E34EC /* PBXTargetDependency */,
 			);
 			name = "Pods-Folder Monitor-Folder MonitorUITests";
 			productName = "Pods-Folder Monitor-Folder MonitorUITests";
@@ -318,7 +367,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				565DF3AA571219514B05EDFF3D243153 /* PBXTargetDependency */,
+				B5E34867CCEE3A3AFFC3E65D354E2B1B /* PBXTargetDependency */,
 			);
 			name = "Pods-Folder MonitorTests";
 			productName = "Pods-Folder MonitorTests";
@@ -327,16 +376,17 @@
 		};
 		95D07EE3F1F30417E5034A8B032C3FE7 /* Pods-Folder Monitor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EC5CAEFC00856369D0011F11DC3B8E49 /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor" */;
+			buildConfigurationList = 5F97B0BCD725330C569ACA7D1E0E20EF /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor" */;
 			buildPhases = (
-				E0F246DFB1E0D7BC056E40EB5CBE511D /* Headers */,
-				7AC74BBEB6C2BF240AA8EAC13A45D146 /* Sources */,
-				35CE46E0DFF321D20CC634C3061757F8 /* Frameworks */,
+				87005352B44157B4A0E3FE1AD8AC45CA /* Headers */,
+				DD9B563B2C749FB1EB0403532ABE22BB /* Sources */,
+				247F7EC4146C62AB20CB94603280868A /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4922C7A3D418618E0ABA11E62F24F437 /* PBXTargetDependency */,
+				A69BE23B2497BB2783953F70257364D8 /* PBXTargetDependency */,
+				512407B0F28E0A6F352DFAA664DFABCE /* PBXTargetDependency */,
 			);
 			name = "Pods-Folder Monitor";
 			productName = "Pods-Folder Monitor";
@@ -353,7 +403,7 @@
 				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 10.0";
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -369,6 +419,7 @@
 				95D07EE3F1F30417E5034A8B032C3FE7 /* Pods-Folder Monitor */,
 				27CD3D4761C203870AC241827FFAFB17 /* Pods-Folder Monitor-Folder MonitorUITests */,
 				38E0DA95598954B0901FC388391EE736 /* Pods-Folder MonitorTests */,
+				52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */,
 			);
 		};
 /* End PBXProject section */
@@ -409,11 +460,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7AC74BBEB6C2BF240AA8EAC13A45D146 /* Sources */ = {
+		D89ED1B2B0F4560CD0E151D9CC7BADCB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2561AF5F149378006CECAFA534D67ED /* Pods-Folder Monitor-dummy.m in Sources */,
+				59213B763C35BA0FDC7CB901442907FB /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD9B563B2C749FB1EB0403532ABE22BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3FFF9C110A07FFC2505661A45F2790D7 /* Pods-Folder Monitor-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,38 +488,83 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC33158FD8AE0868CCB47E13A22E8F5B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				462F67B288751573CDBA0D90CAE3B3DE /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4922C7A3D418618E0ABA11E62F24F437 /* PBXTargetDependency */ = {
+		512407B0F28E0A6F352DFAA664DFABCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
+			targetProxy = 64BF21A6FACD477CCB2F8EB17280B4DB /* PBXContainerItemProxy */;
+		};
+		5C0A0A2903EE015E383E29BB815E34EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftLint;
+			target = 52B60EC2A583F24ACBB69C113F5488B9 /* SwiftLint */;
+			targetProxy = 01137CADD8AB31E686CBC785534EC344 /* PBXContainerItemProxy */;
+		};
+		7340068B1CA5EA85150FF0FB01E0ED87 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FileWatcher;
 			target = 2C6DCF49E9E3138CD06BB33023EAB2A8 /* FileWatcher */;
-			targetProxy = F21A9F3E9056018078B68253031AF972 /* PBXContainerItemProxy */;
+			targetProxy = AA9DD31D151CFEC242996268A27DBB57 /* PBXContainerItemProxy */;
 		};
-		4ABF5F5BD99C628FC9F9102E29049C6A /* PBXTargetDependency */ = {
+		A69BE23B2497BB2783953F70257364D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FileWatcher;
 			target = 2C6DCF49E9E3138CD06BB33023EAB2A8 /* FileWatcher */;
-			targetProxy = 119EF21157928C29EA47C5716A5273ED /* PBXContainerItemProxy */;
+			targetProxy = 03C77BF53670F45FC2187336811D1EEE /* PBXContainerItemProxy */;
 		};
-		565DF3AA571219514B05EDFF3D243153 /* PBXTargetDependency */ = {
+		B5E34867CCEE3A3AFFC3E65D354E2B1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-Folder Monitor";
 			target = 95D07EE3F1F30417E5034A8B032C3FE7 /* Pods-Folder Monitor */;
-			targetProxy = 42AE86537BF58C1FD1545DD0093B7856 /* PBXContainerItemProxy */;
+			targetProxy = 485B9FA46992D0A7B1116614CCE2F0B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3106DB3F08CC76A1D4E3FA51E569D3E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AB1C13D717EEC92BEEEC89F5DDD9BBD /* Pods-Folder Monitor-Folder MonitorUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor-Folder MonitorUITests/Pods-Folder Monitor-Folder MonitorUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		37EF91DB1F252897502EC37FD1183BD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F830C9C9A69214D78814DB36C925F8D /* SwiftLint.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
 		43A1DF56E937B478488BB9E8D6AAEA12 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2F804393319831158E656583529E54C2 /* Pods-Folder MonitorTests.debug.xcconfig */;
@@ -483,32 +587,9 @@
 			};
 			name = Debug;
 		};
-		43E722C568E8E3E5DD3AE7EF3E0180CE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 59214EBD0C238B915B33A1B958F0E938 /* Pods-Folder Monitor.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
 		4809262823E46EAC0369BB7E38687F1D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB55BA53EE0F1A3CE36F618EFEF003B8 /* FileWatcher.debug.xcconfig */;
+			baseConfigurationReference = BE1627AA07A2640A74C47DF9B22AC1F3 /* FileWatcher.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -532,7 +613,25 @@
 			};
 			name = Debug;
 		};
-		57938647893973DA5C093C37BD77F112 /* Debug */ = {
+		48962536F0953CC589E4B93B2086BE3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE185CB868613A032D5DC7B61A7AA68 /* SwiftLint.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4B681A07EB51ADEA190D6EA24C232B4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2E0736CBE46331CB83276B91DF8B495D /* Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig */;
 			buildSettings = {
@@ -555,32 +654,9 @@
 			};
 			name = Debug;
 		};
-		6A3E51A479A639DB0A3361FB77BE84EA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECBD458EF74EF484DEBE4F496AB8ADB2 /* Pods-Folder Monitor.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		7674C8D62CBD4A28196B65A2F9AC6DBA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0947F9B94A377A14E3B9445A4C14BB31 /* FileWatcher.release.xcconfig */;
+			baseConfigurationReference = 85ADAE89114EABC0663B3DF2F0F17B97 /* FileWatcher.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -601,6 +677,29 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		83BC8FE795DD0F96B3CD5E524986F09B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECBD458EF74EF484DEBE4F496AB8ADB2 /* Pods-Folder Monitor.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -670,6 +769,29 @@
 			};
 			name = Debug;
 		};
+		BD97A1984C012A1FA70FEA12AA3A269B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59214EBD0C238B915B33A1B958F0E938 /* Pods-Folder Monitor.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = staticlib;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 		D444F20E0E9C1CE5255ECB2412BEDE0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B0DC036C72593B28A855AE2CF472619C /* Pods-Folder MonitorTests.release.xcconfig */;
@@ -683,29 +805,6 @@
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		D480E8122AB499FBD53BCE4CCC6FC59C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AB1C13D717EEC92BEEEC89F5DDD9BBD /* Pods-Folder Monitor-Folder MonitorUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				EXECUTABLE_PREFIX = lib;
-				MACH_O_TYPE = staticlib;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor-Folder MonitorUITests/Pods-Folder Monitor-Folder MonitorUITests.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -798,11 +897,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4DAB168D321800D97FCEA359CE59AD48 /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor-Folder MonitorUITests" */ = {
+		5F97B0BCD725330C569ACA7D1E0E20EF /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				57938647893973DA5C093C37BD77F112 /* Debug */,
-				D480E8122AB499FBD53BCE4CCC6FC59C /* Release */,
+				BD97A1984C012A1FA70FEA12AA3A269B /* Debug */,
+				83BC8FE795DD0F96B3CD5E524986F09B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -816,11 +915,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EC5CAEFC00856369D0011F11DC3B8E49 /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor" */ = {
+		AE7B4FB01588B9E6DF09CB79FC7CE7BD /* Build configuration list for PBXAggregateTarget "SwiftLint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				43E722C568E8E3E5DD3AE7EF3E0180CE /* Debug */,
-				6A3E51A479A639DB0A3361FB77BE84EA /* Release */,
+				37EF91DB1F252897502EC37FD1183BD6 /* Debug */,
+				48962536F0953CC589E4B93B2086BE3E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E379F12046FBE76903865E7808DB204B /* Build configuration list for PBXNativeTarget "Pods-Folder Monitor-Folder MonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B681A07EB51ADEA190D6EA24C232B4C /* Debug */,
+				3106DB3F08CC76A1D4E3FA51E569D3E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
