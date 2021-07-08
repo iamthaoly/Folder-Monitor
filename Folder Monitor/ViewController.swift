@@ -17,15 +17,15 @@ enum Status {
 }
 class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var txtFolderPath: NSTextField!
-    
+
     @IBOutlet weak var lblStatus: NSTextField!
     @IBOutlet weak var imvStatus: NSImageView!
     @IBOutlet weak var btnBrowserFolder: NSButton!
     @IBOutlet weak var btnMonitor: NSButton!
     @IBOutlet var txtLogs: NSTextView!
-    
+
     @IBOutlet weak var scrollView: NSScrollView!
-    
+
     var folderPath: URL? {
         didSet {
             // Save folder access permission to bookmark
@@ -38,23 +38,23 @@ class ViewController: NSViewController, NSWindowDelegate {
             if let strPath = folderPath?.absoluteString {
                 txtFolderPath.stringValue = strPath
             }
-            
+
         }
     }
     lazy var filewatcher = FileWatcher([NSString(string: folderPath?.path ?? "temp").expandingTildeInPath])
 //    lazy var filewatcher: FileWatcher? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
 
     }
-    
+
     override func viewDidAppear() {
         self.view.window?.delegate = self
     }
-    
+
     func setupUI() {
         txtLogs.string.append(contentsOf: "\n")
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
@@ -72,35 +72,32 @@ class ViewController: NSViewController, NSWindowDelegate {
     func scrollToBottom() {
         txtLogs.scrollToEndOfDocument(self)
     }
-    
-    
+
     @IBAction func monitorProcess(_ sender: Any) {
         if btnMonitor.title == "START" {
             process(start: true)
-        }
-        else if btnMonitor.title == "STOP" {
+        } else if btnMonitor.title == "STOP" {
             process(start: false)
         }
     }
-    
+
     func process(start: Bool) {
         if start {
-            if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "temp"){
+            if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "temp") {
                 changeStatus(status: .warning, text: "Current folder's not exist. Please choose another.")
                 return
             }
             startMonitor()
             btnMonitor.title = "STOP"
             btnMonitor.titleTextColor = NSColor.red
-        }
-        else {
+        } else {
             stopMonitor()
             btnMonitor.title = "START"
             btnMonitor.titleTextColor = NSColor.systemBlue
 
         }
     }
-    
+
     func startMonitor() {
         filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
         changeStatus(status: .ok, text: "Your folder are being monitor.")
@@ -127,7 +124,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                 }
     //            print("event.flags:  \(event.flags)")
                 // [2] create event
-                else if event.fileCreated || event.fileRenamed{
+                else if event.fileCreated || event.fileRenamed {
                     log.append(contentsOf: "\(String(describing: fileName)) was added.")
                     let tempLog = self.extractTextFromPDF(filePath: event.path)
                     log.append(tempLog)
@@ -145,19 +142,19 @@ class ViewController: NSViewController, NSWindowDelegate {
         filewatcher.start() // start monitoring
 
     }
-    
+
     func stopMonitor() {
         let time = getTime()
         txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
         filewatcher.stop()
         changeStatus(status: .error, text: "Your folder are not being monitor.")
     }
-    
-    func extractTextFromPDF(filePath: String) -> String{
+
+    func extractTextFromPDF(filePath: String) -> String {
         var log = ""
         guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else {return log}
         debugPrint("PDF file: \(pdfFileUrl)")
-        
+
         if let pdf = PDFDocument(url: pdfFileUrl) {
             let content = pdf.string!
 //                print("PDF content: ")
@@ -169,7 +166,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                     let fm = FileManager.default
                     var newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
                     var i = 0
-                    while(fm.fileExists(atPath: newUrl.path)) {
+                    while fm.fileExists(atPath: newUrl.path) {
                         i += 1
                         newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + "(\(i))" + ".pdf")
                     }
@@ -179,39 +176,34 @@ class ViewController: NSViewController, NSWindowDelegate {
                     do {
                         try fm.moveItem(at: pdfFileUrl, to: newUrl)
                         log.append("-> Rename \(oldFileName) to \(newFileName)")
-                    }
-                    catch let error as NSError{
+                    } catch let error as NSError {
                         log.append(" - Rename file error - ")
                     }
-                }
-                else {
+                } else {
                     log.append(" - Correct format. ")
                 }
-            }
-            else {
+            } else {
                 // number not found
                 log.append(" - Referenznr number not found in PDF - Ignored.")
             }
-        }
-        else {
+        } else {
             log.append(" - Cannot read PDF - Ignored.")
         }
         // Update to text view
         return log
-        
-        
+
     }
-    
+
     func extractNumberFromText(content: String) -> String? {
         let word = "Referenznr"
         if let range = content.range(of: word) {
             var r1: String.Index = content.index(after: range.lowerBound)
             var r2: String.Index = content.index(range.upperBound, offsetBy: 10)
-            
+
             r1 = content.index(after: range.upperBound)
             var char = content[r1]
 //            print("content: \(char)")
-            while(r1 < content.endIndex && !(char.isASCII && char.isNumber)) {
+            while r1 < content.endIndex && !(char.isASCII && char.isNumber) {
                 print("content: \(char)")
                 r1 = content.index(r1, offsetBy: 1)
                 char = content[r1]
@@ -219,15 +211,14 @@ class ViewController: NSViewController, NSWindowDelegate {
 //            print("r1: \(r1)")
             r2 = r1
             char = content[r2]
-            while(r2 < content.endIndex && (char.isNumber || char == "-")) {
+            while r2 < content.endIndex && (char.isNumber || char == "-") {
                 r2 = content.index(r2, offsetBy: 1)
                 char = content[r2]
             }
             print("Referenznr-->")
             print(content[r1..<r2])
             return String(content[r1..<r2])
-        }
-        else {
+        } else {
             // word not found
         }
         return nil
@@ -238,7 +229,6 @@ class ViewController: NSViewController, NSWindowDelegate {
         // Update the view, if already loaded.
         }
     }
-
 
 }
 extension ViewController {
@@ -254,9 +244,9 @@ extension ViewController {
             imvStatus.image = NSImage(named: "Warning")
         }
         lblStatus.stringValue = text
-        
+
     }
-    
+
     func isPDF(path: String) -> Bool {
         let url = URL(fileURLWithPath: path)
         if url.pathExtension == "pdf" {
@@ -264,10 +254,10 @@ extension ViewController {
         }
         return false
     }
-    
+
     func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
         let fileName = filePath.deletingPathExtension().lastPathComponent
-        if let specialIndex = fileName.firstIndex(of: "(")  {
+        if let specialIndex = fileName.firstIndex(of: "(") {
             if (fileName[..<specialIndex]) == refNumber {
                 return true
             }
@@ -296,10 +286,10 @@ extension ViewController {
         }
         return false
     }
-    
+
     @IBAction func browserFolder(_ sender: Any) {
-        
-        let dialog = NSOpenPanel();
+
+        let dialog = NSOpenPanel()
         dialog.title = "Choose a folder"
         dialog.showsResizeIndicator = true
         dialog.showsHiddenFiles = false
@@ -308,9 +298,9 @@ extension ViewController {
         dialog.canChooseFiles = false
         dialog.allowsMultipleSelection = false
 
-        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+        if dialog.runModal() == NSApplication.ModalResponse.OK {
             let result = dialog.url // Pathname of the file
-            if (result != nil) {
+            if result != nil {
                 process(start: false)
                 let path = result!.path
                 folderPath = URL(string: path)
@@ -344,7 +334,7 @@ extension ViewController {
         default:
             completion(0)
         }
-        
+
     }
 
 }
@@ -367,20 +357,20 @@ extension FileWatcherEvent {
 }
 
 extension NSButton {
- 
-    var titleTextColor : NSColor {
+
+    var titleTextColor: NSColor {
         get {
             let attrTitle = self.attributedTitle
             return attrTitle.attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil) as! NSColor
         }
-        
+
         set(newColor) {
             let attrTitle = NSMutableAttributedString(attributedString: self.attributedTitle)
-            let titleRange = NSMakeRange(0, self.title.count)
- 
+            let titleRange = NSRange(location: 0, length: self.title.count)
+
             attrTitle.addAttributes([NSAttributedString.Key.foregroundColor: newColor], range: titleRange)
             self.attributedTitle = attrTitle
         }
     }
-    
+
 }

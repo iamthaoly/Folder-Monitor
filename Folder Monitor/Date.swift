@@ -1,8 +1,7 @@
 //
 //  NSDateExtension.swift
 
-
-//import UIKit
+// import UIKit
 import Foundation
 
 extension Date {
@@ -11,7 +10,6 @@ extension Date {
         dateFormater.timeZone = .current
         dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
         let str = dateFormater.string(from: Date())
-        
         return str
     }
     func dateTimeFormat() -> String {
@@ -31,7 +29,7 @@ extension Date {
 }
 
 extension Date {
-    
+
     var yesterday: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
     }
@@ -42,7 +40,7 @@ extension Date {
         return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)!
     }
     var month: Int {
-        return Calendar.current.component(.month,  from: self)
+        return Calendar.current.component(.month, from: self)
     }
     var nextMonth: Date? {
         return Calendar.current.date(byAdding: .month, value: 1, to: self)
@@ -62,23 +60,23 @@ extension Date {
     /**
      "yyyy-MM-dd"
      */
-    public func getStrDateFromFormat(format:String) -> String {
+    public func getStrDateFromFormat(format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         let result = formatter.string(from: self)
         return result
     }
-    public func getDetailDate(format:String) -> String {
+    public func getDetailDate(format: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         let result = formatter.string(from: self)
         return result
     }
-    
+
     func currentTimeMillis() -> Int64 {
         return Int64(self.timeIntervalSince1970 * 1000)
     }
-    
+
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
         return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
     }
@@ -124,74 +122,70 @@ extension Date {
     }
  }
 extension DateFormatter {
-    public func timeFromStrDate(dateString:String, oldFormat:String, newFormat:String)->String {
-        self.dateFormat = oldFormat//"EEE MMM d"
+    public func timeFromStrDate(dateString: String, oldFormat: String, newFormat: String) -> String {
+        self.dateFormat = oldFormat// "EEE MMM d"
         let dateObj = self.date(from: dateString)
         if dateObj == nil {
             return "00 : 00 PM"
-        }else {
-            self.dateFormat = newFormat//"yyyy-MM-dd"
+        } else {
+            self.dateFormat = newFormat// "yyyy-MM-dd"
             debugPrint(self.calendar.component(.hour, from: dateObj!))
             return "\(self.calendar.component(.hour, from: dateObj!)) : \(self.calendar.component(.minute, from: dateObj!))"
         }
     }
-    
-    public func convertStrDate(dateString:String, oldFormat:String, newFormat:String)->String {
-        self.dateFormat = oldFormat//"EEE MMM d"
+
+    public func convertStrDate(dateString: String, oldFormat: String, newFormat: String) -> String {
+        self.dateFormat = oldFormat// "EEE MMM d"
         let dateObj = self.date(from: dateString)
         if dateObj == nil {
             return dateString
-        }else {
-            self.dateFormat = newFormat//"yyyy-MM-dd"
+        } else {
+            self.dateFormat = newFormat// "yyyy-MM-dd"
             return self.string(from: dateObj!)
         }
     }
     /**
      Return today, tomorrow, yesterday
      */
-    public func strDateFromStrDate(dateString:String, oldFormat:String, newFormat:String)->String {
-        self.dateFormat = oldFormat//"EEE MMM d"
+    public func strDateFromStrDate(dateString: String, oldFormat: String, newFormat: String) -> String {
+        self.dateFormat = oldFormat// "EEE MMM d"
         let dateObj = self.date(from: dateString)
-        
+
         if let schedulePlay = dateObj {
-            
-            if NSCalendar.current.isDateInToday(schedulePlay) == true{
+
+            if NSCalendar.current.isDateInToday(schedulePlay) == true {
                 return "Today"
             }
-            
-            if NSCalendar.current.isDateInTomorrow(schedulePlay) == true{
+
+            if NSCalendar.current.isDateInTomorrow(schedulePlay) == true {
                 return "Tomorrow"
             }
-            if NSCalendar.current.isDateInYesterday(schedulePlay) == true{
+            if NSCalendar.current.isDateInYesterday(schedulePlay) == true {
                 return "Yesterday"
             }
         }
         if dateObj == nil {
             return dateString
-        }else {
-            self.dateFormat = newFormat//"yyyy-MM-dd"
-            
-            
-            
+        } else {
+            self.dateFormat = newFormat// "yyyy-MM-dd"
+
             return self.string(from: dateObj!)
         }
-        
-        
-        
+
     }
-    
-    public func getLocalTimeFrom(dateUTC:String,timeUTC:String) {
+
+    public func getLocalTimeFrom(dateUTC: String, timeUTC: String) {
         // create dateFormatter with UTC time format
         self.dateFormat = "yyyy-MM-dd hh:mm:ss"
         self.timeZone = NSTimeZone.init(name: "UTC")! as TimeZone
         let strUTC = dateUTC + timeUTC
         let date = self.date(from: strUTC)
-        
+
         self.timeZone = TimeZone.current
-        let timeStamp = self.string(from:date!)
-        
+        let timeStamp = self.string(from: date!)
+
         debugPrint(timeStamp)
-        
+
     }
-    
+
 }
