@@ -12,7 +12,7 @@ import FileWatcher
 
 enum Status {
     case warning
-    case ok
+    case good
     case error
 }
 class ViewController: NSViewController, NSWindowDelegate {
@@ -55,8 +55,8 @@ class ViewController: NSViewController, NSWindowDelegate {
         self.view.window?.delegate = self
     }
 
-    func setupUI() {
-        txtLogs.string.append(contentsOf: "\n")
+    private func setupUI() {
+        updateLog( "\n")
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
                 txtFolderPath.stringValue = path
@@ -69,10 +69,16 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
 
-    func scrollToBottom() {
+    private func scrollToBottom() {
         txtLogs.scrollToEndOfDocument(self)
     }
-
+    
+    private func updateLog(_ text: String) {
+        DispatchQueue.main.async {
+            self.updateLog(text)
+            self.scrollToBottom()
+        }
+    }
     @IBAction func monitorProcess(_ sender: Any) {
         if btnMonitor.title == "START" {
             process(start: true)
@@ -100,9 +106,9 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     func startMonitor() {
         filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
-        changeStatus(status: .ok, text: "Your folder are being monitor.")
+        changeStatus(status: .good, text: "Your folder are being monitor.")
         let time = getTime()
-        txtLogs.string.append(contentsOf: "\(time) - Monitor started.\n")
+        updateLog("\(time) - Monitor started.\n")
 
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
@@ -114,27 +120,22 @@ class ViewController: NSViewController, NSWindowDelegate {
                 return
             }
             if event.fileCreated || event.fileRemoved || event.fileRenamed {
-                var log: String = ""
-                log.append(contentsOf: "---\n")
-                log.append(self.getTime() + "\n")
+//                var log: String = ""
+                self.updateLog("---\n")
+                self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
                 // [1] delete event
                 if event.fileRemoved {
-                    log.append(contentsOf: "\(String(describing: fileName)) was deleted.\n")
+                    self.updateLog("\(String(describing: fileName)) was deleted.\n")
                 }
     //            print("event.flags:  \(event.flags)")
                 // [2] create event
                 else if event.fileCreated || event.fileRenamed {
-                    log.append(contentsOf: "\(String(describing: fileName)) was added.")
-                    let tempLog = self.extractTextFromPDF(filePath: event.path)
-                    log.append(tempLog)
+                    self.updateLog("\(String(describing: fileName)) was added.")
+                    self.extractTextFromPDF(filePath: event.path)
                 }
 
-                log.append(contentsOf: "\n")
-                DispatchQueue.main.async {
-                    self.txtLogs.string.append(contentsOf: log)
-                    self.scrollToBottom()
-                }
+                self.updateLog("\n")
             }
 
         }
@@ -145,14 +146,13 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     func stopMonitor() {
         let time = getTime()
-        txtLogs.string.append(contentsOf: "\(time) - Monitor stopped.\n")
+        updateLog("\(time) - Monitor stopped.\n")
         filewatcher.stop()
         changeStatus(status: .error, text: "Your folder are not being monitor.")
     }
 
-    func extractTextFromPDF(filePath: String) -> String {
-        var log = ""
-        guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else {return log}
+    func extractTextFromPDF(filePath: String){
+        guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else { return }
         debugPrint("PDF file: \(pdfFileUrl)")
 
         if let pdf = PDFDocument(url: pdfFileUrl) {
@@ -161,36 +161,34 @@ class ViewController: NSViewController, NSWindowDelegate {
 //                debugPrint(content)
             // Find substring
             if let refNumber = extractNumberFromText(content: content) {
-                log.append(" - Referenznr number found: \(refNumber) ")
+                updateLog(" - Referenznr number found: \(refNumber) ")
                 if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
-                    let fm = FileManager.default
+                    let fileManager = FileManager.default
                     var newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
-                    var i = 0
-                    while fm.fileExists(atPath: newUrl.path) {
-                        i += 1
-                        newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + "(\(i))" + ".pdf")
+                    var fileCount = 0
+                    while fileManager.fileExists(atPath: newUrl.path) {
+                        fileCount += 1
+                        newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + "(\(fileCount))" + ".pdf")
                     }
                     let oldFileName = pdfFileUrl.lastPathComponent
                     let newFileName = newUrl.lastPathComponent
 
                     do {
-                        try fm.moveItem(at: pdfFileUrl, to: newUrl)
-                        log.append("-> Rename \(oldFileName) to \(newFileName)")
-                    } catch let error as NSError {
-                        log.append(" - Rename file error - ")
+                        try fileManager.moveItem(at: pdfFileUrl, to: newUrl)
+                        updateLog("-> Rename \(oldFileName) to \(newFileName)")
+                    } catch _ as NSError {
+                        updateLog(" - Rename file error - ")
                     }
                 } else {
-                    log.append(" - Correct format. ")
+                    updateLog(" - Correct format. ")
                 }
             } else {
                 // number not found
-                log.append(" - Referenznr number not found in PDF - Ignored.")
+                updateLog(" - Referenznr number not found in PDF - Ignored.")
             }
         } else {
-            log.append(" - Cannot read PDF - Ignored.")
+            updateLog(" - Cannot read PDF - Ignored.")
         }
-        // Update to text view
-        return log
 
     }
 
@@ -236,7 +234,7 @@ extension ViewController {
         switch status {
         case .warning:
             imvStatus.image = NSImage(named: "Warning")
-        case .ok:
+        case .good:
             imvStatus.image = NSImage(named: "Check")
         case .error:
             imvStatus.image = NSImage(named: "Close")

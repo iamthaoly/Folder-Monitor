@@ -9,7 +9,7 @@
 import XCTest
 @testable import Folder_Monitor
 
-class Folder_MonitorTests: XCTestCase {
+class FolderMonitorTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

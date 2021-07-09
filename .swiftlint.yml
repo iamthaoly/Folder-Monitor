@@ -1,12 +1,15 @@
-#disabled_rules:
-  #- trailing_whitespace
-  #opt_in_rules:
-  #- empty_count
-  #- empty_string
+disabled_rules:
+  - trailing_whitespace
+opt_in_rules:
+  - empty_count
+  - empty_string
 excluded:
 - Carthage
 - Pods
 - SwiftLint/Common/3rdPartyLib
+force_cast: warning
+force_try:
+  severity: warning
 line_length:
     warning: 150
     error: 200
