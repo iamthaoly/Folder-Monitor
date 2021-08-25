@@ -78,7 +78,17 @@ class ViewController: NSViewController, NSWindowDelegate {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: pdfPath?.path ?? "") {
             // Call system print
+            
         }
+        let printInfo = NSPrintInfo.shared
+        let operation: NSPrintOperation = NSPrintOperation(view: self.view, printInfo: printInfo)
+        operation.printPanel.options = NSPrintPanel.Options.showsPaperSize
+        operation.printPanel.options = NSPrintPanel.Options.showsOrientation
+        operation.printPanel.options.insert(NSPrintPanel.Options.showsPaperSize)
+        operation.printPanel.options.insert(NSPrintPanel.Options.showsOrientation)
+        operation.run()
+
+            //plasmidMapIBOutlet.print(sender)
     }
     // TEST PRINTING
     func thePrintInfo() -> NSPrintInfo {
