@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -708,11 +708,11 @@
             <objects>
                 <viewController title="Main" id="XfG-lQ-9wD" customClass="ViewController" customModule="Folder_Monitor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="536" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="620" height="307"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
-                                <rect key="frame" x="400" y="185" width="112" height="32"/>
+                                <rect key="frame" x="483" y="232" width="114" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="idA-DD-uSc"/>
                                 </constraints>
@@ -725,7 +725,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bms-Hj-uoq">
-                                <rect key="frame" x="376" y="215" width="136" height="32"/>
+                                <rect key="frame" x="467" y="262" width="130" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose folder..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nLy-1X-hgG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -735,7 +735,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFb-Jj-L6W">
-                                <rect key="frame" x="28" y="224" width="44" height="16"/>
+                                <rect key="frame" x="28" y="271" width="44" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Folder" id="p0n-ZA-0oF">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -743,14 +743,14 @@
                                 </textFieldCell>
                             </textField>
                             <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YMB-qL-TOZ" userLabel="Stack View Status">
-                                <rect key="frame" x="30" y="194" width="286" height="16"/>
+                                <rect key="frame" x="30" y="241" width="370" height="16"/>
                                 <subviews>
                                     <imageView verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kM-6n-2BJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="17" height="16"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="22" height="16"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Warning" id="vWz-zh-PSW"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Mi-Hr-AaH">
-                                        <rect key="frame" x="20" y="0.0" width="268" height="16"/>
+                                        <rect key="frame" x="25" y="0.0" width="347" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="You haven't choose any folder to monitor" id="KWz-Gh-gFu">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -767,8 +767,40 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Qpt-MH-Ehe">
+                                <rect key="frame" x="262" y="151" width="96" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <stackView distribution="equalCentering" orientation="horizontal" alignment="bottom" spacing="40" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AXS-Qu-oii" userLabel="Stack View Print">
+                                <rect key="frame" x="30" y="200" width="560" height="21"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VcF-eh-Rt7">
+                                        <rect key="frame" x="0.0" y="0.0" width="470" height="21"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="PDF's name to print" drawsBackground="YES" id="yb5-5W-Tz3">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-xm-iyB">
+                                        <rect key="frame" x="503" y="-7" width="64" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Print" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KlA-JA-RMv">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <real value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
-                                <rect key="frame" x="75" y="222" width="291" height="21"/>
+                                <rect key="frame" x="75" y="269" width="383" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -776,7 +808,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t2v-Jc-y0r">
-                                <rect key="frame" x="28" y="163" width="34" height="16"/>
+                                <rect key="frame" x="28" y="169" width="34" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Logs" id="tkz-cn-2wV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -784,18 +816,18 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IV-NM-HJG">
-                                <rect key="frame" x="30" y="20" width="476" height="138"/>
+                                <rect key="frame" x="30" y="20" width="560" height="144"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="meg-T3-nhf">
-                                    <rect key="frame" x="1" y="1" width="459" height="136"/>
+                                    <rect key="frame" x="1" y="1" width="543" height="142"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="W5m-u9-pLe">
-                                            <rect key="frame" x="0.0" y="0.0" width="459" height="136"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="543" height="142"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="459" height="136"/>
-                                            <size key="maxSize" width="563" height="10000000"/>
+                                            <size key="minSize" width="543" height="142"/>
+                                            <size key="maxSize" width="595" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="Whenever you add PDFs, it will be logged here.">
                                                     <attributes>
@@ -814,7 +846,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="zLN-rE-dZp">
-                                    <rect key="frame" x="460" y="1" width="15" height="136"/>
+                                    <rect key="frame" x="544" y="1" width="15" height="142"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -822,7 +854,9 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="8IV-NM-HJG" secondAttribute="bottom" constant="20" symbolic="YES" id="1Gx-EB-Hmk"/>
                             <constraint firstItem="8IV-NM-HJG" firstAttribute="leading" secondItem="fFb-Jj-L6W" secondAttribute="leading" id="3pY-at-x3n"/>
+                            <constraint firstItem="AXS-Qu-oii" firstAttribute="bottom" secondItem="t2v-Jc-y0r" secondAttribute="top" constant="-15" id="5cW-yV-yqH"/>
                             <constraint firstItem="OdP-IC-WqB" firstAttribute="centerY" secondItem="YMB-qL-TOZ" secondAttribute="centerY" id="7Xg-xw-5op"/>
+                            <constraint firstItem="t2v-Jc-y0r" firstAttribute="bottom" secondItem="8IV-NM-HJG" secondAttribute="top" constant="-5" id="AHf-FM-ZZj"/>
                             <constraint firstItem="YMB-qL-TOZ" firstAttribute="top" secondItem="fFb-Jj-L6W" secondAttribute="top" constant="30" id="As5-BO-6on"/>
                             <constraint firstItem="bms-Hj-uoq" firstAttribute="leading" secondItem="LG0-av-GAj" secondAttribute="trailing" constant="16" id="Brs-ho-Elo"/>
                             <constraint firstItem="OdP-IC-WqB" firstAttribute="leading" secondItem="YMB-qL-TOZ" secondAttribute="trailing" constant="90" id="CNn-TZ-uEb"/>
@@ -830,11 +864,12 @@
                             <constraint firstItem="OdP-IC-WqB" firstAttribute="trailing" secondItem="bms-Hj-uoq" secondAttribute="trailing" id="EoS-ul-Pgz"/>
                             <constraint firstItem="8IV-NM-HJG" firstAttribute="trailing" secondItem="OdP-IC-WqB" secondAttribute="trailing" id="L5x-MG-aHh"/>
                             <constraint firstItem="bms-Hj-uoq" firstAttribute="centerY" secondItem="LG0-av-GAj" secondAttribute="centerY" id="N4m-OU-Iub"/>
+                            <constraint firstItem="AXS-Qu-oii" firstAttribute="trailing" secondItem="OdP-IC-WqB" secondAttribute="trailing" id="QGi-C8-qCi"/>
                             <constraint firstItem="LG0-av-GAj" firstAttribute="leading" secondItem="fFb-Jj-L6W" secondAttribute="trailing" constant="5" id="SXG-px-EC3"/>
+                            <constraint firstItem="AXS-Qu-oii" firstAttribute="top" secondItem="YMB-qL-TOZ" secondAttribute="bottom" constant="20" id="aEd-cm-z23"/>
+                            <constraint firstItem="AXS-Qu-oii" firstAttribute="leading" secondItem="t2v-Jc-y0r" secondAttribute="leading" id="br2-dx-VcI"/>
                             <constraint firstItem="t2v-Jc-y0r" firstAttribute="leading" secondItem="YMB-qL-TOZ" secondAttribute="leading" id="iNX-87-bQP"/>
-                            <constraint firstItem="8IV-NM-HJG" firstAttribute="top" secondItem="t2v-Jc-y0r" secondAttribute="bottom" constant="5" id="pcE-Ap-ero"/>
                             <constraint firstItem="fFb-Jj-L6W" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="qg2-kj-Ppu"/>
-                            <constraint firstItem="t2v-Jc-y0r" firstAttribute="top" secondItem="YMB-qL-TOZ" secondAttribute="bottom" constant="15" id="s2i-Qs-ePT"/>
                             <constraint firstItem="YMB-qL-TOZ" firstAttribute="leading" secondItem="fFb-Jj-L6W" secondAttribute="leading" id="vie-ea-Flc"/>
                             <constraint firstItem="fFb-Jj-L6W" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="xxE-5B-qZu"/>
                             <constraint firstAttribute="trailing" secondItem="bms-Hj-uoq" secondAttribute="trailing" constant="30" id="yYD-B3-uRw"/>
@@ -843,6 +878,7 @@
                     <connections>
                         <outlet property="btnBrowserFolder" destination="bms-Hj-uoq" id="wPv-Ph-AMN"/>
                         <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                        <outlet property="btnPrint" destination="Nc4-xm-iyB" id="65F-5t-CZA"/>
                         <outlet property="imvStatus" destination="7kM-6n-2BJ" id="PGO-pt-vwe"/>
                         <outlet property="lblStatus" destination="2Mi-Hr-AaH" id="7d8-tb-bQG"/>
                         <outlet property="scrollView" destination="8IV-NM-HJG" id="tUQ-ea-IQB"/>
@@ -852,7 +888,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34" y="656"/>
+            <point key="canvasLocation" x="34" y="679.5"/>
         </scene>
     </scenes>
     <resources>

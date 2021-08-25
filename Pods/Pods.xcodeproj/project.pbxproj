@@ -399,8 +399,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -480,10 +480,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				512EEEA6E886CA2DB1CCAC3F671C7669 /* FileWatcher.swift in Sources */,
 				DA9ADE2517ABB9C2233C1AAA363DFFAF /* FileWatcher+Action.swift in Sources */,
 				5A017F180C3DA409610627BF08FB3FAA /* FileWatcher+Type.swift in Sources */,
 				33FE6EC9948794DAE9071CCA4A48641A /* FileWatcher-dummy.m in Sources */,
-				512EEEA6E886CA2DB1CCAC3F671C7669 /* FileWatcher.swift in Sources */,
 				C051C883DEF21CFE971AD5894A7F6754 /* FileWatcherEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

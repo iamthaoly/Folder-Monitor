@@ -9,6 +9,7 @@
 import Cocoa
 import PDFKit
 import FileWatcher
+import Foundation
 
 enum Status {
     case warning
@@ -26,6 +27,8 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     @IBOutlet weak var scrollView: NSScrollView!
 
+    @IBOutlet weak var btnPrint: NSButton!
+    
     var folderPath: URL? {
         didSet {
             // Save folder access permission to bookmark
@@ -48,7 +51,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         super.viewDidLoad()
 
         setupUI()
-
+        printPDF(name: "123-498-000")
     }
 
     override func viewDidAppear() {
@@ -69,6 +72,36 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
 
+    func printPDF(name: String) {
+        let pdfPath = (folderPath?.absoluteURL.appendingPathComponent(name))
+        print("pdfPath:: \(pdfPath)")
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: pdfPath?.path ?? "") {
+            // Call system print
+        }
+    }
+    // TEST PRINTING
+    func thePrintInfo() -> NSPrintInfo {
+        let thePrintInfo = NSPrintInfo()
+        thePrintInfo.horizontalPagination = .fit
+        thePrintInfo.verticalPagination = .automatic
+        thePrintInfo.isHorizontallyCentered = false
+        thePrintInfo.isVerticallyCentered = false
+        thePrintInfo.leftMargin = 72.0
+        thePrintInfo.rightMargin = 72.0
+        thePrintInfo.topMargin = 72.0
+        thePrintInfo.bottomMargin = 72.0
+        thePrintInfo.jobDisposition = .spool
+        // thePrintInfo hay printInfo???
+        thePrintInfo.dictionary().setObject(NSNumber(value: true), forKey: NSPrintInfo.AttributeKey.headerAndFooter as NSCopying)
+        return thePrintInfo
+    }
+    
+    @objc func printOperationDidRun(
+    _ printOperation: NSPrintOperation, success: Bool, contextInfo: UnsafeMutableRawPointer?) {
+    }
+    
+    
     private func scrollToBottom() {
         txtLogs.scrollToEndOfDocument(self)
     }
@@ -151,8 +184,8 @@ class ViewController: NSViewController, NSWindowDelegate {
         changeStatus(status: .error, text: "Your folder are not being monitor.")
     }
 
-    func extractTextFromPDF(filePath: String){
-        guard let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath) else { return }
+    func extractTextFromPDF(filePath: String) {
+        let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
 
         if let pdf = PDFDocument(url: pdfFileUrl) {
