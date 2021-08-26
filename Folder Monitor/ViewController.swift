@@ -16,6 +16,7 @@ enum Status {
     case good
     case error
 }
+
 class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var txtFolderPath: NSTextField!
 
@@ -28,6 +29,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var scrollView: NSScrollView!
 
     @IBOutlet weak var btnPrint: NSButton!
+    @IBOutlet weak var txtPrint: NSTextField!
     
     var folderPath: URL? {
         didSet {
@@ -51,7 +53,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         super.viewDidLoad()
 
         setupUI()
-        printPDF(name: "123-498-000")
+//        printPDF(name: "123-498-000")
     }
 
     override func viewDidAppear() {
@@ -71,46 +73,137 @@ class ViewController: NSViewController, NSWindowDelegate {
             }
         }
     }
-
-    func printPDF(name: String) {
-        let pdfPath = (folderPath?.absoluteURL.appendingPathComponent(name))
+    
+    func printPDF2(name: String) {
+        var pdfPath: URL = URL.init(fileURLWithPath: folderPath!.path)
+        pdfPath.appendPathComponent(name + ".pdf")
+        
         print("pdfPath:: \(pdfPath)")
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: pdfPath?.path ?? "") {
-            // Call system print
+        if fileManager.fileExists(atPath: pdfPath.path) {
+            guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
+            let pdfView = PDFView()
+            pdfView.document = pdf
+            print("PDF total pages: ", pdf.pageCount)
             
+            if let printOperation = pdf.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleNone, autoRotate: false) {
+                printOperation.printPanel = thePrintPanel()
+                let result = printOperation.run()
+                if (result) {
+                    renamePDFAfterPrint(pdfPath: pdfPath)
+                    print("Print successfully.")
+                    updateLog(name + ".pdf" + " - Printed.\n")
+                    txtPrint.stringValue = ""
+                    txtPrint.resignFirstResponder()
+                }
+            }
         }
-        let printInfo = NSPrintInfo.shared
-        let operation: NSPrintOperation = NSPrintOperation(view: self.view, printInfo: printInfo)
-        operation.printPanel.options = NSPrintPanel.Options.showsPaperSize
-        operation.printPanel.options = NSPrintPanel.Options.showsOrientation
-        operation.printPanel.options.insert(NSPrintPanel.Options.showsPaperSize)
-        operation.printPanel.options.insert(NSPrintPanel.Options.showsOrientation)
-        operation.run()
-
-            //plasmidMapIBOutlet.print(sender)
+        else {
+            showNotExistAlert()
+        }
+        
     }
+
+    func renamePDFAfterPrint(pdfPath: URL) {
+        var newURL = pdfPath
+        newURL.deletePathExtension()
+        newURL.appendPathExtension("done")
+        print("New URL: ", newURL)
+        
+        let fileManager = FileManager.default
+        do {
+            try fileManager.moveItem(at: pdfPath, to: newURL)
+//            updateLog("-> Rename \(oldFileName) to \(newFileName)")
+        } catch _ as NSError {
+            updateLog(" - Rename file error - ")
+        }
+    }
+    
+    func printPDF(name: String) {
+        var pdfPath: URL = URL.init(fileURLWithPath: folderPath!.path)
+        pdfPath.appendPathComponent(name + ".pdf")
+        
+        print("pdfPath:: \(pdfPath)")
+        let fileManager = FileManager.default
+        if fileManager.fileExists(atPath: pdfPath.path) {
+            // Call system print
+            guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
+            let pdfView = PDFView()
+            pdfView.document = pdf
+            print("PDF total pages: ", pdf.pageCount)
+            
+//            pdfView.print(with: NSPrintInfo.shared, autoRotate: false)
+////            pdf?.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleDownToFit, autoRotate: false)
+////            let printInfo = thePrintInfo()
+//            let window = NSWindow()
+//            window.contentView?.addSubview(pdfView)
+//            pdfView.print(with: NSPrintInfo.shared, autoRotate: false)
+//            pdfView.removeFromSuperview()
+//
+//            if let printOperation = pdf?.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleNone, autoRotate: false) {
+//                        printOperation.printPanel = thePrintPanel()
+//                        printOperation.run()
+//            }
+            let window = NSWindow()
+//            window.contentView = pdfView
+//            window.setContentSize(pdfView.frame.size)
+            window.contentView?.addSubview(pdfView)
+            let printInfo = NSPrintInfo.shared
+            let operation: NSPrintOperation = NSPrintOperation(view: pdfView, printInfo: printInfo)
+            operation.printPanel.options = NSPrintPanel.Options.showsPaperSize
+            operation.printPanel.options = NSPrintPanel.Options.showsOrientation
+//            operation.printPanel.options.insert(NSPrintPanel.Options.showsPaperSize)
+//            operation.printPanel.options.insert(NSPrintPanel.Options.showsOrientation)
+
+            operation.showsPrintPanel = true
+            operation.showsProgressPanel = true
+            let result = operation.run()
+            if (result) {
+//                renamePDFAfterPrint()
+                print("Print successfully.")
+                txtPrint.stringValue = ""
+            }
+            print("ope result: ", result)
+        }
+    }
+    
+
+    
     // TEST PRINTING
+    func thePrintPanel() -> NSPrintPanel {
+            let thePrintPanel = NSPrintPanel()
+            thePrintPanel.options = [
+                NSPrintPanel.Options.showsCopies,
+                NSPrintPanel.Options.showsPrintSelection,
+                NSPrintPanel.Options.showsPageSetupAccessory,
+                NSPrintPanel.Options.showsScaling,
+                NSPrintPanel.Options.showsPreview
+            ]
+            return thePrintPanel
+    }
+    
     func thePrintInfo() -> NSPrintInfo {
         let thePrintInfo = NSPrintInfo()
         thePrintInfo.horizontalPagination = .fit
         thePrintInfo.verticalPagination = .automatic
         thePrintInfo.isHorizontallyCentered = false
         thePrintInfo.isVerticallyCentered = false
-        thePrintInfo.leftMargin = 72.0
-        thePrintInfo.rightMargin = 72.0
-        thePrintInfo.topMargin = 72.0
-        thePrintInfo.bottomMargin = 72.0
+//        thePrintInfo.leftMargin = 72.0
+//        thePrintInfo.rightMargin = 72.0
+//        thePrintInfo.topMargin = 72.0
+//        thePrintInfo.bottomMargin = 72.0
         thePrintInfo.jobDisposition = .spool
         // thePrintInfo hay printInfo???
         thePrintInfo.dictionary().setObject(NSNumber(value: true), forKey: NSPrintInfo.AttributeKey.headerAndFooter as NSCopying)
         return thePrintInfo
     }
     
-    @objc func printOperationDidRun(
-    _ printOperation: NSPrintOperation, success: Bool, contextInfo: UnsafeMutableRawPointer?) {
-    }
     
+    @IBAction func startPrinting(_ sender: Any) {
+        let pdfName = txtPrint.stringValue
+//        printPDF2(name: "123-498-000")
+        printPDF2(name: pdfName)
+    }
     
     private func scrollToBottom() {
         txtLogs.scrollToEndOfDocument(self)
@@ -118,7 +211,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     private func updateLog(_ text: String) {
         DispatchQueue.main.async {
-            self.updateLog(text)
+            self.txtLogs.string.append(contentsOf: text)
             self.scrollToBottom()
         }
     }
@@ -356,6 +449,14 @@ extension ViewController {
     func getTime() -> String {
         return Date.currentDateTime()
     }
+    
+    func showNotExistAlert() {
+        let alert = NSAlert()
+        alert.messageText = "PDF's name that you enter does not exist."
+        alert.alertStyle = NSAlert.Style.critical
+        alert.runModal()
+    }
+    
     func showCloseAlert(completion: (Int) -> Void) {
         let alert = NSAlert()
         alert.messageText = "Do you want to quit? "
