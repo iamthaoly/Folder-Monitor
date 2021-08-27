@@ -86,7 +86,10 @@ class ViewController: NSViewController, NSWindowDelegate {
             pdfView.document = pdf
             print("PDF total pages: ", pdf.pageCount)
             
-            if let printOperation = pdf.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleNone, autoRotate: false) {
+            var printInfo = NSPrintInfo.shared
+            printInfo.scalingFactor = 0.9
+            if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleNone, autoRotate: false) {
+                printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
                 let result = printOperation.run()
                 if (result) {
@@ -134,17 +137,19 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     func thePrintInfo() -> NSPrintInfo {
         let thePrintInfo = NSPrintInfo()
-        thePrintInfo.horizontalPagination = .fit
-        thePrintInfo.verticalPagination = .automatic
-        thePrintInfo.isHorizontallyCentered = false
-        thePrintInfo.isVerticallyCentered = false
+//        thePrintInfo.horizontalPagination = .fit
+//        thePrintInfo.verticalPagination = .automatic
+//        thePrintInfo.isHorizontallyCentered = false
+//        thePrintInfo.isVerticallyCentered = false
 //        thePrintInfo.leftMargin = 72.0
 //        thePrintInfo.rightMargin = 72.0
 //        thePrintInfo.topMargin = 72.0
 //        thePrintInfo.bottomMargin = 72.0
+        
+        thePrintInfo.scalingFactor = 0.9
         thePrintInfo.jobDisposition = .spool
         // thePrintInfo hay printInfo???
-        thePrintInfo.dictionary().setObject(NSNumber(value: true), forKey: NSPrintInfo.AttributeKey.headerAndFooter as NSCopying)
+//        thePrintInfo.dictionary().setObject(NSNumber(value: true), forKey: NSPrintInfo.AttributeKey.headerAndFooter as NSCopying)
         return thePrintInfo
     }
     
