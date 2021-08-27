@@ -119,56 +119,6 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    func printPDF(name: String) {
-        var pdfPath: URL = URL.init(fileURLWithPath: folderPath!.path)
-        pdfPath.appendPathComponent(name + ".pdf")
-        
-        print("pdfPath:: \(pdfPath)")
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: pdfPath.path) {
-            // Call system print
-            guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
-            let pdfView = PDFView()
-            pdfView.document = pdf
-            print("PDF total pages: ", pdf.pageCount)
-            
-//            pdfView.print(with: NSPrintInfo.shared, autoRotate: false)
-////            pdf?.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleDownToFit, autoRotate: false)
-////            let printInfo = thePrintInfo()
-//            let window = NSWindow()
-//            window.contentView?.addSubview(pdfView)
-//            pdfView.print(with: NSPrintInfo.shared, autoRotate: false)
-//            pdfView.removeFromSuperview()
-//
-//            if let printOperation = pdf?.printOperation(for: NSPrintInfo.shared, scalingMode: .pageScaleNone, autoRotate: false) {
-//                        printOperation.printPanel = thePrintPanel()
-//                        printOperation.run()
-//            }
-            let window = NSWindow()
-//            window.contentView = pdfView
-//            window.setContentSize(pdfView.frame.size)
-            window.contentView?.addSubview(pdfView)
-            let printInfo = NSPrintInfo.shared
-            let operation: NSPrintOperation = NSPrintOperation(view: pdfView, printInfo: printInfo)
-            operation.printPanel.options = NSPrintPanel.Options.showsPaperSize
-            operation.printPanel.options = NSPrintPanel.Options.showsOrientation
-//            operation.printPanel.options.insert(NSPrintPanel.Options.showsPaperSize)
-//            operation.printPanel.options.insert(NSPrintPanel.Options.showsOrientation)
-
-            operation.showsPrintPanel = true
-            operation.showsProgressPanel = true
-            let result = operation.run()
-            if (result) {
-//                renamePDFAfterPrint()
-                print("Print successfully.")
-                txtPrint.stringValue = ""
-            }
-            print("ope result: ", result)
-        }
-    }
-    
-
-    
     // TEST PRINTING
     func thePrintPanel() -> NSPrintPanel {
             let thePrintPanel = NSPrintPanel()
