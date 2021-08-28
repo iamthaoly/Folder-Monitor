@@ -43,6 +43,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if let strPath = folderPath?.absoluteString {
                 txtFolderPath.stringValue = strPath
             }
+            btnMonitor.isEnabled = (folderPath != nil)
 
         }
     }
@@ -62,6 +63,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     private func setupUI() {
         updateLog( "\n")
+        
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
                 txtFolderPath.stringValue = path
@@ -72,10 +74,13 @@ class ViewController: NSViewController, NSWindowDelegate {
                 changeStatus(status: .warning, text: "Click start to begin monitor process.")
             }
         }
+        else {
+            btnMonitor.isEnabled = false
+        }
     }
     
     func printPDF2(name: String) {
-        var pdfPath: URL = URL.init(fileURLWithPath: folderPath!.path)
+        var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
         
         print("pdfPath:: \(pdfPath)")
@@ -97,7 +102,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                     print("Print successfully.")
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
-                    txtPrint.resignFirstResponder()
+//                    txtPrint.resignFirstResponder()
                 }
             }
         }
@@ -197,7 +202,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     func startMonitor() {
         filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
-        changeStatus(status: .good, text: "Your folder are being monitor.")
+        changeStatus(status: .good, text: "Your folder is being monitor.")
         let time = getTime()
         updateLog("\(time) - Monitor started.\n")
 
