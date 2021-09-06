@@ -14,8 +14,11 @@
 		081418F62670458000E8ABB8 /* FolderMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418F52670458000E8ABB8 /* FolderMonitorTests.swift */; };
 		081419012670458000E8ABB8 /* FolderMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081419002670458000E8ABB8 /* FolderMonitorUITests.swift */; };
 		0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0814190E26704D1200E8ABB8 /* testfile.pdf */; };
+		08577AB426DF3C3A00E73543 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08577AAF26DF367E00E73543 /* Sparkle.framework */; };
+		08577AB526DF3C3A00E73543 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08577AAF26DF367E00E73543 /* Sparkle.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
 		08994BA92672F65D0062C561 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08994BA82672F65D0062C561 /* Date.swift */; };
+		08DA914426DF430D0023CF97 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA914326DF430D0023CF97 /* Updater.swift */; };
 		1BA6E728696DEC3A094DC671 /* libPods-Folder Monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EB40EDC94D90F56ADCA1E6 /* libPods-Folder Monitor.a */; };
 		4A61895CA2B034FBA79E673E /* libPods-Folder MonitorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3108533FFA9A0509A76495C6 /* libPods-Folder MonitorTests.a */; };
 		9E628BCB5AE15CC0AA27ADB7 /* libPods-Folder Monitor-Folder MonitorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B974CE00609C2ABB6F952DCE /* libPods-Folder Monitor-Folder MonitorUITests.a */; };
@@ -38,6 +41,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		08577AB626DF3C3A00E73543 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				08577AB526DF3C3A00E73543 /* Sparkle.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		081418DF2670457A00E8ABB8 /* Folder Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Folder Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		081418E22670457A00E8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,8 +71,10 @@
 		081419022670458000E8ABB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0814190E26704D1200E8ABB8 /* testfile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testfile.pdf; sourceTree = "<group>"; };
 		081419112670511E00E8ABB8 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
+		08577AAF26DF367E00E73543 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Folder MonitorRelease.entitlements"; sourceTree = "<group>"; };
 		08994BA82672F65D0062C561 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		08DA914326DF430D0023CF97 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		185E2A1B8564A72A89C98472 /* Pods-Folder MonitorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Folder MonitorTests.debug.xcconfig"; path = "Target Support Files/Pods-Folder MonitorTests/Pods-Folder MonitorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3108533FFA9A0509A76495C6 /* libPods-Folder MonitorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder MonitorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F1392DEEEDE78F51F51F95 /* Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; path = "Target Support Files/Pods-Folder Monitor-Folder MonitorUITests/Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */,
+				08577AB426DF3C3A00E73543 /* Sparkle.framework in Frameworks */,
 				1BA6E728696DEC3A094DC671 /* libPods-Folder Monitor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +145,7 @@
 				08994BA82672F65D0062C561 /* Date.swift */,
 				081418E22670457A00E8ABB8 /* AppDelegate.swift */,
 				081418E42670457A00E8ABB8 /* ViewController.swift */,
+				08DA914326DF430D0023CF97 /* Updater.swift */,
 				081418E62670457F00E8ABB8 /* Assets.xcassets */,
 				0814190E26704D1200E8ABB8 /* testfile.pdf */,
 				081418E82670457F00E8ABB8 /* Main.storyboard */,
@@ -155,6 +176,7 @@
 		081419102670511E00E8ABB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08577AAF26DF367E00E73543 /* Sparkle.framework */,
 				081419112670511E00E8ABB8 /* PDFKit.framework */,
 				D2EB40EDC94D90F56ADCA1E6 /* libPods-Folder Monitor.a */,
 				B974CE00609C2ABB6F952DCE /* libPods-Folder Monitor-Folder MonitorUITests.a */,
@@ -188,6 +210,7 @@
 				081418DC2670457A00E8ABB8 /* Frameworks */,
 				081418DD2670457A00E8ABB8 /* Resources */,
 				081591852696B2F500EA4128 /* ShellScript */,
+				08577AB626DF3C3A00E73543 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -403,6 +426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				081418E52670457A00E8ABB8 /* ViewController.swift in Sources */,
+				08DA914426DF430D0023CF97 /* Updater.swift in Sources */,
 				08994BA92672F65D0062C561 /* Date.swift in Sources */,
 				081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */,
 			);
@@ -575,12 +599,16 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Folder Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lytran.FolderMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -599,12 +627,16 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Folder Monitor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lytran.FolderMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

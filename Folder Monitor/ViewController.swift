@@ -44,7 +44,6 @@ class ViewController: NSViewController, NSWindowDelegate {
                 txtFolderPath.stringValue = strPath
             }
             btnMonitor.isEnabled = (folderPath != nil)
-
         }
     }
     lazy var filewatcher = FileWatcher([NSString(string: folderPath?.path ?? "temp").expandingTildeInPath])

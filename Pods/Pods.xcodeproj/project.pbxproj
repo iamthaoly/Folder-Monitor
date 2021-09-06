@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = SwiftLint;
+			productName = SwiftLint;
 		};
 /* End PBXAggregateTarget section */
 
@@ -74,10 +75,10 @@
 /* Begin PBXFileReference section */
 		0152AD79B64ED0E906A6157EBEAECAC4 /* FileWatcher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-prefix.pch"; sourceTree = "<group>"; };
 		0D7422470A43E629F396C1741E2071A8 /* Pods-Folder Monitor-Folder MonitorUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Folder Monitor-Folder MonitorUITests.modulemap"; sourceTree = "<group>"; };
-		10FCCEDBF38C818F0A6F30EF0C630114 /* libFileWatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libFileWatcher.a; path = libFileWatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		10FCCEDBF38C818F0A6F30EF0C630114 /* libFileWatcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFileWatcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		12739664841B21ABF89B7F75CAE15798 /* Pods-Folder Monitor-Folder MonitorUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder Monitor-Folder MonitorUITests-dummy.m"; sourceTree = "<group>"; };
 		1AE185CB868613A032D5DC7B61A7AA68 /* SwiftLint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.release.xcconfig; sourceTree = "<group>"; };
-		1EF99A4AC2E5926C60FC6000F1A58758 /* libPods-Folder Monitor-Folder MonitorUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder Monitor-Folder MonitorUITests.a"; path = "libPods-Folder Monitor-Folder MonitorUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EF99A4AC2E5926C60FC6000F1A58758 /* libPods-Folder Monitor-Folder MonitorUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder Monitor-Folder MonitorUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F830C9C9A69214D78814DB36C925F8D /* SwiftLint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftLint.debug.xcconfig; sourceTree = "<group>"; };
 		2AA11301D92F2186BD0876073A5013B4 /* Pods-Folder MonitorTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder MonitorTests-dummy.m"; sourceTree = "<group>"; };
 		2E0736CBE46331CB83276B91DF8B495D /* Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,16 +95,16 @@
 		8CF76798F945C3D7B25C2AAEA051ABD9 /* Pods-Folder Monitor-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Folder Monitor-dummy.m"; sourceTree = "<group>"; };
 		8E77271DA93564222EA8C793E68AA09E /* FileWatcher+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Action.swift"; sourceTree = "<group>"; };
 		919E69B4C31C5AD1EE19E7359576A509 /* Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Folder Monitor-Folder MonitorUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B0D5300C01C21CE5A3423A1E781998AC /* FileWatcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
 		B0DC036C72593B28A855AE2CF472619C /* Pods-Folder MonitorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Folder MonitorTests.release.xcconfig"; sourceTree = "<group>"; };
 		B104710A87B2496FF61B3E4D8809DD4F /* Pods-Folder Monitor-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Folder Monitor-umbrella.h"; sourceTree = "<group>"; };
-		B4D278250924DC079D896D95C93102F3 /* libPods-Folder Monitor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder Monitor.a"; path = "libPods-Folder Monitor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D278250924DC079D896D95C93102F3 /* libPods-Folder Monitor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder Monitor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6EFC89E82AFC437DA79317C0BFD1268 /* FileWatcher.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FileWatcher.modulemap; sourceTree = "<group>"; };
 		BE1627AA07A2640A74C47DF9B22AC1F3 /* FileWatcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FileWatcher.debug.xcconfig; sourceTree = "<group>"; };
 		C6EA70DE69BD25DCC4434905ECAB644B /* FileWatcher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FileWatcher-umbrella.h"; sourceTree = "<group>"; };
 		C8DFA58CA23F696D9D08EF575C11A854 /* Pods-Folder MonitorTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Folder MonitorTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C93B2EBB68F671632622D45D8F74997F /* libPods-Folder MonitorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Folder MonitorTests.a"; path = "libPods-Folder MonitorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C93B2EBB68F671632622D45D8F74997F /* libPods-Folder MonitorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder MonitorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF85738DEB375534742D5EF364F8D4BE /* Pods-Folder Monitor.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Folder Monitor.modulemap"; sourceTree = "<group>"; };
 		D34EDF4D09609DEC01E4186330124CF5 /* FileWatcherEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileWatcherEvent.swift; sourceTree = "<group>"; };
 		D6EFFBB835D2AEFB4CA9B4CFE9355907 /* FileWatcher+Type.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FileWatcher+Type.swift"; sourceTree = "<group>"; };
@@ -200,7 +201,6 @@
 				D34EDF4D09609DEC01E4186330124CF5 /* FileWatcherEvent.swift */,
 				F94B04A06FA113E98BCDB7EE110D1528 /* Support Files */,
 			);
-			name = FileWatcher;
 			path = FileWatcher;
 			sourceTree = "<group>";
 		};
@@ -235,7 +235,6 @@
 			children = (
 				F199AAE221D2C97B37B58F27E086982C /* Support Files */,
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -691,6 +690,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
@@ -780,6 +783,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				MACH_O_TYPE = staticlib;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MODULEMAP_FILE = "Target Support Files/Pods-Folder Monitor/Pods-Folder Monitor.modulemap";
