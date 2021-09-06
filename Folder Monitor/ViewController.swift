@@ -55,6 +55,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         setupUI()
 //        printPDF(name: "123-498-000")
+        extractText2()
     }
 
     override func viewDidAppear() {
@@ -79,7 +80,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    func printPDF2(name: String) {
+    func printPDF(name: String) {
         var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
         
@@ -162,7 +163,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBAction func startPrinting(_ sender: Any) {
         let pdfName = txtPrint.stringValue
 //        printPDF2(name: "123-498-000")
-        printPDF2(name: pdfName)
+        printPDF(name: pdfName)
     }
     
     private func scrollToBottom() {
@@ -245,6 +246,29 @@ class ViewController: NSViewController, NSWindowDelegate {
         updateLog("\(time) - Monitor stopped.\n")
         filewatcher.stop()
         changeStatus(status: .error, text: "Your folder are not being monitor.")
+    }
+    
+    func matches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func extractText2(filePath: String) {
+        let regex = "\\d+-\\d+-\\d+"
+        let str = " 302-4674957-6575510, abc123-3"
+        let res = matches(for: regex, in: str)
+        for s in res {
+            print("Result: \(s)")
+        }
     }
 
     func extractTextFromPDF(filePath: String) {
