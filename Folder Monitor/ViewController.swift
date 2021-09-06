@@ -55,7 +55,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         setupUI()
 //        printPDF(name: "123-498-000")
-        extractText2()
+//        extractText2()
     }
 
     override func viewDidAppear() {
@@ -262,13 +262,16 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    func extractText2(filePath: String) {
+    func extractText2(content: String) -> String?{
         let regex = "\\d+-\\d+-\\d+"
-        let str = " 302-4674957-6575510, abc123-3"
-        let res = matches(for: regex, in: str)
+        let res = matches(for: regex, in: content)
         for s in res {
-            print("Result: \(s)")
+            debugPrint("Result: \(s)")
         }
+        if res.count > 0 {
+            return res[0]
+        }
+        return nil
     }
 
     func extractTextFromPDF(filePath: String) {
@@ -280,7 +283,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 //                print("PDF content: ")
 //                debugPrint(content)
             // Find substring
-            if let refNumber = extractNumberFromText(content: content) {
+            if let refNumber = extractText2(content: content) {
                 updateLog(" - Referenznr number found: \(refNumber) ")
                 if !isFormatCorrect(filePath: pdfFileUrl, refNumber: refNumber) {
                     let fileManager = FileManager.default
