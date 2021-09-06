@@ -93,10 +93,13 @@ class ViewController: NSViewController, NSWindowDelegate {
             print("PDF total pages: ", pdf.pageCount)
             
             var printInfo = NSPrintInfo.shared
+//            let paperSize = CGSize(width: 35.9833, height: <#T##CGFloat#>)
+            // Custom paper size
             printInfo.scalingFactor = 0.9
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleNone, autoRotate: false) {
-                printOperation.showsPrintPanel = false
+//                printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
+                debugPrint(printInfo)
                 let result = printOperation.run()
                 if (result) {
                     renamePDFAfterPrint(pdfPath: pdfPath)
@@ -136,7 +139,8 @@ class ViewController: NSViewController, NSWindowDelegate {
                 NSPrintPanel.Options.showsPrintSelection,
                 NSPrintPanel.Options.showsPageSetupAccessory,
                 NSPrintPanel.Options.showsScaling,
-                NSPrintPanel.Options.showsPreview
+                NSPrintPanel.Options.showsPreview,
+                NSPrintPanel.Options.showsPaperSize
             ]
             return thePrintPanel
     }
