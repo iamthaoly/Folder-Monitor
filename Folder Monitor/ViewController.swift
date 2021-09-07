@@ -31,6 +31,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var btnPrint: NSButton!
     @IBOutlet weak var txtPrint: NSTextField!
     
+    
     var folderPath: URL? {
         didSet {
             // Save folder access permission to bookmark
@@ -80,6 +81,28 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
+    @IBAction func getPrintInfoEvent(_ sender: Any) {
+        print("Print event :D")
+        getPrintInfo()
+    }
+    func getPrintInfo() {
+        let printInfo = NSPrintInfo.shared
+        let alert = NSAlert()
+        
+        alert.informativeText = printInfo.debugDescription
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "Copy")
+        let buttonChosen = alert.runModal()
+        switch buttonChosen {
+            case .alertFirstButtonReturn:
+                let pasteboard = NSPasteboard.general
+                pasteboard.declareTypes([.string], owner: nil)
+                pasteboard.setString(printInfo.debugDescription, forType: .string)
+//                alert.buttons[0].title = "Copied!"
+            default:
+                break
+        }
+    }
     func printPDF(name: String) {
         var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
@@ -88,18 +111,20 @@ class ViewController: NSViewController, NSWindowDelegate {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: pdfPath.path) {
             guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
-            let pdfView = PDFView()
-            pdfView.document = pdf
+//            let pdfView = PDFView()
+//            pdfView.document = pdf
             print("PDF total pages: ", pdf.pageCount)
             
             var printInfo = NSPrintInfo.shared
-//            let paperSize = CGSize(width: 35.9833, height: <#T##CGFloat#>)
+            let paperSize = CGSize(width: 612, height: 792)
+            printInfo.paperSize = paperSize
             // Custom paper size
-            printInfo.scalingFactor = 0.9
-            if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleNone, autoRotate: false) {
+//            printInfo.scalingFactor = 0.9
+            if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleDownToFit, autoRotate: false) {
 //                printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
+                
                 let result = printOperation.run()
                 if (result) {
                     renamePDFAfterPrint(pdfPath: pdfPath)
@@ -311,7 +336,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                 }
             } else {
                 // number not found
-                updateLog(" - Referenznr number not found in PDF - Ignored.")
+                updateLog(" - Number not found in PDF - Ignored.")
             }
         } else {
             updateLog(" - Cannot read PDF - Ignored.")
