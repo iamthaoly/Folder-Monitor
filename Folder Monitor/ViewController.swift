@@ -125,8 +125,8 @@ class ViewController: NSViewController, NSWindowDelegate {
             let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
             printInfo.paperSize = paperSize
             // Custom paper size
-//            printInfo.scalingFactor = 0.9
-            if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleDownToFit, autoRotate: false) {
+            printInfo.scalingFactor = size.height < 200 ? 0.95 : 1
+            if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
                 printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
