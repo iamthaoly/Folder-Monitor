@@ -98,11 +98,12 @@ class ViewController: NSViewController, NSWindowDelegate {
                 let pasteboard = NSPasteboard.general
                 pasteboard.declareTypes([.string], owner: nil)
                 pasteboard.setString(printInfo.debugDescription, forType: .string)
-//                alert.buttons[0].title = "Copied!"
+                alert.buttons[0].title = "Copied!"
             default:
                 break
         }
     }
+    
     func printPDF(name: String) {
         var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
@@ -114,14 +115,19 @@ class ViewController: NSViewController, NSWindowDelegate {
 //            let pdfView = PDFView()
 //            pdfView.document = pdf
             print("PDF total pages: ", pdf.pageCount)
+            let page = pdf.page(at: 0)!
+            let bounds = page.bounds(for: .mediaBox)
+            let size = bounds.size
+            print("PDF Size: ", size)
             
-            var printInfo = NSPrintInfo.shared
-            let paperSize = CGSize(width: 612, height: 792)
+            let printInfo = NSPrintInfo.shared
+            let printerWidth = 289.134
+            let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
             printInfo.paperSize = paperSize
             // Custom paper size
 //            printInfo.scalingFactor = 0.9
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: .pageScaleDownToFit, autoRotate: false) {
-//                printOperation.showsPrintPanel = false
+                printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 

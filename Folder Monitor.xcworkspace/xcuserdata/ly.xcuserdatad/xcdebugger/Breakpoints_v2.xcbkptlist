@@ -14,8 +14,8 @@
             filePath = "Folder Monitor/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "extractTextFromPDF(filePath:)"
             landmarkType = "7">
          </BreakpointContent>
