@@ -62,7 +62,59 @@ class ViewController: NSViewController, NSWindowDelegate {
     override func viewDidAppear() {
         self.view.window?.delegate = self
     }
+    
+    override var representedObject: Any? {
+        didSet {
+        // Update the view, if already loaded.
+        }
+    }
+    
+    // MARK: - ACTIONS
+    @IBAction func startPrinting(_ sender: Any) {
+        let pdfName = txtPrint.stringValue
+        printPDF(name: pdfName)
+    }
+    
+    @IBAction func getPrintInfoEvent(_ sender: Any) {
+        print("Print event :D")
+        getPrintInfo()
+    }
+    
+    
+    @IBAction func monitorProcess(_ sender: Any) {
+        if btnMonitor.title == "START" {
+            process(start: true)
+        } else if btnMonitor.title == "STOP" {
+            process(start: false)
+        }
+    }
+    
+    @IBAction func browserFolder(_ sender: Any) {
+        let dialog = NSOpenPanel()
+        dialog.title = "Choose a folder"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.canChooseFiles = false
+        dialog.allowsMultipleSelection = false
 
+        if dialog.runModal() == NSApplication.ModalResponse.OK {
+            let result = dialog.url // Pathname of the file
+            if result != nil {
+                process(start: false)
+                let path = result!.path
+                folderPath = URL(string: path)
+                UserDefaults.standard.set(path, forKey: "previousFolder")
+                process(start: true)
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+    }
+
+    // MARK: - PRIVATE
     private func setupUI() {
         updateLog( "\n")
         
@@ -81,11 +133,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    @IBAction func getPrintInfoEvent(_ sender: Any) {
-        print("Print event :D")
-        getPrintInfo()
-    }
-    func getPrintInfo() {
+    private func getPrintInfo() {
         let printInfo = NSPrintInfo.shared
         let alert = NSAlert()
         
@@ -104,7 +152,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    func printPDF(name: String) {
+    private func printPDF(name: String) {
         var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
         
@@ -125,7 +173,18 @@ class ViewController: NSViewController, NSWindowDelegate {
             let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
             printInfo.paperSize = paperSize
             // Custom paper size
-            printInfo.scalingFactor = size.height < 200 ? 0.95 : 1
+            if (size.height < 200) {
+                printInfo.horizontalPagination = .clip
+                printInfo.verticalPagination = .clip
+//                printInfo.isVerticallyCentered = false
+//                printInfo.isHorizontallyCentered = false
+                printInfo.topMargin = 20
+                printInfo.bottomMargin = 0
+                printInfo.scalingFactor = 1.06
+                printInfo.leftMargin = 20
+                printInfo.rightMargin = 20
+//                printInfo.isVerticallyCentered = true
+            }
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
                 printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
@@ -147,7 +206,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         
     }
 
-    func renamePDFAfterPrint(pdfPath: URL) {
+    private func renamePDFAfterPrint(pdfPath: URL) {
         var newURL = pdfPath
         newURL.deletePathExtension()
         newURL.appendPathExtension("done")
@@ -163,7 +222,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     // TEST PRINTING
-    func thePrintPanel() -> NSPrintPanel {
+    private func thePrintPanel() -> NSPrintPanel {
             let thePrintPanel = NSPrintPanel()
             thePrintPanel.options = [
                 NSPrintPanel.Options.showsCopies,
@@ -176,7 +235,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             return thePrintPanel
     }
     
-    func thePrintInfo() -> NSPrintInfo {
+    private func thePrintInfo() -> NSPrintInfo {
         let thePrintInfo = NSPrintInfo()
 //        thePrintInfo.horizontalPagination = .fit
 //        thePrintInfo.verticalPagination = .automatic
@@ -186,7 +245,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 //        thePrintInfo.rightMargin = 72.0
 //        thePrintInfo.topMargin = 72.0
 //        thePrintInfo.bottomMargin = 72.0
-        
+//        thePrintInfo.horizontalPagination = .
         thePrintInfo.scalingFactor = 0.9
         thePrintInfo.jobDisposition = .spool
         // thePrintInfo hay printInfo???
@@ -194,32 +253,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         return thePrintInfo
     }
     
-    
-    @IBAction func startPrinting(_ sender: Any) {
-        let pdfName = txtPrint.stringValue
-//        printPDF2(name: "123-498-000")
-        printPDF(name: pdfName)
-    }
-    
-    private func scrollToBottom() {
-        txtLogs.scrollToEndOfDocument(self)
-    }
-    
-    private func updateLog(_ text: String) {
-        DispatchQueue.main.async {
-            self.txtLogs.string.append(contentsOf: text)
-            self.scrollToBottom()
-        }
-    }
-    @IBAction func monitorProcess(_ sender: Any) {
-        if btnMonitor.title == "START" {
-            process(start: true)
-        } else if btnMonitor.title == "STOP" {
-            process(start: false)
-        }
-    }
-
-    func process(start: Bool) {
+    private func process(start: Bool) {
         if start {
             if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "temp") {
                 changeStatus(status: .warning, text: "Current folder's not exist. Please choose another.")
@@ -236,7 +270,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
 
-    func startMonitor() {
+    private func startMonitor() {
         filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
         changeStatus(status: .good, text: "Your folder is being monitor.")
         let time = getTime()
@@ -252,7 +286,6 @@ class ViewController: NSViewController, NSWindowDelegate {
                 return
             }
             if event.fileCreated || event.fileRemoved || event.fileRenamed {
-//                var log: String = ""
                 self.updateLog("---\n")
                 self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
@@ -276,40 +309,15 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     }
 
-    func stopMonitor() {
+    private func stopMonitor() {
         let time = getTime()
         updateLog("\(time) - Monitor stopped.\n")
         filewatcher.stop()
         changeStatus(status: .error, text: "Your folder are not being monitor.")
     }
     
-    func matches(for regex: String, in text: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
-    
-    func extractText2(content: String) -> String?{
-        let regex = "\\d+-\\d+-\\d+"
-        let res = matches(for: regex, in: content)
-        for s in res {
-            debugPrint("Result: \(s)")
-        }
-        if res.count > 0 {
-            return res[0]
-        }
-        return nil
-    }
 
-    func extractTextFromPDF(filePath: String) {
+    private func extractTextFromPDF(filePath: String) {
         let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
 
@@ -349,44 +357,80 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
 
     }
-
-    func extractNumberFromText(content: String) -> String? {
-        let word = "Referenznr"
-        if let range = content.range(of: word) {
-            var r1: String.Index = content.index(after: range.lowerBound)
-            var r2: String.Index = content.index(range.upperBound, offsetBy: 10)
-
-            r1 = content.index(after: range.upperBound)
-            var char = content[r1]
-//            print("content: \(char)")
-            while r1 < content.endIndex && !(char.isASCII && char.isNumber) {
-                print("content: \(char)")
-                r1 = content.index(r1, offsetBy: 1)
-                char = content[r1]
-            }
-//            print("r1: \(r1)")
-            r2 = r1
-            char = content[r2]
-            while r2 < content.endIndex && (char.isNumber || char == "-") {
-                r2 = content.index(r2, offsetBy: 1)
-                char = content[r2]
-            }
-            print("Referenznr-->")
-            print(content[r1..<r2])
-            return String(content[r1..<r2])
-        } else {
-            // word not found
+    
+    private func extractText2(content: String) -> String?{
+        let regex = "\\d+-\\d+-\\d+"
+        let res = matches(for: regex, in: content)
+        for s in res {
+            debugPrint("Result: \(s)")
+        }
+        if res.count > 0 {
+            return res[0]
         }
         return nil
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
+    
+    private func matches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let results = regex.matches(in: text,
+                                        range: NSRange(text.startIndex..., in: text))
+            return results.map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
         }
     }
+    
+    private func updateLog(_ text: String) {
+        DispatchQueue.main.async {
+            self.txtLogs.string.append(contentsOf: text)
+            self.scrollToBottom()
+        }
+    }
+    
+    private func scrollToBottom() {
+        txtLogs.scrollToEndOfDocument(self)
+    }
+    
+
+    // Archived - Old way.
+    // But keep it here so I'll remember how naive I am :)
+//    private func extractNumberFromText(content: String) -> String? {
+//        let word = "Referenznr"
+//        if let range = content.range(of: word) {
+//            var r1: String.Index = content.index(after: range.lowerBound)
+//            var r2: String.Index = content.index(range.upperBound, offsetBy: 10)
+//
+//            r1 = content.index(after: range.upperBound)
+//            var char = content[r1]
+////            print("content: \(char)")
+//            while r1 < content.endIndex && !(char.isASCII && char.isNumber) {
+//                print("content: \(char)")
+//                r1 = content.index(r1, offsetBy: 1)
+//                char = content[r1]
+//            }
+////            print("r1: \(r1)")
+//            r2 = r1
+//            char = content[r2]
+//            while r2 < content.endIndex && (char.isNumber || char == "-") {
+//                r2 = content.index(r2, offsetBy: 1)
+//                char = content[r2]
+//            }
+//            print("Referenznr-->")
+//            print(content[r1..<r2])
+//            return String(content[r1..<r2])
+//        } else {
+//            // word not found
+//        }
+//        return nil
+//    }
 
 }
+
+// MARK - HELPER
 extension ViewController {
     func changeStatus(status: Status, text: String) {
         switch status {
@@ -443,31 +487,6 @@ extension ViewController {
         return false
     }
 
-    @IBAction func browserFolder(_ sender: Any) {
-
-        let dialog = NSOpenPanel()
-        dialog.title = "Choose a folder"
-        dialog.showsResizeIndicator = true
-        dialog.showsHiddenFiles = false
-        dialog.canChooseDirectories = true
-        dialog.canCreateDirectories = true
-        dialog.canChooseFiles = false
-        dialog.allowsMultipleSelection = false
-
-        if dialog.runModal() == NSApplication.ModalResponse.OK {
-            let result = dialog.url // Pathname of the file
-            if result != nil {
-                process(start: false)
-                let path = result!.path
-                folderPath = URL(string: path)
-                UserDefaults.standard.set(path, forKey: "previousFolder")
-                process(start: true)
-            }
-        } else {
-            // User clicked on "Cancel"
-            return
-        }
-    }
     func getTime() -> String {
         return Date.currentDateTime()
     }
@@ -503,38 +522,3 @@ extension ViewController {
 
 }
 
-extension FileWatcherEvent {
-    func printEventType() {
-        if self.fileCreated {
-            print("Event: Created")
-        }
-        if self.fileRenamed {
-            print("Event: Renamed")
-        }
-        if self.fileModified {
-            print("Event: Modified")
-        }
-        if self.fileRemoved {
-            print("Event: Removed")
-        }
-    }
-}
-
-extension NSButton {
-
-    var titleTextColor: NSColor {
-        get {
-            let attrTitle = self.attributedTitle
-            return attrTitle.attribute(NSAttributedString.Key.foregroundColor, at: 0, effectiveRange: nil) as! NSColor
-        }
-
-        set(newColor) {
-            let attrTitle = NSMutableAttributedString(attributedString: self.attributedTitle)
-            let titleRange = NSRange(location: 0, length: self.title.count)
-
-            attrTitle.addAttributes([NSAttributedString.Key.foregroundColor: newColor], range: titleRange)
-            self.attributedTitle = attrTitle
-        }
-    }
-
-}

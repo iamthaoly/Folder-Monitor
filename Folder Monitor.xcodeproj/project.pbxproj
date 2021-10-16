@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080C1F21271B3AC900EB43DB /* FileWatcherEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C1F20271B3AC900EB43DB /* FileWatcherEvent.swift */; };
+		080C1F24271B3B0500EB43DB /* NSButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080C1F23271B3B0500EB43DB /* NSButton+Extension.swift */; };
 		081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418E22670457A00E8ABB8 /* AppDelegate.swift */; };
 		081418E52670457A00E8ABB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418E42670457A00E8ABB8 /* ViewController.swift */; };
 		081418E72670457F00E8ABB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 081418E62670457F00E8ABB8 /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080C1F20271B3AC900EB43DB /* FileWatcherEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcherEvent.swift; sourceTree = "<group>"; };
+		080C1F23271B3B0500EB43DB /* NSButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSButton+Extension.swift"; sourceTree = "<group>"; };
 		081418DF2670457A00E8ABB8 /* Folder Monitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Folder Monitor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		081418E22670457A00E8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		081418E42670457A00E8ABB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080C1F22271B3AE900EB43DB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				080C1F20271B3AC900EB43DB /* FileWatcherEvent.swift */,
+				080C1F23271B3B0500EB43DB /* NSButton+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		081418D62670457A00E8ABB8 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +138,7 @@
 				08994BA82672F65D0062C561 /* Date.swift */,
 				081418E22670457A00E8ABB8 /* AppDelegate.swift */,
 				081418E42670457A00E8ABB8 /* ViewController.swift */,
+				080C1F22271B3AE900EB43DB /* Extension */,
 				081418E62670457F00E8ABB8 /* Assets.xcassets */,
 				0814190E26704D1200E8ABB8 /* testfile.pdf */,
 				081418E82670457F00E8ABB8 /* Main.storyboard */,
@@ -402,7 +416,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080C1F24271B3B0500EB43DB /* NSButton+Extension.swift in Sources */,
 				081418E52670457A00E8ABB8 /* ViewController.swift in Sources */,
+				080C1F21271B3AC900EB43DB /* FileWatcherEvent.swift in Sources */,
 				08994BA92672F65D0062C561 /* Date.swift in Sources */,
 				081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */,
 			);
