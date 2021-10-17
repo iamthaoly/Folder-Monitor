@@ -297,7 +297,17 @@ class ViewController: NSViewController, NSWindowDelegate {
                 // [2] create event
                 else if event.fileCreated || event.fileRenamed {
                     self.updateLog("\(String(describing: fileName)) was added.")
-                    self.extractTextFromPDF(filePath: event.path)
+                    
+                    // If PDF has more than 1 page, split
+                    // Else extract text
+                    if let pageCnt = CustomPDFManager.getPDFPageCountFromPath(filePath: event.path) {
+                        if pageCnt > 1 {
+                            self.splitPDFToSingle(filePath: event.path)
+                        }
+                        else {
+                            self.extractTextFromPDF(filePath: event.path)
+                        }
+                    }
                 }
 
                 self.updateLog("\n")
@@ -307,6 +317,37 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         filewatcher.start() // start monitoring
 
+    }
+    
+
+    private func splitPDFToSingle(filePath: String) {
+        let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
+        debugPrint("PDF file: \(pdfFileUrl)")
+        guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return }
+        
+        if pdfDocument.pageCount > 1 {
+            var fileCount = 0
+            let fileName = pdfFileUrl.deletingPathExtension().lastPathComponent
+            
+            for i in 0..<pdfDocument.pageCount {
+                let newDoc = PDFDocument()
+                let page = pdfDocument.page(at: i)
+                newDoc.insert(page!, at: 0)
+                
+                // Save to disk
+                let fileManager = FileManager.default
+                var newUrl = pdfFileUrl
+                
+                while fileManager.fileExists(atPath: newUrl.path) {
+                    fileCount += 1
+                    newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(fileName + "(\(fileCount))" + ".pdf")
+                    
+                    
+                }
+                newDoc.write(to: newUrl)
+            }
+            
+        }
     }
 
     private func stopMonitor() {
