@@ -255,7 +255,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     private func process(start: Bool) {
         if start {
-            if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "temp") {
+            if folderPath == nil || !FileManager.default.fileExists(atPath: folderPath?.path ?? "tempx00") {
                 changeStatus(status: .warning, text: "Current folder's not exist. Please choose another.")
                 return
             }
@@ -300,9 +300,10 @@ class ViewController: NSViewController, NSWindowDelegate {
                     
                     // If PDF has more than 1 page, split
                     // Else extract text
-                    if let pageCnt = CustomPDFManager.getPDFPageCountFromPath(filePath: event.path) {
+                    let pdfManager = CustomPDFManager
+                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
                         if pageCnt > 1 {
-                            CustomPDFManager.splitPDFIntoSingle(filePath: event.path)
+                            pdfManager.splitPDFIntoSingle(filePath: event.path)
                             do {
                                 try FileManager.default.removeItem(atPath: event.path)
                             }
@@ -446,7 +447,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 }
 
-// MARK - HELPER
+// MARK: - HELPER
 extension ViewController {
     func changeStatus(status: Status, text: String) {
         switch status {
