@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 extension NSButton {
     var titleTextColor: NSColor {
