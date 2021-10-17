@@ -302,7 +302,13 @@ class ViewController: NSViewController, NSWindowDelegate {
                     // Else extract text
                     if let pageCnt = CustomPDFManager.getPDFPageCountFromPath(filePath: event.path) {
                         if pageCnt > 1 {
-                            self.splitPDFToSingle(filePath: event.path)
+                            CustomPDFManager.splitPDFIntoSingle(filePath: event.path)
+                            do {
+                                try FileManager.default.removeItem(atPath: event.path)
+                            }
+                            catch {
+                                debugPrint("Remove original multi page PDF error \(error)")
+                            }
                         }
                         else {
                             self.extractTextFromPDF(filePath: event.path)
@@ -317,37 +323,6 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         filewatcher.start() // start monitoring
 
-    }
-    
-
-    private func splitPDFToSingle(filePath: String) {
-        let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
-        debugPrint("PDF file: \(pdfFileUrl)")
-        guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return }
-        
-        if pdfDocument.pageCount > 1 {
-            var fileCount = 0
-            let fileName = pdfFileUrl.deletingPathExtension().lastPathComponent
-            
-            for i in 0..<pdfDocument.pageCount {
-                let newDoc = PDFDocument()
-                let page = pdfDocument.page(at: i)
-                newDoc.insert(page!, at: 0)
-                
-                // Save to disk
-                let fileManager = FileManager.default
-                var newUrl = pdfFileUrl
-                
-                while fileManager.fileExists(atPath: newUrl.path) {
-                    fileCount += 1
-                    newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(fileName + "(\(fileCount))" + ".pdf")
-                    
-                    
-                }
-                newDoc.write(to: newUrl)
-            }
-            
-        }
     }
 
     private func stopMonitor() {
@@ -481,8 +456,6 @@ extension ViewController {
             imvStatus.image = NSImage(named: "Check")
         case .error:
             imvStatus.image = NSImage(named: "Close")
-        default:
-            imvStatus.image = NSImage(named: "Warning")
         }
         lblStatus.stringValue = text
 
