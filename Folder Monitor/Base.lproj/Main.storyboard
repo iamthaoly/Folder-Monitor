@@ -678,19 +678,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="555" height="324"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
-                                <rect key="frame" x="418" y="249" width="114" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="idA-DD-uSc"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="START" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="systemSemibold" size="13"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="monitorProcess:" target="XfG-lQ-9wD" id="CgI-oO-AQo"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="bms-Hj-uoq">
                                 <rect key="frame" x="359" y="279" width="173" height="32"/>
                                 <buttonCell key="cell" type="push" title="Choose folder..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nLy-1X-hgG">
@@ -701,6 +688,14 @@
                                     <action selector="browserFolder:" target="XfG-lQ-9wD" id="JOf-IR-zc8"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
+                                <rect key="frame" x="75" y="286" width="275" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFb-Jj-L6W">
                                 <rect key="frame" x="28" y="288" width="44" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Folder" id="p0n-ZA-0oF">
@@ -737,6 +732,19 @@
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Qpt-MH-Ehe">
                                 <rect key="frame" x="30" y="245" width="160" height="5"/>
                             </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdP-IC-WqB">
+                                <rect key="frame" x="418" y="249" width="114" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="idA-DD-uSc"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="START" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JQ3-rM-onm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="monitorProcess:" target="XfG-lQ-9wD" id="CgI-oO-AQo"/>
+                                </connections>
+                            </button>
                             <stackView distribution="fillProportionally" orientation="horizontal" alignment="bottom" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AXS-Qu-oii" userLabel="Stack View Print">
                                 <rect key="frame" x="30" y="217" width="320" height="21"/>
                                 <subviews>
@@ -777,14 +785,6 @@ DQ
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
-                                <rect key="frame" x="75" y="286" width="275" height="21"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t2v-Jc-y0r">
                                 <rect key="frame" x="28" y="186" width="34" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Logs" id="tkz-cn-2wV">
