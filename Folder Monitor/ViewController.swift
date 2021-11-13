@@ -187,13 +187,15 @@ class ViewController: NSViewController, NSWindowDelegate {
 //                printInfo.isVerticallyCentered = true
             }
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-                printOperation.showsPrintPanel = false
+//                printOperation.showsPrintPanel = false
                 printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
                 let result = printOperation.run()
                 if (result) {
-                    renamePDFAfterPrint(pdfPath: pdfPath)
+                    if true {
+                        renamePDFAfterPrint(pdfPath: pdfPath, inSubFolder: "Delivery Notes")
+                    }
                     print("Print successfully.")
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
@@ -207,13 +209,31 @@ class ViewController: NSViewController, NSWindowDelegate {
         
     }
 
-    private func renamePDFAfterPrint(pdfPath: URL) {
+    private func renamePDFAfterPrint(pdfPath: URL, inSubFolder: String? = nil) {
         var newURL = pdfPath
+        let fileManager = FileManager.default
+
+        // Add subfolder to the new URL.
+        if let subFolder = inSubFolder {
+            let lastPath = newURL.lastPathComponent
+            newURL.deleteLastPathComponent()
+            newURL.appendPathComponent(subFolder)
+            // Create subfolder if it does not exist.
+            if (fileManager.fileExists(atPath: newURL.path) == false) {
+                do {
+                    try fileManager.createDirectory(atPath: newURL.path, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    debugPrint("Error creating subfolder: \(error)")
+                }
+            }
+            newURL.appendPathComponent(lastPath)
+        }
+        
+        // Rename printed PDF extension to .done
         newURL.deletePathExtension()
         newURL.appendPathExtension("done")
         print("New URL: ", newURL)
         
-        let fileManager = FileManager.default
         do {
             try fileManager.moveItem(at: pdfPath, to: newURL)
 //            updateLog("-> Rename \(oldFileName) to \(newFileName)")
