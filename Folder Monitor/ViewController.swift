@@ -48,6 +48,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         }
     }
+    
     lazy var filewatcher = FileWatcher([NSString(string: folderPath?.path ?? "temp").expandingTildeInPath])
 //    lazy var filewatcher: FileWatcher? = nil
 
@@ -300,7 +301,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                     
                     // If PDF has more than 1 page, split
                     // Else extract text
-                    let pdfManager = CustomPDFManager
+                    let pdfManager = CustomPDFManager.shared
                     if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
                         if pageCnt > 1 {
                             pdfManager.splitPDFIntoSingle(filePath: event.path)

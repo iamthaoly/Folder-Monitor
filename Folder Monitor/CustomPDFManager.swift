@@ -11,14 +11,20 @@ import PDFKit
 
 class CustomPDFManager {
     
-    static func getPDFPageCountFromPath(filePath: String) -> Int?{
+    static let shared = CustomPDFManager()
+    
+    init() {
+        // Init
+    }
+    
+    func getPDFPageCountFromPath(filePath: String) -> Int?{
         let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
         guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return nil }
         return pdfDocument.pageCount
     }
     
-    static func splitPDFIntoSingle(filePath: String) {
+    func splitPDFIntoSingle(filePath: String) {
         let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
         guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return }
