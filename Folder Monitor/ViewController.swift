@@ -300,7 +300,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
 //            let eventURL = URL(string: event.path)
-            if !self.isPDF(path: event.path) { return }
+            if !event.path.isPDF() { return }
             event.printEventType()
             print("event.path: \(event.path)")
             if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
@@ -483,13 +483,13 @@ extension ViewController {
 
     }
 
-    func isPDF(path: String) -> Bool {
-        let url = URL(fileURLWithPath: path)
-        if url.pathExtension == "pdf" {
-            return true
-        }
-        return false
-    }
+//    func isPDF(path: String) -> Bool {
+//        let url = URL(fileURLWithPath: path)
+//        if url.pathExtension == "pdf" {
+//            return true
+//        }
+//        return false
+//    }
 
     func isFormatCorrect(filePath: URL, refNumber: String) -> Bool {
         let fileName = filePath.deletingPathExtension().lastPathComponent
