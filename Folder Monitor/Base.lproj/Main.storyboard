@@ -682,15 +682,15 @@
                                 <rect key="frame" x="30" y="342" width="495" height="21"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fFb-Jj-L6W">
-                                        <rect key="frame" x="-2" y="2" width="44" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Folder" id="p0n-ZA-0oF">
+                                        <rect key="frame" x="-2" y="2" width="102" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Shipping Folder" id="p0n-ZA-0oF">
                                             <font key="font" metaFont="systemMedium" size="13"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LG0-av-GAj">
-                                        <rect key="frame" x="50" y="0.0" width="319" height="21"/>
+                                        <rect key="frame" x="108" y="0.0" width="261" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="w4L-y0-TW7">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -720,7 +720,7 @@
                                 </customSpacing>
                             </stackView>
                             <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YMB-qL-TOZ" userLabel="Stack Status">
-                                <rect key="frame" x="30" y="312" width="495" height="20"/>
+                                <rect key="frame" x="30" y="314" width="495" height="20"/>
                                 <subviews>
                                     <imageView verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7kM-6n-2BJ">
                                         <rect key="frame" x="0.0" y="4" width="23" height="16"/>
@@ -763,18 +763,18 @@
                                 </customSpacing>
                             </stackView>
                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dd9-OM-a5w" userLabel="Stack Folder 2">
-                                <rect key="frame" x="30" y="281" width="495" height="21"/>
+                                <rect key="frame" x="30" y="278" width="495" height="21"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mZ6-bl-Uow">
-                                        <rect key="frame" x="-2" y="2" width="44" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Folder" id="uj2-rv-OHF">
-                                            <font key="font" metaFont="systemMedium" size="13"/>
+                                        <rect key="frame" x="-2" y="2" width="102" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Delivery Folder" id="uj2-rv-OHF">
+                                            <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="90v-Vt-oBd">
-                                        <rect key="frame" x="50" y="0.0" width="319" height="21"/>
+                                        <rect key="frame" x="108" y="0.0" width="261" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Folder path appears here" drawsBackground="YES" id="GEY-C3-DPC">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -788,7 +788,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="browserFolder:" target="XfG-lQ-9wD" id="5NI-58-0Kf"/>
+                                            <action selector="browserFolder2:" target="XfG-lQ-9wD" id="aFy-Aj-hKf"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -804,35 +804,50 @@
                                 </customSpacing>
                             </stackView>
                             <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtw-tY-LXU" userLabel="Stack Status 2">
-                                <rect key="frame" x="30" y="255" width="269" height="16"/>
+                                <rect key="frame" x="30" y="250" width="495" height="20"/>
                                 <subviews>
                                     <imageView verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EkR-Pn-JtU">
-                                        <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="Warning" id="G3L-NR-g3a"/>
+                                        <rect key="frame" x="0.0" y="4" width="23" height="16"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="left" image="Warning" id="G3L-NR-g3a"/>
                                     </imageView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fDn-R6-vcO">
-                                        <rect key="frame" x="19" y="0.0" width="252" height="16"/>
+                                        <rect key="frame" x="26" y="4" width="366" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="You haven't choose any folder to monitor" id="zEt-2Y-LxX">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LzS-aI-c8R">
+                                        <rect key="frame" x="388" y="-7" width="114" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="TRk-f9-EcR"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="START" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PEB-Rm-vtz">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="systemSemibold" size="13"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="monitorProcess2:" target="XfG-lQ-9wD" id="qhJ-4j-BZ4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <visibilityPriorities>
+                                    <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Qpt-MH-Ehe">
-                                <rect key="frame" x="30" y="242" width="160" height="5"/>
+                                <rect key="frame" x="30" y="237" width="160" height="5"/>
                             </box>
                             <stackView distribution="fillProportionally" orientation="horizontal" alignment="bottom" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="AXS-Qu-oii" userLabel="Stack Print">
-                                <rect key="frame" x="30" y="218" width="320" height="21"/>
+                                <rect key="frame" x="30" y="213" width="320" height="21"/>
                                 <subviews>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VcF-eh-Rt7">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
@@ -872,7 +887,7 @@ DQ
                                 </customSpacing>
                             </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t2v-Jc-y0r">
-                                <rect key="frame" x="28" y="187" width="34" height="16"/>
+                                <rect key="frame" x="28" y="182" width="34" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Logs" id="tkz-cn-2wV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -880,17 +895,17 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IV-NM-HJG">
-                                <rect key="frame" x="30" y="20" width="495" height="162"/>
+                                <rect key="frame" x="30" y="20" width="495" height="157"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="meg-T3-nhf">
-                                    <rect key="frame" x="1" y="1" width="478" height="160"/>
+                                    <rect key="frame" x="1" y="1" width="478" height="155"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="W5m-u9-pLe">
-                                            <rect key="frame" x="0.0" y="0.0" width="478" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="478" height="155"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="478" height="160"/>
+                                            <size key="minSize" width="478" height="155"/>
                                             <size key="maxSize" width="825" height="10000000"/>
                                             <attributedString key="textStorage">
                                                 <fragment content="Whenever you add PDFs, it will be logged here.">
@@ -910,7 +925,7 @@ DQ
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="zLN-rE-dZp">
-                                    <rect key="frame" x="479" y="1" width="15" height="160"/>
+                                    <rect key="frame" x="479" y="1" width="15" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -924,35 +939,47 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="YMB-qL-TOZ" secondAttribute="trailing" constant="30" id="9jv-hE-tWh"/>
                             <constraint firstItem="t2v-Jc-y0r" firstAttribute="bottom" secondItem="8IV-NM-HJG" secondAttribute="top" constant="-5" id="AHf-FM-ZZj"/>
                             <constraint firstItem="Qpt-MH-Ehe" firstAttribute="leading" secondItem="YMB-qL-TOZ" secondAttribute="leading" id="Lj7-4j-MNq"/>
-                            <constraint firstItem="dd9-OM-a5w" firstAttribute="top" secondItem="YMB-qL-TOZ" secondAttribute="bottom" constant="10" id="LvP-m1-171"/>
-                            <constraint firstItem="YMB-qL-TOZ" firstAttribute="top" secondItem="aeL-U2-WUE" secondAttribute="bottom" constant="10" id="MUy-NW-PKL"/>
+                            <constraint firstItem="dd9-OM-a5w" firstAttribute="top" secondItem="YMB-qL-TOZ" secondAttribute="bottom" constant="15" id="LvP-m1-171"/>
+                            <constraint firstItem="YMB-qL-TOZ" firstAttribute="top" secondItem="aeL-U2-WUE" secondAttribute="bottom" constant="8" id="MUy-NW-PKL"/>
                             <constraint firstItem="Qpt-MH-Ehe" firstAttribute="width" secondItem="AXS-Qu-oii" secondAttribute="width" multiplier="0.5" id="MdN-81-LRL"/>
+                            <constraint firstItem="90v-Vt-oBd" firstAttribute="leading" secondItem="LG0-av-GAj" secondAttribute="leading" id="Mri-Dj-LzZ"/>
                             <constraint firstItem="aeL-U2-WUE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="OvK-aA-5x8"/>
                             <constraint firstItem="gtw-tY-LXU" firstAttribute="leading" secondItem="aeL-U2-WUE" secondAttribute="leading" id="PCd-PA-Zgf"/>
                             <constraint firstItem="dd9-OM-a5w" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="30" id="PZK-GE-c7E"/>
                             <constraint firstItem="8IV-NM-HJG" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="VPM-jc-0ht"/>
+                            <constraint firstAttribute="trailing" secondItem="gtw-tY-LXU" secondAttribute="trailing" constant="30" id="ZjU-7h-B1Z"/>
                             <constraint firstItem="AXS-Qu-oii" firstAttribute="top" secondItem="Qpt-MH-Ehe" secondAttribute="bottom" constant="5" id="aEd-cm-z23"/>
                             <constraint firstItem="AXS-Qu-oii" firstAttribute="leading" secondItem="t2v-Jc-y0r" secondAttribute="leading" id="br2-dx-VcI"/>
+                            <constraint firstItem="90v-Vt-oBd" firstAttribute="trailing" secondItem="LG0-av-GAj" secondAttribute="trailing" id="dWf-1t-dVw"/>
                             <constraint firstAttribute="trailing" secondItem="dd9-OM-a5w" secondAttribute="trailing" constant="30" id="f7W-0G-yIX"/>
                             <constraint firstItem="t2v-Jc-y0r" firstAttribute="leading" secondItem="aeL-U2-WUE" secondAttribute="leading" id="iNX-87-bQP"/>
-                            <constraint firstItem="gtw-tY-LXU" firstAttribute="top" secondItem="dd9-OM-a5w" secondAttribute="bottom" constant="10" id="n9G-mf-k8c"/>
+                            <constraint firstItem="gtw-tY-LXU" firstAttribute="top" secondItem="dd9-OM-a5w" secondAttribute="bottom" constant="8" id="n9G-mf-k8c"/>
                             <constraint firstAttribute="trailing" secondItem="aeL-U2-WUE" secondAttribute="trailing" constant="30" id="sQe-dJ-SeM"/>
                             <constraint firstItem="Qpt-MH-Ehe" firstAttribute="top" secondItem="gtw-tY-LXU" secondAttribute="bottom" constant="10" id="ts3-Dl-OQ1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnBrowseFolder2" destination="IUJ-Wi-K3C" id="HXC-4V-MZF"/>
                         <outlet property="btnBrowserFolder" destination="bms-Hj-uoq" id="wPv-Ph-AMN"/>
                         <outlet property="btnMonitor" destination="OdP-IC-WqB" id="MOC-8b-aio"/>
+                        <outlet property="btnMonitor2" destination="LzS-aI-c8R" id="saz-gY-8FV"/>
                         <outlet property="btnPrint" destination="Nc4-xm-iyB" id="65F-5t-CZA"/>
+                        <outlet property="edtFolderPath2" destination="90v-Vt-oBd" id="gTj-yI-HRn"/>
                         <outlet property="imvStatus" destination="7kM-6n-2BJ" id="PGO-pt-vwe"/>
+                        <outlet property="imvStatus2" destination="EkR-Pn-JtU" id="gSH-x0-DDm"/>
                         <outlet property="lblStatus" destination="2Mi-Hr-AaH" id="7d8-tb-bQG"/>
                         <outlet property="scrollView" destination="8IV-NM-HJG" id="tUQ-ea-IQB"/>
                         <outlet property="txtFolderPath" destination="LG0-av-GAj" id="ycj-u1-bHT"/>
                         <outlet property="txtLogs" destination="W5m-u9-pLe" id="q3a-7u-S38"/>
                         <outlet property="txtPrint" destination="VcF-eh-Rt7" id="KQv-Dc-Znk"/>
+                        <outlet property="txtStatus2" destination="fDn-R6-vcO" id="4ME-m2-vTX"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <buttonCell type="push" title="START" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iS6-VK-nLl">
+                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                    <font key="font" metaFont="systemSemibold" size="13"/>
+                </buttonCell>
             </objects>
             <point key="canvasLocation" x="-107.5" y="688"/>
         </scene>

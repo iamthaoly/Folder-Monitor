@@ -11,26 +11,30 @@ import PDFKit
 import FileWatcher
 import Foundation
 
-enum Status {
-    case warning
-    case good
-    case error
-}
+
 
 class ViewController: NSViewController, NSWindowDelegate {
+    
+    // First layout to monitor the first folder
     @IBOutlet weak var txtFolderPath: NSTextField!
-
     @IBOutlet weak var lblStatus: NSTextField!
     @IBOutlet weak var imvStatus: NSImageView!
     @IBOutlet weak var btnBrowserFolder: NSButton!
     @IBOutlet weak var btnMonitor: NSButton!
     @IBOutlet var txtLogs: NSTextView!
-
+    
+    // Second layout to monitor second folder
+    @IBOutlet weak var edtFolderPath2: NSTextField!
+    @IBOutlet weak var btnBrowseFolder2: NSButton!
+    @IBOutlet weak var btnMonitor2: NSButton!
+    @IBOutlet weak var txtStatus2: NSTextField!
+    @IBOutlet weak var imvStatus2: NSImageView!
+    
     @IBOutlet weak var scrollView: NSScrollView!
 
+    // Print layout
     @IBOutlet weak var btnPrint: NSButton!
     @IBOutlet weak var txtPrint: NSTextField!
-    
     
     var folderPath: URL? {
         didSet {
@@ -41,15 +45,33 @@ class ViewController: NSViewController, NSWindowDelegate {
             } catch let error as NSError {
                 print("Set Bookmark Fails: \(error.description)")
             }
-            if let strPath = folderPath?.absoluteString {
+            if let strPath = folderPath?.path {
                 txtFolderPath.stringValue = strPath
             }
             btnMonitor.isEnabled = (folderPath != nil)
 
         }
     }
+    var folderPath2: URL? {
+        didSet {
+            // Save folder access permission to bookmark
+            do {
+                let bookmark = try folderPath2?.bookmarkData(options: .securityScopeAllowOnlyReadAccess, includingResourceValuesForKeys: nil, relativeTo: nil)
+                UserDefaults.standard.set(bookmark, forKey: "bookmark2")
+            } catch let error as NSError {
+                print("Set Bookmark Fails: \(error.description)")
+            }
+            if let strPath = folderPath2?.path {
+                edtFolderPath2.stringValue = strPath
+            }
+            btnMonitor2.isEnabled = (folderPath2 != nil)
+
+        }
+    }
     
     lazy var filewatcher = FileWatcher([NSString(string: folderPath?.path ?? "temp").expandingTildeInPath])
+    lazy var filewatcher2 = FileWatcher([NSString(string: folderPath2?.path ?? "temp").expandingTildeInPath])
+
 //    lazy var filewatcher: FileWatcher? = nil
 
     override func viewDidLoad() {
@@ -72,13 +94,14 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - ACTIONS
     @IBAction func startPrinting(_ sender: Any) {
+        // TODO: - Search and print 2 url
         let pdfName = txtPrint.stringValue
         printPDF(name: pdfName)
     }
     
     @IBAction func getPrintInfoEvent(_ sender: Any) {
         print("Print event :D")
-        getPrintInfo()
+        displayPrintInfo()
     }
     
     
@@ -87,6 +110,13 @@ class ViewController: NSViewController, NSWindowDelegate {
             process(start: true)
         } else if btnMonitor.title == "STOP" {
             process(start: false)
+        }
+    }
+    @IBAction func monitorProcess2(_ sender: Any) {
+        if btnMonitor2.title == "START" {
+            process2(start: true)
+        } else if btnMonitor2.title == "STOP" {
+            process2(start: false)
         }
     }
     
@@ -102,12 +132,39 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         if dialog.runModal() == NSApplication.ModalResponse.OK {
             let result = dialog.url // Pathname of the file
+            
             if result != nil {
                 process(start: false)
                 let path = result!.path
-                folderPath = URL(string: path)
+                folderPath = URL.init(fileURLWithPath: path)
                 UserDefaults.standard.set(path, forKey: "previousFolder")
                 process(start: true)
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+    }
+    
+    
+    @IBAction func browserFolder2(_ sender: Any) {
+        let dialog = NSOpenPanel()
+        dialog.title = "Choose a folder"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.canChooseFiles = false
+        dialog.allowsMultipleSelection = false
+
+        if dialog.runModal() == NSApplication.ModalResponse.OK {
+            let result = dialog.url // Pathname of the file
+            if result != nil {
+                process2(start: false)
+                let path = result!.path
+                folderPath2 = URL.init(fileURLWithPath: path)
+                UserDefaults.standard.set(path, forKey: "previousFolder2")
+                process2(start: true)
             }
         } else {
             // User clicked on "Cancel"
@@ -122,7 +179,8 @@ class ViewController: NSViewController, NSWindowDelegate {
         if let path = UserDefaults.standard.string(forKey: "previousFolder") {
             if FileManager.default.fileExists(atPath: path) {
                 txtFolderPath.stringValue = path
-                folderPath = URL(string: path)
+//                folderPath = URL(string: path)
+                folderPath = URL.init(fileURLWithPath: path)
                 btnMonitor.isEnabled = true
                 btnMonitor.titleTextColor = NSColor.systemBlue
                 btnBrowserFolder.title = "Change Folder"
@@ -132,9 +190,24 @@ class ViewController: NSViewController, NSWindowDelegate {
         else {
             btnMonitor.isEnabled = false
         }
+        
+        if let path = UserDefaults.standard.string(forKey: "previousFolder2") {
+            if FileManager.default.fileExists(atPath: path) {
+                edtFolderPath2.stringValue = path
+//                folderPath2 = URL(string: path)
+                folderPath2 = URL.init(fileURLWithPath: path)
+                btnMonitor2.isEnabled = true
+                btnMonitor2.titleTextColor = NSColor.systemBlue
+                btnBrowseFolder2.title = "Change Folder"
+                changeStatus(status: .warning, text: "Click start to begin monitor process.", isFirst: false)
+            }
+        }
+        else {
+            btnMonitor2.isEnabled = false
+        }
     }
     
-    private func getPrintInfo() {
+    private func displayPrintInfo() {
         let printInfo = NSPrintInfo.shared
         let alert = NSAlert()
         
@@ -153,7 +226,7 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    private func printPDF(name: String) {
+    private func printPDF(name: String, _ documentType: ClientDocumentType = .shipping) {
         var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
         
@@ -207,6 +280,50 @@ class ViewController: NSViewController, NSWindowDelegate {
             showNotExistAlert()
         }
         
+    }
+    
+    private func getNSPrintInfo(of documentType: ClientDocumentType, pdfPageSize: CGSize) {
+        if documentType == .shipping {
+            let size = pdfPageSize
+            
+            let printInfo = NSPrintInfo.shared
+            let printerWidth = 289.134
+            let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
+            printInfo.paperSize = paperSize
+            // Custom paper size
+            if (size.height < 200) {
+                printInfo.horizontalPagination = .clip
+                printInfo.verticalPagination = .clip
+//                printInfo.isVerticallyCentered = false
+//                printInfo.isHorizontallyCentered = false
+                printInfo.topMargin = 20
+                printInfo.bottomMargin = 0
+                printInfo.scalingFactor = 1.06
+                printInfo.leftMargin = 20
+                printInfo.rightMargin = 20
+//                printInfo.isVerticallyCentered = true
+                
+                // Set printer? :D
+                //                NSPrinter.printerNames
+                if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[0]) {
+                    printInfo.printer = selectedPrinter
+                }
+                else {
+                    // DISPLAY ERROR!
+                }
+            }
+        }
+        else {
+            let printInfo = NSPrintInfo.shared
+            
+            // Use second printer for delivery note.
+            if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[1]) {
+                printInfo.printer = selectedPrinter
+            }
+            else {
+                // DISPLAY ERROR!
+            }
+        }
     }
 
     private func renamePDFAfterPrint(pdfPath: URL, inSubFolder: String? = nil) {
@@ -290,6 +407,23 @@ class ViewController: NSViewController, NSWindowDelegate {
 
         }
     }
+    
+    private func process2(start: Bool) {
+        if start {
+            if folderPath2 == nil || !FileManager.default.fileExists(atPath: folderPath2?.path ?? "tempx00") {
+                changeStatus(status: .warning, text: "Current folder's not exist. Please choose another.", isFirst: false)
+                return
+            }
+            startMonitor2()
+            btnMonitor2.title = "STOP"
+            btnMonitor2.titleTextColor = NSColor.red
+        } else {
+            stopMonitor2()
+            btnMonitor2.title = "START"
+            btnMonitor2.titleTextColor = NSColor.systemBlue
+
+        }
+    }
 
     private func startMonitor() {
         filewatcher = FileWatcher([NSString(string: folderPath!.path).expandingTildeInPath])
@@ -347,11 +481,72 @@ class ViewController: NSViewController, NSWindowDelegate {
 
     }
 
+    private func startMonitor2() {
+        filewatcher2 = FileWatcher([NSString(string: folderPath2!.path).expandingTildeInPath])
+        changeStatus(status: .good, text: "Your folder is being monitor.", isFirst: false)
+        let time = getTime()
+        updateLog("\(time) - Monitor started.\n")
+
+        filewatcher2.queue = DispatchQueue.global()
+        filewatcher2.callback = { event in
+//            let eventURL = URL(string: event.path)
+            if !event.path.isPDF() { return }
+            event.printEventType()
+            print("event.path: \(event.path)")
+            if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
+                return
+            }
+            if event.fileCreated || event.fileRemoved || event.fileRenamed {
+                self.updateLog("---\n")
+                self.updateLog(self.getTime() + "\n")
+                let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
+                // [1] delete event
+                if event.fileRemoved {
+                    self.updateLog("\(String(describing: fileName)) was deleted.\n")
+                }
+    //            print("event.flags:  \(event.flags)")
+                // [2] create event
+                else if event.fileCreated || event.fileRenamed {
+                    self.updateLog("\(String(describing: fileName)) was added.")
+                    
+                    // If PDF has more than 1 page, split
+                    // Else extract text
+                    let pdfManager = CustomPDFManager.shared
+                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
+                        if pageCnt > 1 {
+                            pdfManager.splitPDFIntoSingle(filePath: event.path)
+                            do {
+                                try FileManager.default.removeItem(atPath: event.path)
+                            }
+                            catch {
+                                debugPrint("Remove original multi page PDF error \(error)")
+                            }
+                        }
+                        else {
+                            self.extractTextFromPDF(filePath: event.path)
+                        }
+                    }
+                }
+
+                self.updateLog("\n")
+            }
+
+        }
+
+        filewatcher2.start() // start monitoring
+
+    }
     private func stopMonitor() {
         let time = getTime()
         updateLog("\(time) - Monitor stopped.\n")
         filewatcher.stop()
         changeStatus(status: .error, text: "Your folder are not being monitor.")
+    }
+    private func stopMonitor2() {
+        let time = getTime()
+        updateLog("\(time) - Monitor stopped.\n")
+        filewatcher2.stop()
+        changeStatus(status: .error, text: "Your folder are not being monitor.", isFirst: false)
     }
     
 
@@ -470,16 +665,24 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 // MARK: - HELPER
 extension ViewController {
-    func changeStatus(status: Status, text: String) {
+    func changeStatus(status: Status, text: String, isFirst: Bool = true) {
+        var imvCurrent = imvStatus!
+        var txtCurrent = lblStatus!
+        
+        if !isFirst {
+            imvCurrent = imvStatus2!
+            txtCurrent = txtStatus2!
+        }
+
         switch status {
         case .warning:
-            imvStatus.image = NSImage(named: "Warning")
+            imvCurrent.image = NSImage(named: "Warning")
         case .good:
-            imvStatus.image = NSImage(named: "Check")
+            imvCurrent.image = NSImage(named: "Check")
         case .error:
-            imvStatus.image = NSImage(named: "Close")
+            imvCurrent.image = NSImage(named: "Close")
         }
-        lblStatus.stringValue = text
+        txtCurrent.stringValue = text
 
     }
 
