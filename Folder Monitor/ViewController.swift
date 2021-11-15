@@ -94,9 +94,17 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - ACTIONS
     @IBAction func startPrinting(_ sender: Any) {
-        // TODO: - Search and print 2 url
         let pdfName = txtPrint.stringValue
+        
+        let fileManager = FileManager.default
+        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
+            showNotExistAlert()
+            return
+        }
         printPDF(name: pdfName)
+        printPDF(name: pdfName, isFirst: false)
     }
     
     @IBAction func getPrintInfoEvent(_ sender: Any) {
@@ -226,12 +234,22 @@ class ViewController: NSViewController, NSWindowDelegate {
         }
     }
     
-    private func printPDF(name: String, _ documentType: ClientDocumentType = .shipping) {
-        var pdfPath: URL = URL.init(fileURLWithPath: folderPath?.path ?? "")
+    private func printPDF(name: String, isFirst: Bool = true) {
+        let fileManager = FileManager.default
+        
+        // Show alert. If both not exist
+//        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(name + ".pdf")
+//        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(name + ".pdf")
+//        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
+//            showNotExistAlert()
+//            return
+//        }
+
+        let tempPath = isFirst ? folderPath?.path : folderPath2?.path
+        var pdfPath: URL = URL.init(fileURLWithPath: tempPath ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
         
         print("pdfPath:: \(pdfPath)")
-        let fileManager = FileManager.default
         if fileManager.fileExists(atPath: pdfPath.path) {
             guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
 //            let pdfView = PDFView()
@@ -242,33 +260,34 @@ class ViewController: NSViewController, NSWindowDelegate {
             let size = bounds.size
             print("PDF Size: ", size)
             
-            let printInfo = NSPrintInfo.shared
-            let printerWidth = 289.134
-            let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
-            printInfo.paperSize = paperSize
-            // Custom paper size
-            if (size.height < 200) {
-                printInfo.horizontalPagination = .clip
-                printInfo.verticalPagination = .clip
-//                printInfo.isVerticallyCentered = false
-//                printInfo.isHorizontallyCentered = false
-                printInfo.topMargin = 20
-                printInfo.bottomMargin = 0
-                printInfo.scalingFactor = 1.06
-                printInfo.leftMargin = 20
-                printInfo.rightMargin = 20
-//                printInfo.isVerticallyCentered = true
-            }
+            // Old way - Commented
+//            let printInfo = NSPrintInfo.shared
+//            let printerWidth = 289.134
+//            let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
+//            printInfo.paperSize = paperSize
+//            // Custom paper size
+//            if (size.height < 200) {
+//                printInfo.horizontalPagination = .clip
+//                printInfo.verticalPagination = .clip
+////                printInfo.isVerticallyCentered = false
+////                printInfo.isHorizontallyCentered = false
+//                printInfo.topMargin = 20
+//                printInfo.bottomMargin = 0
+//                printInfo.scalingFactor = 1.06
+//                printInfo.leftMargin = 20
+//                printInfo.rightMargin = 20
+////                printInfo.isVerticallyCentered = true
+//            }
+            // New way
+            let printInfo = getNSPrintInfo(pdfPageSize: size, isFirst: isFirst)
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-//                printOperation.showsPrintPanel = false
-                printOperation.printPanel = thePrintPanel()
+                printOperation.showsPrintPanel = false
+//                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
                 let result = printOperation.run()
                 if (result) {
-                    if true {
-                        renamePDFAfterPrint(pdfPath: pdfPath, inSubFolder: "Delivery Notes")
-                    }
+                    renamePDFAfterPrint(pdfPath: pdfPath, inSubFolder: "Done")
                     print("Print successfully.")
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
@@ -276,15 +295,13 @@ class ViewController: NSViewController, NSWindowDelegate {
                 }
             }
         }
-        else {
-            showNotExistAlert()
-        }
         
     }
     
-    private func getNSPrintInfo(of documentType: ClientDocumentType, pdfPageSize: CGSize) {
-        if documentType == .shipping {
-            let size = pdfPageSize
+    private func getNSPrintInfo(pdfPageSize: CGSize, isFirst: Bool = true) -> NSPrintInfo {
+        let size = pdfPageSize
+
+        if isFirst {
             
             let printInfo = NSPrintInfo.shared
             let printerWidth = 289.134
@@ -304,25 +321,33 @@ class ViewController: NSViewController, NSWindowDelegate {
 //                printInfo.isVerticallyCentered = true
                 
                 // Set printer? :D
-                //                NSPrinter.printerNames
                 if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[0]) {
                     printInfo.printer = selectedPrinter
                 }
                 else {
                     // DISPLAY ERROR!
+                    debugPrint("Cannot select printer!!! ")
+                    debugPrint("All printers: ", NSPrinter.printerNames)
                 }
             }
+            return printInfo
         }
         else {
             let printInfo = NSPrintInfo.shared
-            
+            let printerWidth = 419.527
+//            let paperSize = CGSize(width: printerWidth, height: Double(size.width) / printerWidth * Double(size.height))
+            let paperSize = CGSize(width: printerWidth, height: 595.275)
+            printInfo.paperSize = paperSize
             // Use second printer for delivery note.
             if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[1]) {
                 printInfo.printer = selectedPrinter
             }
             else {
                 // DISPLAY ERROR!
+                debugPrint("Cannot select printer!!! ")
+                debugPrint("All printers: ", NSPrinter.printerNames)
             }
+            return printInfo
         }
     }
 
