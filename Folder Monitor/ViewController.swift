@@ -218,8 +218,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     private func displayPrintInfo() {
         let printInfo = NSPrintInfo.shared
         let alert = NSAlert()
-        
-        alert.informativeText = printInfo.debugDescription
+        let printersInfo = NSPrinter.printerNames
+        alert.informativeText = "All printers: " + printersInfo.description + "\n" + printInfo.debugDescription
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Copy")
         let buttonChosen = alert.runModal()
