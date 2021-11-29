@@ -36,6 +36,12 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var btnPrint: NSButton!
     @IBOutlet weak var txtPrint: NSTextField!
     
+    // MARK: - CONSTANTS
+    let LABEL_PRINTER_NAME = "Brother QL-1110NWB"
+    let LASEL_PRINTER_NAME = "Brother HL-L5100DN series [3c2af40cd627]"
+    
+    // MARK: - VAR
+    
     var folderPath: URL? {
         didSet {
             // Save folder access permission to bookmark
@@ -103,7 +109,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             showNotExistAlert()
             return
         }
-        printPDF(name: pdfName)
+        printPDF(name: pdfName, isFirst: true)
         printPDF(name: pdfName, isFirst: false)
     }
     
@@ -237,7 +243,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     private func printPDF(name: String, isFirst: Bool = true) {
         let fileManager = FileManager.default
         
-        // Show alert. If both not exist
+        // Show alert. If both not exist 
 //        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(name + ".pdf")
 //        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(name + ".pdf")
 //        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
@@ -259,6 +265,9 @@ class ViewController: NSViewController, NSWindowDelegate {
             let bounds = page.bounds(for: .mediaBox)
             let size = bounds.size
             print("PDF Size: ", size)
+            print("PRINT INFO->")
+            print("Path: ", tempPath)
+            print("Printer name: ", isFirst ? LABEL_PRINTER_NAME : LASEL_PRINTER_NAME)
             
             // Old way - Commented
 //            let printInfo = NSPrintInfo.shared
@@ -280,6 +289,11 @@ class ViewController: NSViewController, NSWindowDelegate {
 //            }
             // New way
             let printInfo = getNSPrintInfo(pdfPageSize: size, isFirst: isFirst)
+            
+            
+            // Debug printer info
+
+            
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
                 printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
@@ -304,6 +318,18 @@ class ViewController: NSViewController, NSWindowDelegate {
         if isFirst {
             
             let printInfo = NSPrintInfo.shared
+            
+            // Set printer? :D
+            // Set lable printer
+            if let selectedPrinter = NSPrinter(name: LABEL_PRINTER_NAME) {
+                printInfo.printer = selectedPrinter
+            }
+            else {
+                // DISPLAY ERROR!
+                debugPrint("Cannot select printer!!! ")
+                debugPrint("All printers: ", NSPrinter.printerNames)
+            }
+            
             let printerWidth = 289.134
             let paperSize = CGSize(width: printerWidth, height: Double(size.width)/printerWidth*Double(size.height))
             printInfo.paperSize = paperSize
@@ -319,16 +345,8 @@ class ViewController: NSViewController, NSWindowDelegate {
                 printInfo.leftMargin = 20
                 printInfo.rightMargin = 20
 //                printInfo.isVerticallyCentered = true
-                
-                // Set printer? :D
-                if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[0]) {
-                    printInfo.printer = selectedPrinter
-                }
-                else {
-                    // DISPLAY ERROR!
-                    debugPrint("Cannot select printer!!! ")
-                    debugPrint("All printers: ", NSPrinter.printerNames)
-                }
+
+
             }
             return printInfo
         }
@@ -338,8 +356,9 @@ class ViewController: NSViewController, NSWindowDelegate {
 //            let paperSize = CGSize(width: printerWidth, height: Double(size.width) / printerWidth * Double(size.height))
             let paperSize = CGSize(width: printerWidth, height: 595.275)
             printInfo.paperSize = paperSize
-            // Use second printer for delivery note.
-            if let selectedPrinter = NSPrinter(name: NSPrinter.printerNames[1]) {
+            
+            // Use second printer (laser) for delivery note.
+            if let selectedPrinter = NSPrinter(name: LASEL_PRINTER_NAME) {
                 printInfo.printer = selectedPrinter
             }
             else {
