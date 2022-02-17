@@ -68,26 +68,40 @@ class CustomPDFManager {
             extractTextFromPDF(filePath: filePath)
         }
         else if splitCase == 1 {
-            var fileCount = 0
-            let fileName = pdfFileUrl.deletingPathExtension().lastPathComponent
+            
+            let originalFileName = pdfFileUrl.deletingPathExtension().lastPathComponent
+            
             let fileManager = FileManager.default
             
-            // 1 pdf -> multiple pdf
-            // x von n -> get n (default 1)
             for i in 0..<pdfDocument.pageCount {
                 let newDoc = PDFDocument()
                 let page = pdfDocument.page(at: i)
                 newDoc.insert(page!, at: 0)
 
                 // Save to disk
-                
                 var newUrl = pdfFileUrl
-                while fileManager.fileExists(atPath: newUrl.path) {
-                    fileCount += 1
-                    newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(fileName + "(\(fileCount))" + ".pdf")
+                if let refNumber = extractText2(content: (page?.string) ?? "") {
+                    loggingDelegate?.updateLogInVC(" - Referenznr number found: \(refNumber) ")
+                    
+                    var fileCount = 0
+                    while fileManager.fileExists(atPath: newUrl.path) {
+                        fileCount += 1
+                        newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + "(\(fileCount))" + ".pdf")
 
+                    }
+                    
+                }
+                else {
+                    // number not found
+                    loggingDelegate?.updateLogInVC(" - Number not found in PDF - Ignored.")
+                    var fileCount = 0
+                    while fileManager.fileExists(atPath: newUrl.path) {
+                        fileCount += 1
+                        newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(originalFileName + "(\(fileCount))" + ".pdf")
+                    }
                 }
                 newDoc.write(to: newUrl)
+
             }
             // Remove original PDF for case 1.
             do {
