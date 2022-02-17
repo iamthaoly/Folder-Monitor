@@ -488,7 +488,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
                 return
             }
-            if event.fileCreated || event.fileRemoved || event.fileRenamed {
+            if event.fileCreated || event.fileRemoved{
                 self.updateLog("---\n")
                 self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
