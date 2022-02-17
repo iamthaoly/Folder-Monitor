@@ -11,10 +11,13 @@ import PDFKit
 import FileWatcher
 import Foundation
 
-
+protocol Logging: class {
+    func updateLogInVC(_ text: String)
+}
 
 class ViewController: NSViewController, NSWindowDelegate {
     
+    // MARK: - OBJECTS
     // First layout to monitor the first folder
     @IBOutlet weak var txtFolderPath: NSTextField!
     @IBOutlet weak var lblStatus: NSTextField!
@@ -80,6 +83,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
 //    lazy var filewatcher: FileWatcher? = nil
 
+    // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -474,10 +478,10 @@ class ViewController: NSViewController, NSWindowDelegate {
         changeStatus(status: .good, text: "Your folder is being monitor.")
         let time = getTime()
         updateLog("\(time) - Monitor started.\n")
-
+        
         filewatcher.queue = DispatchQueue.global()
         filewatcher.callback = { event in
-//            let eventURL = URL(string: event.path)
+            //            let eventURL = URL(string: event.path)
             if !event.path.isPDF() { return }
             event.printEventType()
             print("event.path: \(event.path)")
@@ -492,7 +496,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                 if event.fileRemoved {
                     self.updateLog("\(String(describing: fileName)) was deleted.\n")
                 }
-    //            print("event.flags:  \(event.flags)")
+                //            print("event.flags:  \(event.flags)")
                 // [2] create event
                 else if event.fileCreated || event.fileRenamed {
                     self.updateLog("\(String(describing: fileName)) was added.")
@@ -500,29 +504,45 @@ class ViewController: NSViewController, NSWindowDelegate {
                     // If PDF has more than 1 page, split
                     // Else extract text
                     let pdfManager = CustomPDFManager.shared
-                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
-                        if pageCnt > 1 {
-                            pdfManager.splitPDFIntoSingle(filePath: event.path)
-                            do {
-                                try FileManager.default.removeItem(atPath: event.path)
-                            }
-                            catch {
-                                debugPrint("Remove original multi page PDF error \(error)")
-                            }
-                        }
-                        else {
-                            self.extractTextFromPDF(filePath: event.path)
-                        }
-                    }
+                    pdfManager.loggingDelegate = self
+                    // Rewrite this logic. One receipt can contain multiple pages.
+                    
+                    // Case 0: 1 page
+                    // Case 1: Multiple page - no regex
+                    // Case 2: Multiple page - 1 regex
+                    
+                    // TODO: - Remove original PDF for case 1.
+                    pdfManager.splitPDFIntoSingle(filePath: event.path)
+                    
+//                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
+//                        if pageCnt > 1 {
+//                            let splitCase = pdfManager.getSplitCase(filePath: event.path)
+//                            if  splitCase == 1 {
+//                                pdfManager.splitPDFIntoSingle(filePath: event.path)
+//                                do {
+//                                    try FileManager.default.removeItem(atPath: event.path)
+//                                }
+//                                catch {
+//                                    debugPrint("Remove original multi page PDF error \(error)")
+//                                }
+//                            }
+//                            else if splitCase == 2 {
+//                                self.extractTextFromPDF(filePath: event.path)
+//                            }
+//                        }
+//                        else {
+//                            self.extractTextFromPDF(filePath: event.path)
+//                        }
+//                    }
                 }
-
+                
                 self.updateLog("\n")
             }
-
+            
         }
-
+        
         filewatcher.start() // start monitoring
-
+        
     }
 
     private func startMonitor2() {
@@ -637,7 +657,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     private func extractText2(content: String) -> String?{
         let regex = "\\d+-\\d+-\\d+"
-        let res = matches(for: regex, in: content)
+        let res = Utils.matches(for: regex, in: content)
         for s in res {
             debugPrint("Result: \(s)")
         }
@@ -647,19 +667,19 @@ class ViewController: NSViewController, NSWindowDelegate {
         return nil
     }
     
-    private func matches(for regex: String, in text: String) -> [String] {
-        do {
-            let regex = try NSRegularExpression(pattern: regex)
-            let results = regex.matches(in: text,
-                                        range: NSRange(text.startIndex..., in: text))
-            return results.map {
-                String(text[Range($0.range, in: text)!])
-            }
-        } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
-            return []
-        }
-    }
+//    private func matches(for regex: String, in text: String) -> [String] {
+//        do {
+//            let regex = try NSRegularExpression(pattern: regex)
+//            let results = regex.matches(in: text,
+//                                        range: NSRange(text.startIndex..., in: text))
+//            return results.map {
+//                String(text[Range($0.range, in: text)!])
+//            }
+//        } catch let error {
+//            print("invalid regex: \(error.localizedDescription)")
+//            return []
+//        }
+//    }
     
     private func updateLog(_ text: String) {
         DispatchQueue.main.async {
@@ -706,6 +726,15 @@ class ViewController: NSViewController, NSWindowDelegate {
 //    }
 
 }
+// MARK: - DELEGATE
+extension ViewController: Logging {
+    func updateLogInVC(_ text: String) {
+        updateLog(text)
+        print("Hi Im logging protocol >:)")
+    }
+    
+    
+}
 
 // MARK: - HELPER
 extension ViewController {
@@ -750,6 +779,7 @@ extension ViewController {
         }
         return false
     }
+    
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         var isQuit = false
         let dontShowQuitAlert = UserDefaults.standard.bool(forKey: "dontShowQuitAlert")

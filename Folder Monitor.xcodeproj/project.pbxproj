@@ -17,6 +17,7 @@
 		081419012670458000E8ABB8 /* FolderMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081419002670458000E8ABB8 /* FolderMonitorUITests.swift */; };
 		0814190F26704D1300E8ABB8 /* testfile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0814190E26704D1200E8ABB8 /* testfile.pdf */; };
 		081BD690271BF49F002E7BE2 /* CustomPDFManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081BD68F271BF49F002E7BE2 /* CustomPDFManager.swift */; };
+		0826E20D27A3F0320051DFE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826E20C27A3F0320051DFE2 /* Utils.swift */; };
 		085552AA273FFD7D00ED3E06 /* FolderWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085552A9273FFD7D00ED3E06 /* FolderWatcher.swift */; };
 		085552AC273FFEBE00ED3E06 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085552AB273FFEBE00ED3E06 /* String+Extension.swift */; };
 		086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
@@ -63,6 +64,7 @@
 		0814190E26704D1200E8ABB8 /* testfile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = testfile.pdf; sourceTree = "<group>"; };
 		081419112670511E00E8ABB8 /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFKit.framework; path = System/Library/Frameworks/PDFKit.framework; sourceTree = SDKROOT; };
 		081BD68F271BF49F002E7BE2 /* CustomPDFManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPDFManager.swift; sourceTree = "<group>"; };
+		0826E20C27A3F0320051DFE2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		085552A9273FFD7D00ED3E06 /* FolderWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderWatcher.swift; sourceTree = "<group>"; };
 		085552AB273FFEBE00ED3E06 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Folder MonitorRelease.entitlements"; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				080C1F20271B3AC900EB43DB /* FileWatcherEvent+Extension.swift */,
 				080C1F23271B3B0500EB43DB /* NSButton+Extension.swift */,
 				085552AB273FFEBE00ED3E06 /* String+Extension.swift */,
+				0826E20C27A3F0320051DFE2 /* Utils.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				081418E52670457A00E8ABB8 /* ViewController.swift in Sources */,
 				080C1F21271B3AC900EB43DB /* FileWatcherEvent+Extension.swift in Sources */,
 				081BD690271BF49F002E7BE2 /* CustomPDFManager.swift in Sources */,
+				0826E20D27A3F0320051DFE2 /* Utils.swift in Sources */,
 				08E8964927410D4900CCD4DC /* Enum.swift in Sources */,
 				08994BA92672F65D0062C561 /* Date+Extension.swift in Sources */,
 				085552AA273FFD7D00ED3E06 /* FolderWatcher.swift in Sources */,
