@@ -29,14 +29,12 @@ class CustomPDFManager {
     }
     
     func getSplitCase(filePath: String) -> Int? {
-        var caseNumber: Int?
-        
         // Case 0: 1 page
         // Case 1: Multiple page - no regex
         // Case 2: Multiple page - 1 regex
         let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
-        guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return caseNumber}
+        guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return nil}
         
         if pdfDocument.pageCount == 1 {
             return 0
@@ -55,7 +53,7 @@ class CustomPDFManager {
         return 2
     }
     
-    func splitPDFIntoSingle(filePath: String) {
+    func splitAndRenamePDF(filePath: String) {
         let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
         debugPrint("PDF file: \(pdfFileUrl)")
         guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return }
@@ -68,17 +66,15 @@ class CustomPDFManager {
             extractTextFromPDF(filePath: filePath)
         }
         else if splitCase == 1 {
-            
-            let originalFileName = pdfFileUrl.deletingPathExtension().lastPathComponent
-            
             let fileManager = FileManager.default
+            let originalFileName = pdfFileUrl.deletingPathExtension().lastPathComponent
             
             for i in 0..<pdfDocument.pageCount {
                 let newDoc = PDFDocument()
                 let page = pdfDocument.page(at: i)
                 newDoc.insert(page!, at: 0)
 
-                // Save to disk
+                // Save each pdf to disk
                 var newUrl = pdfFileUrl
                 if let refNumber = extractText2(content: (page?.string) ?? "") {
                     loggingDelegate?.updateLogInVC("\n- Referenznr number found: \(refNumber) ")

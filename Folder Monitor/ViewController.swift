@@ -511,36 +511,13 @@ class ViewController: NSViewController, NSWindowDelegate {
                     // Case 1: Multiple page - no regex
                     // Case 2: Multiple page - 1 regex
                     
-                    // TODO: - Remove original PDF for case 1.
-                    pdfManager.splitPDFIntoSingle(filePath: event.path)
-                    
-//                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
-//                        if pageCnt > 1 {
-//                            let splitCase = pdfManager.getSplitCase(filePath: event.path)
-//                            if  splitCase == 1 {
-//                                pdfManager.splitPDFIntoSingle(filePath: event.path)
-//                                do {
-//                                    try FileManager.default.removeItem(atPath: event.path)
-//                                }
-//                                catch {
-//                                    debugPrint("Remove original multi page PDF error \(error)")
-//                                }
-//                            }
-//                            else if splitCase == 2 {
-//                                self.extractTextFromPDF(filePath: event.path)
-//                            }
-//                        }
-//                        else {
-//                            self.extractTextFromPDF(filePath: event.path)
-//                        }
-//                    }
+                    pdfManager.splitAndRenamePDF(filePath: event.path)
                 }
                 
                 self.updateLog("\n")
             }
             
         }
-        
         filewatcher.start() // start monitoring
         
     }
@@ -550,17 +527,17 @@ class ViewController: NSViewController, NSWindowDelegate {
         changeStatus(status: .good, text: "Your folder is being monitor.", isFirst: false)
         let time = getTime()
         updateLog("\(time) - Monitor started.\n")
-
+        
         filewatcher2.queue = DispatchQueue.global()
         filewatcher2.callback = { event in
-//            let eventURL = URL(string: event.path)
+            //            let eventURL = URL(string: event.path)
             if !event.path.isPDF() { return }
             event.printEventType()
             print("event.path: \(event.path)")
             if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
                 return
             }
-            if event.fileCreated || event.fileRemoved || event.fileRenamed {
+            if event.fileCreated || event.fileRemoved{
                 self.updateLog("---\n")
                 self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
@@ -568,7 +545,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                 if event.fileRemoved {
                     self.updateLog("\(String(describing: fileName)) was deleted.\n")
                 }
-    //            print("event.flags:  \(event.flags)")
+                //            print("event.flags:  \(event.flags)")
                 // [2] create event
                 else if event.fileCreated || event.fileRenamed {
                     self.updateLog("\(String(describing: fileName)) was added.")
@@ -576,30 +553,79 @@ class ViewController: NSViewController, NSWindowDelegate {
                     // If PDF has more than 1 page, split
                     // Else extract text
                     let pdfManager = CustomPDFManager.shared
-                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
-                        if pageCnt > 1 {
-                            pdfManager.splitPDFIntoSingle(filePath: event.path)
-                            do {
-                                try FileManager.default.removeItem(atPath: event.path)
-                            }
-                            catch {
-                                debugPrint("Remove original multi page PDF error \(error)")
-                            }
-                        }
-                        else {
-                            self.extractTextFromPDF(filePath: event.path)
-                        }
-                    }
+                    pdfManager.loggingDelegate = self
+                    // Rewrite this logic. One receipt can contain multiple pages.
+                    
+                    // Case 0: 1 page
+                    // Case 1: Multiple page - no regex
+                    // Case 2: Multiple page - 1 regex
+                    
+                    pdfManager.splitAndRenamePDF(filePath: event.path)
                 }
-
+                
                 self.updateLog("\n")
             }
-
+            
         }
-
         filewatcher2.start() // start monitoring
 
     }
+    
+//    private func startMonitor2() {
+//        filewatcher2 = FileWatcher([NSString(string: folderPath2!.path).expandingTildeInPath])
+//        changeStatus(status: .good, text: "Your folder is being monitor.", isFirst: false)
+//        let time = getTime()
+//        updateLog("\(time) - Monitor started.\n")
+//
+//        filewatcher2.queue = DispatchQueue.global()
+//        filewatcher2.callback = { event in
+////            let eventURL = URL(string: event.path)
+//            if !event.path.isPDF() { return }
+//            event.printEventType()
+//            print("event.path: \(event.path)")
+//            if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
+//                return
+//            }
+//            if event.fileCreated || event.fileRemoved || event.fileRenamed {
+//                self.updateLog("---\n")
+//                self.updateLog(self.getTime() + "\n")
+//                let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
+//                // [1] delete event
+//                if event.fileRemoved {
+//                    self.updateLog("\(String(describing: fileName)) was deleted.\n")
+//                }
+//    //            print("event.flags:  \(event.flags)")
+//                // [2] create event
+//                else if event.fileCreated || event.fileRenamed {
+//                    self.updateLog("\(String(describing: fileName)) was added.")
+//
+//                    // If PDF has more than 1 page, split
+//                    // Else extract text
+//                    let pdfManager = CustomPDFManager.shared
+//                    if let pageCnt = pdfManager.getPDFPageCountFromPath(filePath: event.path) {
+//                        if pageCnt > 1 {
+//                            pdfManager.splitPDFIntoSingle(filePath: event.path)
+//                            do {
+//                                try FileManager.default.removeItem(atPath: event.path)
+//                            }
+//                            catch {
+//                                debugPrint("Remove original multi page PDF error \(error)")
+//                            }
+//                        }
+//                        else {
+//                            self.extractTextFromPDF(filePath: event.path)
+//                        }
+//                    }
+//                }
+//
+//                self.updateLog("\n")
+//            }
+//
+//        }
+//
+//        filewatcher2.start() // start monitoring
+//
+//    }
     private func stopMonitor() {
         let time = getTime()
         updateLog("\(time) - Monitor stopped.\n")
