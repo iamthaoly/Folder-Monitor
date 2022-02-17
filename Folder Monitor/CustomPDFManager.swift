@@ -81,7 +81,8 @@ class CustomPDFManager {
                 // Save to disk
                 var newUrl = pdfFileUrl
                 if let refNumber = extractText2(content: (page?.string) ?? "") {
-                    loggingDelegate?.updateLogInVC(" - Referenznr number found: \(refNumber) ")
+                    loggingDelegate?.updateLogInVC("\n- Referenznr number found: \(refNumber) ")
+                    newUrl = pdfFileUrl.deletingLastPathComponent().absoluteURL.appendingPathComponent(refNumber + ".pdf")
                     
                     var fileCount = 0
                     while fileManager.fileExists(atPath: newUrl.path) {
