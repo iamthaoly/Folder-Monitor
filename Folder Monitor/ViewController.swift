@@ -400,7 +400,9 @@ class ViewController: NSViewController, NSWindowDelegate {
         print("New URL: ", newURL)
         
         do {
+            try? fileManager.removeItem(at: newURL)
             try fileManager.moveItem(at: pdfPath, to: newURL)
+            
 //            updateLog("-> Rename \(oldFileName) to \(newFileName)")
         } catch _ as NSError {
             updateLog(" - Rename file error - ")
