@@ -299,7 +299,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
             
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-                printOperation.showsPrintPanel = false
+//                printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
@@ -400,9 +400,16 @@ class ViewController: NSViewController, NSWindowDelegate {
         print("New URL: ", newURL)
         
         do {
-            try? fileManager.removeItem(at: newURL)
-            try fileManager.moveItem(at: pdfPath, to: newURL)
             
+            if fileManager.fileExists(atPath: newURL.path) {
+                try? fileManager.removeItem(at: newURL)
+                try fileManager.moveItem(at: pdfPath, to: newURL)
+            }
+            else {
+                try fileManager.moveItem(at: pdfPath, to: newURL)
+
+            }
+
 //            updateLog("-> Rename \(oldFileName) to \(newFileName)")
         } catch _ as NSError {
             updateLog(" - Rename file error - ")
@@ -758,9 +765,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 extension ViewController: Logging {
     func updateLogInVC(_ text: String) {
         updateLog(text)
-        print("Hi Im logging protocol >:)")
     }
-    
     
 }
 
