@@ -299,7 +299,7 @@ class ViewController: NSViewController, NSWindowDelegate {
 
             
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-//                printOperation.showsPrintPanel = false
+                printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
@@ -497,7 +497,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
                 return
             }
-            if event.fileCreated || event.fileRemoved{
+            if event.fileCreated || event.fileRemoved || event.fileRenamed {
                 self.updateLog("---\n")
                 self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
@@ -546,7 +546,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             if event.fileRenamed && !FileManager.default.fileExists(atPath: event.path) {
                 return
             }
-            if event.fileCreated || event.fileRemoved{
+            if event.fileCreated || event.fileRemoved || event.fileRenamed {
                 self.updateLog("---\n")
                 self.updateLog(self.getTime() + "\n")
                 let fileName = ((URL(fileURLWithPath: event.path)).lastPathComponent)
