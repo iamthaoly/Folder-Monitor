@@ -23,6 +23,9 @@
 		086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
 		08994BA92672F65D0062C561 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08994BA82672F65D0062C561 /* Date+Extension.swift */; };
 		08E8964927410D4900CCD4DC /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8964827410D4900CCD4DC /* Enum.swift */; };
+		08F1CAC327FE8CC4002CB8E7 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F1CAC227FE8CC4002CB8E7 /* TestVC.swift */; };
+		08F1CAC427FE9323002CB8E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081418E42670457A00E8ABB8 /* ViewController.swift */; };
+		08FF6F6627FE977900B3E7E7 /* TestWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FF6F6527FE977900B3E7E7 /* TestWC.swift */; };
 		1BA6E728696DEC3A094DC671 /* libPods-Folder Monitor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EB40EDC94D90F56ADCA1E6 /* libPods-Folder Monitor.a */; };
 		4A61895CA2B034FBA79E673E /* libPods-Folder MonitorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3108533FFA9A0509A76495C6 /* libPods-Folder MonitorTests.a */; };
 		9E628BCB5AE15CC0AA27ADB7 /* libPods-Folder Monitor-Folder MonitorUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B974CE00609C2ABB6F952DCE /* libPods-Folder Monitor-Folder MonitorUITests.a */; };
@@ -70,6 +73,8 @@
 		086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Folder MonitorRelease.entitlements"; sourceTree = "<group>"; };
 		08994BA82672F65D0062C561 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		08E8964827410D4900CCD4DC /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		08F1CAC227FE8CC4002CB8E7 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
+		08FF6F6527FE977900B3E7E7 /* TestWC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWC.swift; sourceTree = "<group>"; };
 		185E2A1B8564A72A89C98472 /* Pods-Folder MonitorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Folder MonitorTests.debug.xcconfig"; path = "Target Support Files/Pods-Folder MonitorTests/Pods-Folder MonitorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3108533FFA9A0509A76495C6 /* libPods-Folder MonitorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Folder MonitorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62F1392DEEEDE78F51F51F95 /* Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; path = "Target Support Files/Pods-Folder Monitor-Folder MonitorUITests/Pods-Folder Monitor-Folder MonitorUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +172,8 @@
 				086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */,
 				081418EC2670457F00E8ABB8 /* Folder_Monitor.entitlements */,
 				08E8964827410D4900CCD4DC /* Enum.swift */,
+				08F1CAC227FE8CC4002CB8E7 /* TestVC.swift */,
+				08FF6F6527FE977900B3E7E7 /* TestWC.swift */,
 			);
 			path = "Folder Monitor";
 			sourceTree = "<group>";
@@ -440,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				085552AC273FFEBE00ED3E06 /* String+Extension.swift in Sources */,
+				08FF6F6627FE977900B3E7E7 /* TestWC.swift in Sources */,
 				080C1F24271B3B0500EB43DB /* NSButton+Extension.swift in Sources */,
 				081418E52670457A00E8ABB8 /* ViewController.swift in Sources */,
 				080C1F21271B3AC900EB43DB /* FileWatcherEvent+Extension.swift in Sources */,
@@ -448,6 +456,7 @@
 				08E8964927410D4900CCD4DC /* Enum.swift in Sources */,
 				08994BA92672F65D0062C561 /* Date+Extension.swift in Sources */,
 				085552AA273FFD7D00ED3E06 /* FolderWatcher.swift in Sources */,
+				08F1CAC327FE8CC4002CB8E7 /* TestVC.swift in Sources */,
 				081418E32670457A00E8ABB8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F1CAC427FE9323002CB8E7 /* ViewController.swift in Sources */,
 				081419012670458000E8ABB8 /* FolderMonitorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

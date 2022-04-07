@@ -45,6 +45,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - VAR
     
+    var settingsWC: NSWindowController?
+    
     var folderPath: URL? {
         didSet {
             // Save folder access permission to bookmark
@@ -104,17 +106,30 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - ACTIONS
     @IBAction func startPrinting(_ sender: Any) {
-        let pdfName = txtPrint.stringValue
+        // Open new view controller
+//        let testVC = storyboard?.instantiateController(withIdentifier: "testvc") as! NSViewController
+//        self.view.window?.contentViewController = testVC
+
+        // Open new window controller.
+//        settingsWC = TestWC()
+//        settingsWC?.window?.display()
         
-        let fileManager = FileManager.default
-        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
-        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(pdfName + ".pdf")
-        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
-            showNotExistAlert()
-            return
-        }
-        printPDF(name: pdfName, isFirst: true)
-        printPDF(name: pdfName, isFirst: false)
+        let myVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "testwc") as! NSWindowController
+        myVC.showWindow(self)
+        
+        
+        
+//        let pdfName = txtPrint.stringValue
+//
+//        let fileManager = FileManager.default
+//        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+//        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+//        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
+//            showNotExistAlert()
+//            return
+//        }
+//        printPDF(name: pdfName, isFirst: true)
+//        printPDF(name: pdfName, isFirst: false)
     }
     
     @IBAction func getPrintInfoEvent(_ sender: Any) {
