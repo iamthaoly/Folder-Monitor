@@ -20,6 +20,7 @@
 		0826E20D27A3F0320051DFE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826E20C27A3F0320051DFE2 /* Utils.swift */; };
 		085552AA273FFD7D00ED3E06 /* FolderWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085552A9273FFD7D00ED3E06 /* FolderWatcher.swift */; };
 		085552AC273FFEBE00ED3E06 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085552AB273FFEBE00ED3E06 /* String+Extension.swift */; };
+		085978E827FFE7A300C9F96C /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085978E727FFE7A300C9F96C /* SettingsVC.swift */; };
 		086C0B1626739C3D0009A3E7 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 081419112670511E00E8ABB8 /* PDFKit.framework */; };
 		08994BA92672F65D0062C561 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08994BA82672F65D0062C561 /* Date+Extension.swift */; };
 		08E8964927410D4900CCD4DC /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8964827410D4900CCD4DC /* Enum.swift */; };
@@ -70,6 +71,7 @@
 		0826E20C27A3F0320051DFE2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		085552A9273FFD7D00ED3E06 /* FolderWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderWatcher.swift; sourceTree = "<group>"; };
 		085552AB273FFEBE00ED3E06 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		085978E727FFE7A300C9F96C /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		086C0B1926739EEB0009A3E7 /* Folder MonitorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Folder MonitorRelease.entitlements"; sourceTree = "<group>"; };
 		08994BA82672F65D0062C561 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		08E8964827410D4900CCD4DC /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				081418EC2670457F00E8ABB8 /* Folder_Monitor.entitlements */,
 				08E8964827410D4900CCD4DC /* Enum.swift */,
 				08F1CAC227FE8CC4002CB8E7 /* TestVC.swift */,
+				085978E727FFE7A300C9F96C /* SettingsVC.swift */,
 				08FF6F6527FE977900B3E7E7 /* TestWC.swift */,
 			);
 			path = "Folder Monitor";
@@ -446,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				085978E827FFE7A300C9F96C /* SettingsVC.swift in Sources */,
 				085552AC273FFEBE00ED3E06 /* String+Extension.swift in Sources */,
 				08FF6F6627FE977900B3E7E7 /* TestWC.swift in Sources */,
 				080C1F24271B3B0500EB43DB /* NSButton+Extension.swift in Sources */,

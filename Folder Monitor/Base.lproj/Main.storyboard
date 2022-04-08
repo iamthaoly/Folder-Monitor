@@ -1025,10 +1025,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="626" y="282"/>
         </scene>
-        <!--View Controller-->
+        <!--SettingsVC-->
         <scene sceneID="eBd-ay-wW5">
             <objects>
-                <viewController id="h3R-1k-0Sp" sceneMemberID="viewController">
+                <viewController id="h3R-1k-0Sp" customClass="SettingsVC" customModule="Folder_Monitor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="oBR-Gq-Z6U">
                         <rect key="frame" x="0.0" y="0.0" width="537" height="270"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES"/>
