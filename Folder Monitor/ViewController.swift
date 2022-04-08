@@ -39,6 +39,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var btnPrint: NSButton!
     @IBOutlet weak var txtPrint: NSTextField!
     
+    @IBOutlet weak var btnSettings: NSButton!
     // MARK: - CONSTANTS
     let LABEL_PRINTER_NAME = "Brother QL-1110NWB"
     let LASEL_PRINTER_NAME = "Brother HL-L5100DN series [3c2af40cd627]"
@@ -105,7 +106,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     // MARK: - ACTIONS
-    @IBAction func startPrinting(_ sender: Any) {
+    
+    @IBAction func openSettings(_ sender: Any) {
         // Open new view controller
 //        let testVC = storyboard?.instantiateController(withIdentifier: "testvc") as! NSViewController
 //        self.view.window?.contentViewController = testVC
@@ -116,20 +118,20 @@ class ViewController: NSViewController, NSWindowDelegate {
         
         let myVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "testwc") as! NSWindowController
         myVC.showWindow(self)
-        
-        
-        
-//        let pdfName = txtPrint.stringValue
-//
-//        let fileManager = FileManager.default
-//        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
-//        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(pdfName + ".pdf")
-//        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
-//            showNotExistAlert()
-//            return
-//        }
-//        printPDF(name: pdfName, isFirst: true)
-//        printPDF(name: pdfName, isFirst: false)
+    }
+    
+    @IBAction func startPrinting(_ sender: Any) {
+        let pdfName = txtPrint.stringValue
+
+        let fileManager = FileManager.default
+        let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+        let tempPath2 = URL.init(fileURLWithPath: folderPath2?.path ?? "").appendingPathComponent(pdfName + ".pdf")
+        if !fileManager.fileExists(atPath: tempPath1.path) && !fileManager.fileExists(atPath: tempPath2.path) {
+            showNotExistAlert()
+            return
+        }
+        printPDF(name: pdfName, isFirst: true)
+        printPDF(name: pdfName, isFirst: false)
     }
     
     @IBAction func getPrintInfoEvent(_ sender: Any) {
