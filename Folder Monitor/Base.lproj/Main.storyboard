@@ -1065,7 +1065,7 @@ DQ
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" contentType="username" translatesAutoresizingMaskIntoConstraints="NO" id="jY9-rc-YUz">
+                                                                <textField verticalHuggingPriority="750" textCompletion="NO" contentType="username" translatesAutoresizingMaskIntoConstraints="NO" id="jY9-rc-YUz">
                                                                     <rect key="frame" x="69" y="0.0" width="362" height="21"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Y87-Z4-Jvy">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1094,7 +1094,7 @@ DQ
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" contentType="password" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-Mt-YTW">
+                                                                <textField verticalHuggingPriority="750" textCompletion="NO" contentType="password" translatesAutoresizingMaskIntoConstraints="NO" id="W8t-Mt-YTW" customClass="NSSecureTextField">
                                                                     <rect key="frame" x="69" y="0.0" width="362" height="21"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Kd3-st-al4">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1123,7 +1123,7 @@ DQ
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rim-iO-dqS">
+                                                                <textField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rim-iO-dqS">
                                                                     <rect key="frame" x="69" y="0.0" width="362" height="21"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Jug-gF-Xy5">
                                                                         <font key="font" usesAppearanceFont="YES"/>
@@ -1227,10 +1227,10 @@ DQ
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="edtAPIKey" destination="PgX-Qo-Vyd" id="Z41-fZ-tlK"/>
+                        <outlet property="edtAPIKey" destination="rim-iO-dqS" id="0IN-qS-cI5"/>
                         <outlet property="edtPassword" destination="W8t-Mt-YTW" id="fCA-Jj-mNo"/>
-                        <outlet property="edtUsername" destination="W8t-Mt-YTW" id="cdo-Er-4f5"/>
-                        <outlet property="txtStatus" destination="PgX-Qo-Vyd" id="cFk-CW-oMD"/>
+                        <outlet property="edtUsername" destination="jY9-rc-YUz" id="Jdx-cU-FPS"/>
+                        <outlet property="txtStatus" destination="PgX-Qo-Vyd" id="R1Y-vy-lO7"/>
                     </connections>
                 </viewController>
                 <customObject id="ZGn-gd-0Qy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

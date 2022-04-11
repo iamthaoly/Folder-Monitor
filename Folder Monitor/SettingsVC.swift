@@ -12,8 +12,8 @@ import Alamofire
 class SettingsVC: NSViewController {
 
     // MARK: - OUTLETS
-    @IBOutlet weak var edtUsername: NSTextField!
     @IBOutlet weak var edtPassword: NSTextField!
+    @IBOutlet weak var edtUsername: NSTextField!
     @IBOutlet weak var edtAPIKey: NSTextField!
     
     @IBOutlet weak var txtStatus: NSTextField!
@@ -31,6 +31,13 @@ class SettingsVC: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         print("This is setting view controller.")
+        
+        if loadAPI() == true {
+            edtUsername.stringValue = username ?? ""
+            edtPassword.stringValue = password ?? ""
+            edtAPIKey.stringValue = apiKey ?? ""
+        }
+        
     }
     
     
@@ -38,18 +45,20 @@ class SettingsVC: NSViewController {
         if edtUsername.stringValue == "" || edtPassword.stringValue == "" || edtAPIKey.stringValue == "" {
             // Display alert. Please fill all the fields.
             
+            return
         }
         UserDefaults.standard.set(edtUsername.stringValue, forKey: API_USERNAME_FIELD)
         UserDefaults.standard.set(edtPassword.stringValue, forKey: API_PASSWORD_FIELD)
         UserDefaults.standard.set(edtAPIKey.stringValue, forKey: API_KEY_FIELD)
-        
+        txtStatus.stringValue = "Save successfully!"
     }
     
     @IBAction func testAPI(_ sender: Any) {
         if loadAPI() == true {
             
         }
-
+        // Notice the user
+        // No API information had been saved. Please save first.
     }
     
     private func loadAPI() -> Bool{
@@ -63,8 +72,6 @@ class SettingsVC: NSViewController {
             return true
         }
         else {
-            // Notice the user
-            // No API information had been saved. Please save first.
             return false
         }
     }
