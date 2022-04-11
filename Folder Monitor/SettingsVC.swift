@@ -17,6 +17,9 @@ class SettingsVC: NSViewController {
     @IBOutlet weak var edtAPIKey: NSTextField!
     
     @IBOutlet weak var txtStatus: NSTextField!
+    
+    
+    @IBOutlet weak var btnTestAPI: NSButton!
     // MARK: - CONSTANTS
     let API_USERNAME_FIELD = "apiUsername"
     let API_PASSWORD_FIELD = "apiPassword"
@@ -55,10 +58,39 @@ class SettingsVC: NSViewController {
     
     @IBAction func testAPI(_ sender: Any) {
         if loadAPI() == true {
+            btnTestAPI.isEnabled = false
+            let api = "https://api.billbee.io/api/v1/shipment/ping"
             
+            var headers: HTTPHeaders = [
+                        .authorization(username: username!, password: password!)
+                    ]
+            headers.add(name: "X-Billbee-Api-Key", value: apiKey!)
+//            let headers2: HTTPHeaders = ["api": "abc", "apiiii": "nosuch"]
+            
+            AF.request(api, method: .get ,headers: headers).responseJSON { result in
+                debugPrint(result)
+                DispatchQueue.main.async {
+                    self.btnTestAPI.isEnabled = true
+                }
+                
+                if (result.response != nil) {
+                    let httpCode: Int = result.response!.statusCode
+                    DispatchQueue.main.async {
+                        let status = "Status: \(httpCode). Authentication " + (httpCode == 200 ? "successfully!" : "failed!")
+                        self.txtStatus.stringValue = status
+                        self.txtStatus.textColor = httpCode == 200 ? .green : .red
+//                            self.txtStatus.stringValue = "Status: \(httpCode). Authentication successfully!"
+                    }
+                }
+                else {
+                    
+                }
+
+            }
         }
         // Notice the user
         // No API information had been saved. Please save first.
+        
     }
     
     private func loadAPI() -> Bool{

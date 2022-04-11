@@ -1227,6 +1227,7 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnTestAPI" destination="sB1-xo-FLC" id="M7e-zx-oFk"/>
                         <outlet property="edtAPIKey" destination="rim-iO-dqS" id="0IN-qS-cI5"/>
                         <outlet property="edtPassword" destination="W8t-Mt-YTW" id="fCA-Jj-mNo"/>
                         <outlet property="edtUsername" destination="jY9-rc-YUz" id="Jdx-cU-FPS"/>
