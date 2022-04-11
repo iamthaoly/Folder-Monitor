@@ -1172,6 +1172,9 @@ DQ
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="saveAPISetting:" target="h3R-1k-0Sp" id="gZh-YB-e5b"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sB1-xo-FLC">
                                                             <rect key="frame" x="63" y="-7" width="84" height="32"/>
@@ -1179,6 +1182,9 @@ DQ
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="testAPI:" target="h3R-1k-0Sp" id="0B6-2k-j3W"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1220,6 +1226,12 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="Bzw-wA-k6a" secondAttribute="trailing" constant="20" symbolic="YES" id="qko-6n-ajF"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="edtAPIKey" destination="PgX-Qo-Vyd" id="Z41-fZ-tlK"/>
+                        <outlet property="edtPassword" destination="W8t-Mt-YTW" id="fCA-Jj-mNo"/>
+                        <outlet property="edtUsername" destination="W8t-Mt-YTW" id="cdo-Er-4f5"/>
+                        <outlet property="txtStatus" destination="PgX-Qo-Vyd" id="cFk-CW-oMD"/>
+                    </connections>
                 </viewController>
                 <customObject id="ZGn-gd-0Qy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,6 +8,7 @@ target 'Folder Monitor' do
   # Pods for Folder Monitor
   pod 'FileWatcher'
   pod 'SwiftLint'
+  pod 'Alamofire', '~> 5.4.3'
   
   target 'Folder MonitorTests' do
     inherit! :search_paths
