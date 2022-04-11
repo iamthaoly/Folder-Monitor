@@ -18,7 +18,6 @@ class SettingsVC: NSViewController {
     
     @IBOutlet weak var txtStatus: NSTextField!
     
-    
     @IBOutlet weak var btnTestAPI: NSButton!
     // MARK: - CONSTANTS
     let API_USERNAME_FIELD = "apiUsername"
@@ -26,19 +25,20 @@ class SettingsVC: NSViewController {
     let API_KEY_FIELD = "apiKey"
     
     // MARK: - VARS
-    var username: String?
-    var password: String?
-    var apiKey: String?
+//    var username: String?
+//    var password: String?
+//    var apiKey: String?
+    let apiManager = BillbeeAPIManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
         print("This is setting view controller.")
         
-        if loadAPI() == true {
-            edtUsername.stringValue = username ?? ""
-            edtPassword.stringValue = password ?? ""
-            edtAPIKey.stringValue = apiKey ?? ""
+        if apiManager.checkNil() == false {
+            edtUsername.stringValue = apiManager.username ?? ""
+            edtPassword.stringValue = apiManager.password ?? ""
+            edtAPIKey.stringValue = apiManager.apiKey ?? ""
         }
         
     }
@@ -47,24 +47,25 @@ class SettingsVC: NSViewController {
     @IBAction func saveAPISetting(_ sender: Any) {
         if edtUsername.stringValue == "" || edtPassword.stringValue == "" || edtAPIKey.stringValue == "" {
             // Display alert. Please fill all the fields.
-            
+            Utils.displayAlert(title: "Warning", text: "Please fill all the fields.")
             return
         }
-        UserDefaults.standard.set(edtUsername.stringValue, forKey: API_USERNAME_FIELD)
-        UserDefaults.standard.set(edtPassword.stringValue, forKey: API_PASSWORD_FIELD)
-        UserDefaults.standard.set(edtAPIKey.stringValue, forKey: API_KEY_FIELD)
+        apiManager.saveAPI()
+//        UserDefaults.standard.set(edtUsername.stringValue, forKey: API_USERNAME_FIELD)
+//        UserDefaults.standard.set(edtPassword.stringValue, forKey: API_PASSWORD_FIELD)
+//        UserDefaults.standard.set(edtAPIKey.stringValue, forKey: API_KEY_FIELD)
         txtStatus.stringValue = "Save successfully!"
     }
     
     @IBAction func testAPI(_ sender: Any) {
-        if loadAPI() == true {
+        if apiManager.checkNil() == false {
             btnTestAPI.isEnabled = false
             let api = "https://api.billbee.io/api/v1/shipment/ping"
             
             var headers: HTTPHeaders = [
-                        .authorization(username: username!, password: password!)
+                .authorization(username: apiManager.username!, password: apiManager.password!)
                     ]
-            headers.add(name: "X-Billbee-Api-Key", value: apiKey!)
+            headers.add(name: "X-Billbee-Api-Key", value: apiManager.apiKey!)
 //            let headers2: HTTPHeaders = ["api": "abc", "apiiii": "nosuch"]
             
             AF.request(api, method: .get ,headers: headers).responseJSON { result in
@@ -93,18 +94,18 @@ class SettingsVC: NSViewController {
         
     }
     
-    private func loadAPI() -> Bool{
-        if let username = UserDefaults.standard.string(forKey: API_USERNAME_FIELD),
-           let password = UserDefaults.standard.string(forKey: API_PASSWORD_FIELD),
-           let apiKey = UserDefaults.standard.string(forKey: API_KEY_FIELD)
-           {
-            self.username = username
-            self.password = password
-            self.apiKey = apiKey
-            return true
-        }
-        else {
-            return false
-        }
-    }
+//    private func loadAPI() -> Bool{
+//        if let username = UserDefaults.standard.string(forKey: API_USERNAME_FIELD),
+//           let password = UserDefaults.standard.string(forKey: API_PASSWORD_FIELD),
+//           let apiKey = UserDefaults.standard.string(forKey: API_KEY_FIELD)
+//           {
+//            self.username = username
+//            self.password = password
+//            self.apiKey = apiKey
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
 }

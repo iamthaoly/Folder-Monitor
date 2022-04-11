@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 class Utils {
     static func matches(for regex: String, in text: String) -> [String] {
@@ -21,6 +22,16 @@ class Utils {
             print("invalid regex: \(error.localizedDescription)")
             return []
         }
+    }
+    static func displayAlert(title: String, text: String) {
+        let alert = NSAlert()
+//        alert.icon = NSImage(named: "ic_dice")
+        alert.messageText = title
+        alert.informativeText = text
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+        
     }
 }
 

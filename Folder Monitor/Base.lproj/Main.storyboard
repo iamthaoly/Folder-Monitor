@@ -989,6 +989,7 @@ DQ
                         <outlet property="btnMonitor2" destination="LzS-aI-c8R" id="saz-gY-8FV"/>
                         <outlet property="btnPrint" destination="Nc4-xm-iyB" id="65F-5t-CZA"/>
                         <outlet property="btnSettings" destination="jtT-zv-0AY" id="Jx5-d2-7FZ"/>
+                        <outlet property="chkSendRequest" destination="Eqa-V9-3xf" id="CXs-IH-w8J"/>
                         <outlet property="edtFolderPath2" destination="90v-Vt-oBd" id="gTj-yI-HRn"/>
                         <outlet property="imvStatus" destination="7kM-6n-2BJ" id="PGO-pt-vwe"/>
                         <outlet property="imvStatus2" destination="EkR-Pn-JtU" id="gSH-x0-DDm"/>

@@ -10,6 +10,7 @@ import Cocoa
 import PDFKit
 import FileWatcher
 import Foundation
+import Alamofire
 
 protocol Logging: class {
     func updateLogInVC(_ text: String)
@@ -34,7 +35,9 @@ class ViewController: NSViewController, NSWindowDelegate {
     @IBOutlet weak var imvStatus2: NSImageView!
     
     @IBOutlet weak var scrollView: NSScrollView!
-
+    
+    @IBOutlet weak var chkSendRequest: NSButton!
+    
     // Print layout
     @IBOutlet weak var btnPrint: NSButton!
     @IBOutlet weak var txtPrint: NSTextField!
@@ -311,10 +314,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             // New way
             let printInfo = getNSPrintInfo(pdfPageSize: size, isFirst: isFirst)
             
-            
             // Debug printer info
-
-            
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
                 printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
@@ -327,9 +327,17 @@ class ViewController: NSViewController, NSWindowDelegate {
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
+                    if chkSendRequest.state == .on {
+                        sendAPIRequest()
+                    }
+                    
                 }
             }
         }
+        
+    }
+    
+    private func sendAPIRequest() {
         
     }
     
