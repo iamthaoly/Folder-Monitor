@@ -48,6 +48,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     let LASEL_PRINTER_NAME = "Brother HL-L5100DN series [3c2af40cd627]"
     
     // MARK: - VAR
+    let apiManager = BillbeeAPIManager()
     
     var settingsWC: NSWindowController?
     
@@ -328,7 +329,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
                     if chkSendRequest.state == .on {
-                        sendAPIRequest()
+                        sendShipmentAPIRequest(orderNumber: name)
                     }
                     
                 }
@@ -337,8 +338,13 @@ class ViewController: NSViewController, NSWindowDelegate {
         
     }
     
-    private func sendAPIRequest() {
-        
+    private func sendShipmentAPIRequest(orderNumber: String) {
+        if apiManager.checkNil() == false {
+            let success = apiManager.sendShipmentRequest(orderNumber: orderNumber)
+        }
+        else {
+            updateLog("\n Failed to send API request. Account information not found.\n")
+        }
     }
     
     private func getNSPrintInfo(pdfPageSize: CGSize, isFirst: Bool = true) -> NSPrintInfo {

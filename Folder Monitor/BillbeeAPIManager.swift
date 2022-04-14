@@ -56,24 +56,43 @@ class BillbeeAPIManager {
     }
     
     func sendShipmentRequest(orderNumber: String) -> Bool{
+        var isRequestSuccessful = false
+
         if checkNil() == false {
             let api = API_BASE_URL + "/orders/" + orderNumber
             var headers: HTTPHeaders = [
                 .authorization(username: username!, password: password!)
                     ]
             headers.add(name: "X-Billbee-Api-Key", value: apiKey!)
+            
             let body = """
                 {
                   "NewStateId": 4
                 }
                 """
+            let body2: [String: Any] = [
+                "NewStateId": 4
+            ]
             
-            AF.request(api, method: .put, headers: headers).responseJSON { result in
-                debugPrint(result)
+            AF.request(api, method: .put, parameters: body2, encoding: JSONEncoding.default, headers: headers).responseJSON { result in
+                print("Shipment request:")
+                print(result.request)
+                print("---")
+                print("Shipment response:")
+                debugPrint(result.response)
                 
+                switch result.result {
+                    case .success:
+                        print("Request success!")
+                        isRequestSuccessful = true
+                        
+                    case .failure:
+                        print("Request fail!")
+                        isRequestSuccessful = false
+                    }
             }
         }
         
-        return false
+        return isRequestSuccessful
     }
 }
