@@ -21,6 +21,9 @@ class BillbeeAPIManager {
     var password: String?
     var apiKey: String?
     
+    weak var loggingDelegate: Logging?
+
+    
     init() {
         if loadAPI() {
             print("API SETTINGS LOADED!")
@@ -55,7 +58,9 @@ class BillbeeAPIManager {
         return username == nil || password == nil || apiKey == nil
     }
     
-    func sendShipmentRequest(orderNumber: String) -> Bool{
+    func sendShipmentRequest(orderNumber: String){
+        Utils.displayAlert(title: "Alert", text: "Test shipment request.")
+        return
         var isRequestSuccessful = false
 
         if checkNil() == false {
@@ -65,11 +70,12 @@ class BillbeeAPIManager {
                     ]
             headers.add(name: "X-Billbee-Api-Key", value: apiKey!)
             
-            let body = """
-                {
-                  "NewStateId": 4
-                }
-                """
+//            let body = """
+//                {
+//                  "NewStateId": 4
+//                }
+//                """
+            
             let body2: [String: Any] = [
                 "NewStateId": 4
             ]
@@ -83,16 +89,18 @@ class BillbeeAPIManager {
                 
                 switch result.result {
                     case .success:
+                        self.loggingDelegate?.updateLogInVC("")
                         print("Request success!")
                         isRequestSuccessful = true
                         
                     case .failure:
+                        self.loggingDelegate?.updateLogInVC("")
                         print("Request fail!")
                         isRequestSuccessful = false
                     }
             }
         }
         
-        return isRequestSuccessful
+//        return isRequestSuccessful
     }
 }

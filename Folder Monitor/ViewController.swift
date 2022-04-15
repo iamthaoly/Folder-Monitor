@@ -124,7 +124,12 @@ class ViewController: NSViewController, NSWindowDelegate {
         myVC.showWindow(self)
     }
     
-    @IBAction func startPrinting(_ sender: Any) {
+    @IBAction func startPrinting(_ sender: Any)
+    {
+        // Test
+        sendShipmentAPIRequest(orderNumber: "abc")
+        return
+        
         let pdfName = txtPrint.stringValue
 
         let fileManager = FileManager.default
@@ -340,7 +345,14 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     private func sendShipmentAPIRequest(orderNumber: String) {
         if apiManager.checkNil() == false {
-            let success = apiManager.sendShipmentRequest(orderNumber: orderNumber)
+            apiManager.sendShipmentRequest(orderNumber: "abcxyz")
+//            let success = apiManager.sendShipmentRequest(orderNumber: orderNumber)
+//            if success {
+//
+//            }
+//            else {
+//                updateLog("\n Failed to send API request. ")
+//            }
         }
         else {
             updateLog("\n Failed to send API request. Account information not found.\n")
