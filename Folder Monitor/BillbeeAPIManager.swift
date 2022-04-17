@@ -58,10 +58,9 @@ class BillbeeAPIManager {
         return username == nil || password == nil || apiKey == nil
     }
     
-    func sendShipmentRequest(orderNumber: String){
-        Utils.displayAlert(title: "Alert", text: "Test shipment request.")
-        return
-        var isRequestSuccessful = false
+    func sendShipmentRequest(orderNumber: String, completion: (() -> ())?){
+        
+//        var isRequestSuccessful = false
 
         if checkNil() == false {
             let api = API_BASE_URL + "/orders/" + orderNumber
@@ -81,23 +80,30 @@ class BillbeeAPIManager {
             ]
             
             AF.request(api, method: .put, parameters: body2, encoding: JSONEncoding.default, headers: headers).responseJSON { result in
-                print("Shipment request:")
-                print(result.request)
-                print("---")
-                print("Shipment response:")
-                debugPrint(result.response)
+//                print("Shipment request:")
+//                debugPrint(result.request)
+//                print("---")
+//                print("Shipment response:")
+//                debugPrint(result.response)
+                debugPrint(result)
+                let httpCode: Int = result.response!.statusCode
+                
+                self.loggingDelegate?.updateLogInVC(" - \(result.request!.url) - Status code: \(httpCode)")
                 
                 switch result.result {
                     case .success:
-                        self.loggingDelegate?.updateLogInVC("")
+                        self.loggingDelegate?.updateLogInVC(" - Successful!\n")
                         print("Request success!")
-                        isRequestSuccessful = true
+//                        isRequestSuccessful = true
                         
-                    case .failure:
-                        self.loggingDelegate?.updateLogInVC("")
+                    case .failure(let error):
+//                        print(error)
+//                        print(result.response?.statusCode)
+                        self.loggingDelegate?.updateLogInVC(" - Failed!\n")
                         print("Request fail!")
-                        isRequestSuccessful = false
+//                        isRequestSuccessful = false
                     }
+                completion?()
             }
         }
         

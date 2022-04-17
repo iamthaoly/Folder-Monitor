@@ -93,6 +93,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     // MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        apiManager.loggingDelegate = self
 
         setupUI()
 //        printPDF(name: "123-498-000")
@@ -126,11 +127,14 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     @IBAction func startPrinting(_ sender: Any)
     {
-        // Test
-        sendShipmentAPIRequest(orderNumber: "abc")
-        return
-        
         let pdfName = txtPrint.stringValue
+        
+        // Remove hyphenate
+        let orderNumberFromPDF = pdfName.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
+        print("order number: ", orderNumberFromPDF)
+        
+        sendShipmentAPIRequest(orderNumber: orderNumberFromPDF)
+        return
 
         let fileManager = FileManager.default
         let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
@@ -334,6 +338,7 @@ class ViewController: NSViewController, NSWindowDelegate {
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
                     if chkSendRequest.state == .on {
+    
                         sendShipmentAPIRequest(orderNumber: name)
                     }
                     
@@ -344,18 +349,20 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     private func sendShipmentAPIRequest(orderNumber: String) {
+        btnPrint.isEnabled = false
         if apiManager.checkNil() == false {
-            apiManager.sendShipmentRequest(orderNumber: "abcxyz")
-//            let success = apiManager.sendShipmentRequest(orderNumber: orderNumber)
-//            if success {
-//
-//            }
-//            else {
-//                updateLog("\n Failed to send API request. ")
-//            }
+            let realOrderNumber = orderNumber.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
+            print("Order number: ", realOrderNumber)
+            updateLog("\n- Send API request for \(orderNumber)")
+            
+            apiManager.sendShipmentRequest(orderNumber: realOrderNumber, completion: ({
+                // Main thread
+                print("Request sent.")
+                self.btnPrint.isEnabled = true
+            }))
         }
         else {
-            updateLog("\n Failed to send API request. Account information not found.\n")
+            Utils.displayAlert(title: "Warning", text: "Cannot send API request. Account information not found.")
         }
     }
     
@@ -809,7 +816,6 @@ extension ViewController: Logging {
     func updateLogInVC(_ text: String) {
         updateLog(text)
     }
-    
 }
 
 // MARK: - HELPER
