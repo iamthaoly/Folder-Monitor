@@ -48,10 +48,10 @@ class BillbeeAPIManager {
         }
     }
     
-    func saveAPI() {
+    func saveAPI(username: String, password: String, key: String) {
         UserDefaults.standard.set(username, forKey: API_USERNAME_FIELD)
         UserDefaults.standard.set(password, forKey: API_PASSWORD_FIELD)
-        UserDefaults.standard.set(apiKey, forKey: API_KEY_FIELD)
+        UserDefaults.standard.set(key, forKey: API_KEY_FIELD)
     }
     
     func checkNil() -> Bool {

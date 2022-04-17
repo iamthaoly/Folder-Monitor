@@ -12,7 +12,7 @@ class TestWC: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        debugPrint("Test new window controller.")
+//        debugPrint("Test new window controller.")
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
 

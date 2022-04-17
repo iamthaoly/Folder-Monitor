@@ -33,7 +33,7 @@ class SettingsVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        print("This is setting view controller.")
+//        print("This is setting view controller.")
         
         if apiManager.checkNil() == false {
             edtUsername.stringValue = apiManager.username ?? ""
@@ -50,7 +50,7 @@ class SettingsVC: NSViewController {
             Utils.displayAlert(title: "Warning", text: "Please fill all the fields.")
             return
         }
-        apiManager.saveAPI()
+        apiManager.saveAPI(username: edtUsername.stringValue, password: edtPassword.stringValue, key: edtAPIKey.stringValue)
 //        UserDefaults.standard.set(edtUsername.stringValue, forKey: API_USERNAME_FIELD)
 //        UserDefaults.standard.set(edtPassword.stringValue, forKey: API_PASSWORD_FIELD)
 //        UserDefaults.standard.set(edtAPIKey.stringValue, forKey: API_KEY_FIELD)
@@ -88,6 +88,9 @@ class SettingsVC: NSViewController {
                 }
 
             }
+        }
+        else {
+            Utils.displayAlert(title: "Warning", text: "Please fill in your account information and save it first.")
         }
         // Notice the user
         // No API information had been saved. Please save first.

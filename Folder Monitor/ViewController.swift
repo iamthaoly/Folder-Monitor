@@ -130,10 +130,10 @@ class ViewController: NSViewController, NSWindowDelegate {
         let pdfName = txtPrint.stringValue
         
         // Remove hyphenate
-        let orderNumberFromPDF = pdfName.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
-        print("order number: ", orderNumberFromPDF)
+//        let orderNumberFromPDF = pdfName.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
+//        print("order number: ", orderNumberFromPDF)
         
-        sendShipmentAPIRequest(orderNumber: orderNumberFromPDF)
+        sendShipmentAPIRequest(orderNumber: pdfName)
         return
 
         let fileManager = FileManager.default
@@ -349,11 +349,13 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     private func sendShipmentAPIRequest(orderNumber: String) {
-        btnPrint.isEnabled = false
         if apiManager.checkNil() == false {
+            btnPrint.isEnabled = false
             let realOrderNumber = orderNumber.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
             print("Order number: ", realOrderNumber)
-            updateLog("\n- Send API request for \(orderNumber)")
+            self.updateLog("---\n")
+            self.updateLog(self.getTime() + "\n")
+            updateLog("Send API request for \(orderNumber)")
             
             apiManager.sendShipmentRequest(orderNumber: realOrderNumber, completion: ({
                 // Main thread
@@ -362,7 +364,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             }))
         }
         else {
-            Utils.displayAlert(title: "Warning", text: "Cannot send API request. Account information not found.")
+            Utils.displayAlert(title: "Warning", text: "Cannot send API request. Account information not found. Please check the settings.")
         }
     }
     
