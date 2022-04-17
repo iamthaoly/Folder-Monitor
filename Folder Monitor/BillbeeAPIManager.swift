@@ -15,7 +15,7 @@ class BillbeeAPIManager {
     let API_PASSWORD_FIELD = "apiPassword"
     let API_KEY_FIELD = "apiKey"
     let API_BASE_URL = "https://api.billbee.io/api/v1"
-
+    
     // MARK: - VARIABLES
     var username: String?
     var password: String?
@@ -37,7 +37,7 @@ class BillbeeAPIManager {
         if let username = UserDefaults.standard.string(forKey: API_USERNAME_FIELD),
            let password = UserDefaults.standard.string(forKey: API_PASSWORD_FIELD),
            let apiKey = UserDefaults.standard.string(forKey: API_KEY_FIELD)
-           {
+        {
             self.username = username
             self.password = password
             self.apiKey = apiKey
@@ -52,6 +52,8 @@ class BillbeeAPIManager {
         UserDefaults.standard.set(username, forKey: API_USERNAME_FIELD)
         UserDefaults.standard.set(password, forKey: API_PASSWORD_FIELD)
         UserDefaults.standard.set(key, forKey: API_KEY_FIELD)
+        // Reload after saving
+        loadAPI()
     }
     
     func checkNil() -> Bool {
@@ -60,53 +62,53 @@ class BillbeeAPIManager {
     
     func sendShipmentRequest(orderNumber: String, completion: (() -> ())?){
         
-//        var isRequestSuccessful = false
-
+        //        var isRequestSuccessful = false
+        
         if checkNil() == false {
             let api = API_BASE_URL + "/orders/" + orderNumber
             var headers: HTTPHeaders = [
                 .authorization(username: username!, password: password!)
-                    ]
+            ]
             headers.add(name: "X-Billbee-Api-Key", value: apiKey!)
             
-//            let body = """
-//                {
-//                  "NewStateId": 4
-//                }
-//                """
+            //            let body = """
+            //                {
+            //                  "NewStateId": 4
+            //                }
+            //                """
             
             let body2: [String: Any] = [
                 "NewStateId": 4
             ]
             
             AF.request(api, method: .put, parameters: body2, encoding: JSONEncoding.default, headers: headers).responseJSON { result in
-//                print("Shipment request:")
-//                debugPrint(result.request)
-//                print("---")
-//                print("Shipment response:")
-//                debugPrint(result.response)
+                //                print("Shipment request:")
+                //                debugPrint(result.request)
+                //                print("---")
+                //                print("Shipment response:")
+                //                debugPrint(result.response)
                 debugPrint(result)
                 let httpCode: Int = result.response!.statusCode
                 
-                self.loggingDelegate?.updateLogInVC(" - \(result.request!.url) - Status code: \(httpCode)")
+                self.loggingDelegate?.updateLogInVC(" - \(result.request!.url!) - Status: \(httpCode)")
                 
                 switch result.result {
-                    case .success:
-                        self.loggingDelegate?.updateLogInVC(" - Successful!\n")
-                        print("Request success!")
-//                        isRequestSuccessful = true
-                        
-                    case .failure(let error):
-//                        print(error)
-//                        print(result.response?.statusCode)
-                        self.loggingDelegate?.updateLogInVC(" - Failed!\n")
-                        print("Request fail!")
-//                        isRequestSuccessful = false
-                    }
+                case .success:
+                    self.loggingDelegate?.updateLogInVC(" - Successful!\n")
+                    print("Request success!")
+                //                        isRequestSuccessful = true
+                
+                case .failure(_):
+                    //                        print(error)
+                    //                        print(result.response?.statusCode)
+                    self.loggingDelegate?.updateLogInVC(" - Failed!\n")
+                    print("Request fail!")
+                //                        isRequestSuccessful = false
+                }
                 completion?()
             }
         }
         
-//        return isRequestSuccessful
+        //        return isRequestSuccessful
     }
 }
