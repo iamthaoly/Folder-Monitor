@@ -33,7 +33,7 @@ class BillbeeAPIManager {
         }
     }
     
-    private func loadAPI() -> Bool{
+    private func loadAPI() -> Bool {
         if let username = UserDefaults.standard.string(forKey: API_USERNAME_FIELD),
            let password = UserDefaults.standard.string(forKey: API_PASSWORD_FIELD),
            let apiKey = UserDefaults.standard.string(forKey: API_KEY_FIELD)
@@ -103,6 +103,9 @@ class BillbeeAPIManager {
                     //                        print(result.response?.statusCode)
                     self.loggingDelegate?.updateLogInVC(" - Failed!\n")
                     print("Request fail!")
+                    DispatchQueue.main.async {
+                        Utils.displayAlert(title: "Warning", text: "Cannot send API request. Please check the log.")
+                    }
                 //                        isRequestSuccessful = false
                 }
                 completion?()

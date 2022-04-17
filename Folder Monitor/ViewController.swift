@@ -133,8 +133,8 @@ class ViewController: NSViewController, NSWindowDelegate {
 //        let orderNumberFromPDF = pdfName.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
 //        print("order number: ", orderNumberFromPDF)
         
-        sendShipmentAPIRequest(orderNumber: pdfName)
-        return
+//        sendShipmentAPIRequest(orderNumber: pdfName)
+//        return
 
         let fileManager = FileManager.default
         let tempPath1 = URL.init(fileURLWithPath: folderPath?.path ?? "").appendingPathComponent(pdfName + ".pdf")
@@ -326,7 +326,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             
             // Debug printer info
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-                printOperation.showsPrintPanel = false
+//                printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
@@ -334,11 +334,12 @@ class ViewController: NSViewController, NSWindowDelegate {
                 if (result) {
                     renamePDFAfterPrint(pdfPath: pdfPath, inSubFolder: "Done")
                     print("Print successfully.")
+                    updateLog("---\n")
+                    updateLog(self.getTime() + "\n")
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
                     if chkSendRequest.state == .on {
-    
                         sendShipmentAPIRequest(orderNumber: name)
                     }
                     
@@ -353,8 +354,8 @@ class ViewController: NSViewController, NSWindowDelegate {
             btnPrint.isEnabled = false
             let realOrderNumber = orderNumber.replacingOccurrences(of: "-", with: "", options: NSString.CompareOptions.literal, range: nil)
             print("Order number: ", realOrderNumber)
-            self.updateLog("---\n")
-            self.updateLog(self.getTime() + "\n")
+            updateLog("---\n")
+            updateLog(self.getTime() + "\n")
             updateLog("Send API request for \(orderNumber)")
             
             apiManager.sendShipmentRequest(orderNumber: realOrderNumber, completion: ({
