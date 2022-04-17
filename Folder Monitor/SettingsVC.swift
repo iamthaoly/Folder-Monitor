@@ -28,7 +28,7 @@ class SettingsVC: NSViewController {
 //    var username: String?
 //    var password: String?
 //    var apiKey: String?
-    let apiManager = BillbeeAPIManager()
+    let apiManager = BillbeeAPIManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -48,7 +48,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     let LASEL_PRINTER_NAME = "Brother HL-L5100DN series [3c2af40cd627]"
     
     // MARK: - VAR
-    let apiManager = BillbeeAPIManager()
+    let apiManager = BillbeeAPIManager.shared
     
     var settingsWC: NSWindowController?
     

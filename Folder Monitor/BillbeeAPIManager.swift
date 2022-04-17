@@ -22,9 +22,9 @@ class BillbeeAPIManager {
     var apiKey: String?
     
     weak var loggingDelegate: Logging?
-
+    static let shared = BillbeeAPIManager()
     
-    init() {
+    private init() {
         if loadAPI() {
             print("API SETTINGS LOADED!")
         }
