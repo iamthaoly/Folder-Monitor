@@ -65,7 +65,7 @@ class BillbeeAPIManager {
         //        var isRequestSuccessful = false
         
         if checkNil() == false {
-            let api = API_BASE_URL + "/orders/" + orderNumber
+            let api = API_BASE_URL + "/orders/" + orderNumber + "/orderstate"
             var headers: HTTPHeaders = [
                 .authorization(username: username!, password: password!)
             ]
@@ -91,23 +91,33 @@ class BillbeeAPIManager {
                 let httpCode: Int = result.response!.statusCode
                 
                 self.loggingDelegate?.updateLogInVC(" - \(result.request!.url!) - Status: \(httpCode)")
-                
-                switch result.result {
-                case .success:
+                if httpCode == 200 {
                     self.loggingDelegate?.updateLogInVC(" - Successful!\n")
                     print("Request success!")
-                //                        isRequestSuccessful = true
-                
-                case .failure(_):
-                    //                        print(error)
-                    //                        print(result.response?.statusCode)
+                }
+                else {
                     self.loggingDelegate?.updateLogInVC(" - Failed!\n")
                     print("Request fail!")
                     DispatchQueue.main.async {
                         Utils.displayAlert(title: "Warning", text: "Cannot send API request. Please check the log.")
                     }
-                //                        isRequestSuccessful = false
                 }
+//                switch result.result {
+//                case .success:
+//                    self.loggingDelegate?.updateLogInVC(" - Successful!\n")
+//                    print("Request success!")
+//                //                        isRequestSuccessful = true
+//
+//                case .failure(_):
+//                    //                        print(error)
+//                    //                        print(result.response?.statusCode)
+//                    self.loggingDelegate?.updateLogInVC(" - Failed!\n")
+//                    print("Request fail!")
+//                    DispatchQueue.main.async {
+//                        Utils.displayAlert(title: "Warning", text: "Cannot send API request. Please check the log.")
+//                    }
+//                //                        isRequestSuccessful = false
+//                }
                 completion?()
             }
         }

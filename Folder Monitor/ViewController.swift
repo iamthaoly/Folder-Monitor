@@ -326,7 +326,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             
             // Debug printer info
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-//                printOperation.showsPrintPanel = false
+                printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
