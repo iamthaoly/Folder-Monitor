@@ -49,6 +49,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     
     // MARK: - VAR
     let apiManager = BillbeeAPIManager.shared
+    let pdfManager = CustomPDFManager.shared
     
     var settingsWC: NSWindowController?
     
@@ -94,7 +95,7 @@ class ViewController: NSViewController, NSWindowDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         apiManager.loggingDelegate = self
-
+        pdfManager.loggingDelegate = self
         setupUI()
 //        printPDF(name: "123-498-000")
 //        extractText2()
@@ -288,8 +289,13 @@ class ViewController: NSViewController, NSWindowDelegate {
         let tempPath = isFirst ? folderPath?.path : folderPath2?.path
         var pdfPath: URL = URL.init(fileURLWithPath: tempPath ?? "")
         pdfPath.appendPathComponent(name + ".pdf")
-        
         print("pdfPath:: \(pdfPath)")
+
+        // For testing
+        let billbeeOrderNumber = pdfManager.extractBillbeeID(filePath: pdfPath.path)
+        print("Billbee id: \(billbeeOrderNumber)")
+        return
+        
         if fileManager.fileExists(atPath: pdfPath.path) {
             guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
 //            let pdfView = PDFView()
@@ -298,11 +304,14 @@ class ViewController: NSViewController, NSWindowDelegate {
             let page = pdf.page(at: 0)!
             let bounds = page.bounds(for: .mediaBox)
             let size = bounds.size
+
             print("PDF Size: ", size)
             print("PRINT INFO->")
             print("Path: ", tempPath)
             print("Printer name: ", isFirst ? LABEL_PRINTER_NAME : LASEL_PRINTER_NAME)
             
+            let billbeeOrderNumber = pdfManager.extractBillbeeID(filePath: pdfPath.path)
+            print("Billbee id: \(billbeeOrderNumber)")
             // Old way - Commented
 //            let printInfo = NSPrintInfo.shared
 //            let printerWidth = 289.134
@@ -339,8 +348,8 @@ class ViewController: NSViewController, NSWindowDelegate {
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
-                    if chkSendRequest.state == .on {
-                        sendShipmentAPIRequest(orderNumber: name)
+                    if chkSendRequest.state == .on && billbeeOrderNumber != nil{
+                        sendShipmentAPIRequest(orderNumber: billbeeOrderNumber!)
                     }
                     
                 }
@@ -565,15 +574,13 @@ class ViewController: NSViewController, NSWindowDelegate {
                     
                     // If PDF has more than 1 page, split
                     // Else extract text
-                    let pdfManager = CustomPDFManager.shared
-                    pdfManager.loggingDelegate = self
                     // Rewrite this logic. One receipt can contain multiple pages.
                     
                     // Case 0: 1 page
                     // Case 1: Multiple page - no regex
                     // Case 2: Multiple page - 1 regex
                     
-                    pdfManager.splitAndRenamePDF(filePath: event.path)
+                    self.pdfManager.splitAndRenamePDF(filePath: event.path)
                 }
                 
                 self.updateLog("\n")

@@ -18,6 +18,24 @@ class CustomPDFManager {
         // Init
     }
     
+    
+    func extractBillbeeID(filePath: String) -> String? {
+        let pdfFileUrl: URL = URL.init(fileURLWithPath: filePath)
+//        debugPrint("PDF file: \(pdfFileUrl)")
+        guard let pdfDocument = PDFDocument(url: pdfFileUrl) else { return nil}
+        let pdfContent = pdfDocument.string!
+        
+        let regex = "(?<=ID: )\\d+"
+        let res = Utils.matches(for: regex, in: pdfContent)
+        for s in res {
+            debugPrint("Result: \(s)")
+        }
+        if res.count > 0 {
+            return res[0]
+        }
+        return nil
+    }
+    
     func getPDFPageCountFromPath(filePath: String) -> Int?{
         
         loggingDelegate?.updateLogInVC("This is get page count!")
@@ -186,17 +204,6 @@ class CustomPDFManager {
 
     }
     
-    private func extractBillbeeID(content: String) -> String? {
-        let regex = "(?<=ID: )\\d+"
-        let res = Utils.matches(for: regex, in: content)
-        for s in res {
-            debugPrint("Result: \(s)")
-        }
-        if res.count > 0 {
-            return res[0]
-        }
-        return nil
-    }
     
     private func extractText2(content: String) -> String?{
         let regex = "\\d+-\\d+-\\d+"
