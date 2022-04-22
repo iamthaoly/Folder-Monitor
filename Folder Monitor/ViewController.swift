@@ -292,9 +292,9 @@ class ViewController: NSViewController, NSWindowDelegate {
         print("pdfPath:: \(pdfPath)")
 
         // For testing
-        let billbeeOrderNumber = pdfManager.extractBillbeeID(filePath: pdfPath.path)
-        print("Billbee id: \(billbeeOrderNumber)")
-        return
+//        let billbeeOrderNumber = pdfManager.extractBillbeeID(filePath: pdfPath.path)
+//        print("Billbee id: \(billbeeOrderNumber)")
+//        return
         
         if fileManager.fileExists(atPath: pdfPath.path) {
             guard let pdf = PDFDocument(url: pdfPath.absoluteURL) else { return }
@@ -335,7 +335,7 @@ class ViewController: NSViewController, NSWindowDelegate {
             
             // Debug printer info
             if let printOperation = pdf.printOperation(for: printInfo, scalingMode: size.height < 200 ? .pageScaleNone : .pageScaleDownToFit , autoRotate: false) {
-                printOperation.showsPrintPanel = false
+//                printOperation.showsPrintPanel = false
 //                printOperation.printPanel = thePrintPanel()
                 debugPrint(printInfo)
                 
@@ -348,7 +348,8 @@ class ViewController: NSViewController, NSWindowDelegate {
                     updateLog(name + ".pdf" + " - Printed.\n")
                     txtPrint.stringValue = ""
 //                    txtPrint.resignFirstResponder()
-                    if chkSendRequest.state == .on && billbeeOrderNumber != nil{
+                    if chkSendRequest.state == .on && billbeeOrderNumber != nil {
+                        updateLog("ID found: \(billbeeOrderNumber!)\n")
                         sendShipmentAPIRequest(orderNumber: billbeeOrderNumber!)
                     }
                     
