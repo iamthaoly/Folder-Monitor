@@ -186,6 +186,18 @@ class CustomPDFManager {
 
     }
     
+    private func extractBillbeeID(content: String) -> String? {
+        let regex = "(?<=ID: )\\d+"
+        let res = Utils.matches(for: regex, in: content)
+        for s in res {
+            debugPrint("Result: \(s)")
+        }
+        if res.count > 0 {
+            return res[0]
+        }
+        return nil
+    }
+    
     private func extractText2(content: String) -> String?{
         let regex = "\\d+-\\d+-\\d+"
         let res = Utils.matches(for: regex, in: content)
