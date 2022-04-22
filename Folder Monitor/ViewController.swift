@@ -47,6 +47,8 @@ class ViewController: NSViewController, NSWindowDelegate {
     let LABEL_PRINTER_NAME = "Brother QL-1110NWB"
     let LASEL_PRINTER_NAME = "Brother HL-L5100DN series [3c2af40cd627]"
     
+    let DEFAULT_WILL_SEND_API = "willSendAPIRequest"
+    
     // MARK: - VAR
     let apiManager = BillbeeAPIManager.shared
     let pdfManager = CustomPDFManager.shared
@@ -112,6 +114,11 @@ class ViewController: NSViewController, NSWindowDelegate {
     }
     
     // MARK: - ACTIONS
+    
+    @IBAction func willSendAPIRequest(_ sender: Any) {
+//        print("Checkbox state changed!")
+        UserDefaults.standard.set(chkSendRequest.state == .on, forKey: DEFAULT_WILL_SEND_API)
+    }
     
     @IBAction func openSettings(_ sender: Any) {
         // Open new view controller
@@ -254,6 +261,10 @@ class ViewController: NSViewController, NSWindowDelegate {
         else {
             btnMonitor2.isEnabled = false
         }
+        
+        // Checkbox: Send API request or not.
+        let willSendAPI = UserDefaults.standard.bool(forKey: DEFAULT_WILL_SEND_API)
+        chkSendRequest.state = willSendAPI == true ? .on : .off
     }
     
     private func displayPrintInfo() {

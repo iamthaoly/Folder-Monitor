@@ -936,6 +936,9 @@ DQ
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="willSendAPIRequest:" target="XfG-lQ-9wD" id="bpb-c4-DDJ"/>
+                                </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="jtT-zv-0AY">
                                 <rect key="frame" x="516" y="10" width="24" height="24"/>
